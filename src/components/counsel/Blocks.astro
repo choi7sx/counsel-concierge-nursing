@@ -1,0 +1,36 @@
+---
+import type { Block } from "../../lib/counsel";
+const { blocks = [], headingLevel } = Astro.props as {
+  blocks: Block[];
+  headingLevel?: 2 | 3;
+};
+// The same source copy can be a page section or a subsection in another layout.
+// Adjust its heading level to that context without changing the writing.
+const sectionHtml = (html = "") => {
+  if (!headingLevel) return html;
+  const levels = [...html.matchAll(/<h([1-6])\b/g)].map((match) => Number(match[1]));
+  if (!levels.length) return html;
+  const firstLevel = Math.min(...levels);
+  return html.replace(/<(\/?)(h)([1-6])\b/g, (_, slash, tag, level) =>
+    `<${slash}${tag}${Math.min(6, Number(level) - firstLevel + headingLevel)}`,
+  );
+};
+---
+
+{blocks.map((block) =>
+  block.type === "accordion" ? (
+    <div class="accordion-list">
+      {block.items?.map((item) => (
+        <details class="accordion">
+          <summary>
+            {item.title}
+            <span aria-hidden="true" class="plus"></span>
+          </summary>
+          <div class="prose accordion-body" set:html={item.html} />
+        </details>
+      ))}
+    </div>
+  ) : (
+    <div class="prose content-block" set:html={sectionHtml(block.html)} />
+  ),
+)}

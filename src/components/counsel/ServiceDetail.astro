@@ -1,0 +1,43 @@
+---
+import type { Page } from "../../lib/counsel";
+import { originalStoreServices, pageAt, links, retainerServices } from "../../lib/counsel";
+import InteriorPage from "./InteriorPage.astro";
+import PageHero from "./PageHero.astro";
+import ServiceCards from "./ServiceCards.astro";
+import Blocks from "./Blocks.astro";
+import Arrow from "./Arrow.astro";
+const { page } = Astro.props as { page: Page };
+const service = originalStoreServices.find((s) => s.path === page.path)!;
+const b = pageAt(links.services).blocks;
+const detail =
+  service.slug === "travel-accompaniment"
+    ? [b[6]]
+    : service.slug === "care-transitions"
+      ? [{ type: "html", html: retainerServices.find((s) => s.slug === "care-transitions")!.html }, b[7]]
+      : service.slug === "continuous-clinical-oversight"
+        ? [b[2], b[3]]
+        : [b[8]];
+---
+
+<InteriorPage>
+<PageHero slot="hero" image={service.image} alt={service.slug === "continuous-clinical-oversight" ? "Gus reviewing medications with an older adult" : service.title}>
+  <Fragment slot="title">{service.title}</Fragment>
+</PageHero>
+<section class="wrap retainer-detail-copy">
+  <a class="text-link page-back-link" href={links.services}>← All services</a>
+  <Blocks blocks={page.blocks} />
+  <a class="button service-consultation" href={links.consultation}>Request Private Consultation <Arrow /></a>
+</section>
+<section class="section">
+  <div class="wrap service-detail-content">
+    <Blocks blocks={detail} headingLevel={2} />
+    {service.slug === "continuous-clinical-oversight" && <ServiceCards items={retainerServices} compact />}
+    {service.slug === "post-op-recovery" && (
+      <a class="text-link" href={links.postop}>
+        Recovery care, pricing & frequently asked questions <Arrow />
+      </a>
+    )}
+  </div>
+</section>
+
+</InteriorPage>

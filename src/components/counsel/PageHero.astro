@@ -1,0 +1,32 @@
+---
+import CounselImage from "./CounselImage.astro";
+import images from "../../../data/counsel-images.json";
+interface Props {
+  image: string;
+  alt: string;
+  position?: string;
+}
+const { image, alt, position = "center" } = Astro.props;
+const key = image.split("/").pop()?.replace(/\.webp$/, "") as keyof typeof images;
+const asset = images[key];
+const ratio = asset ? asset.width / asset.height : 1.5;
+// Cover images can be wider than the viewport before their sides are cropped.
+const sizes = `(max-width: 760px) max(100vw, ${Math.ceil(540 * ratio)}px), max(100vw, ${Math.ceil(680 * ratio)}px)`;
+---
+
+<section class="interior-hero">
+  <CounselImage
+    class="interior-hero-image"
+    src={image.startsWith("/") ? image : `/images/counsel/${image}.webp`}
+    alt={alt}
+    sizes={sizes}
+    style={`object-position: ${position}`}
+    fetchpriority="high"
+  />
+  <div class="wrap interior-hero-content">
+    <div class="interior-hero-copy">
+      {Astro.slots.has("before-title") && <div class="hero-title-navigation"><slot name="before-title" /></div>}
+      <h1><slot name="title" /></h1>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,93 @@
+---
+import CounselImage from "./CounselImage.astro";
+import type { Page } from "../../lib/counsel";
+import { links } from "../../lib/counsel";
+import InteriorPage from "./InteriorPage.astro";
+import PageHero from "./PageHero.astro";
+import Blocks from "./Blocks.astro";
+import Arrow from "./Arrow.astro";
+const { page } = Astro.props as { page: Page };
+const isConsultation = page.path === links.consultation;
+const isContact = page.path === links.contact;
+const isCareer = page.path === "/work-with-us";
+const isLegal = ["/privacy-policy", "/terms-of-use"].includes(page.path);
+const title = isConsultation
+  ? "Private Consultation"
+  : isContact
+    ? "Contact Us"
+    : isCareer
+      ? "Work With Us"
+      : page.title;
+// Page titles are rendered once; the rest of the client's writing remains intact.
+const blocks = page.blocks
+  .map((b, i) =>
+    i === 0 && b.html
+      ? { ...b, html: b.html.replace(/<h[1-6][^>]*>.*?<\/h[1-6]>/s, "") }
+      : b,
+  )
+  .filter((b) => b.html?.trim() || b.type === "accordion");
+---
+
+<InteriorPage>
+<PageHero slot="hero"
+  image={isLegal ? "hero" : isContact ? "greeting" : "care"}
+  alt={isLegal ? "A stethoscope, a tool of our nursing practice" : isContact ? "Gus greeting a client at her front door" : "Gus discussing care with clients at home"}
+>
+  <Fragment slot="title">{title}<span class="heading-period">.</span></Fragment>
+</PageHero>
+<section class:list={["wrap", "general-layout", { "legal-layout": isLegal }]}>
+  <div class="general-copy">
+    <Blocks blocks={blocks} headingLevel={2} />
+    {page.form && (
+      <div id="consultationform" class="form-handoff">
+        <a
+          class={isConsultation ? "button" : "text-link"}
+          href={page.form.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {isCareer
+            ? "Open application form"
+            : isContact
+              ? "Open contact form"
+              : "Request Private Consultation"}{" "}
+          <Arrow diagonal />
+        </a>
+        <p class="form-note">Opens the Counsel form in a new tab.</p>
+      </div>
+    )}
+  </div>
+  {!isLegal && (
+    <aside class="contact-aside">
+      {isConsultation && (
+        <CounselImage
+          src="/images/counsel/greeting.webp" sizes="(max-width: 760px) calc(100vw - 48px), 400px"
+          alt="Gus greeting a client at her front door"
+        />
+      )}
+      <div>
+        <h2>
+          We’re here
+          <br />
+          <em>to help.</em>
+        </h2>
+        <a class="aside-phone" href="tel:+16159339208">
+          (615) 933-9208
+        </a>
+        <a href="mailto:info@counselconciergenursing.com">
+          info@counselconciergenursing.com
+        </a>
+        <p>
+          Serving Nashville and the surrounding Middle Tennessee area.
+        </p>
+        {!isConsultation && (
+          <a class="text-link" href={links.consultation}>
+            Request Private Consultation <Arrow />
+          </a>
+        )}
+      </div>
+    </aside>
+  )}
+</section>
+
+</InteriorPage>

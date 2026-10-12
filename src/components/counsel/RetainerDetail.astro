@@ -1,0 +1,33 @@
+---
+import type { Page } from "../../lib/counsel";
+import { links, pageAt, retainerServices } from "../../lib/counsel";
+import InteriorPage from "./InteriorPage.astro";
+import PageHero from "./PageHero.astro";
+import Blocks from "./Blocks.astro";
+import Arrow from "./Arrow.astro";
+import ServiceCards from "./ServiceCards.astro";
+const { page } = Astro.props as { page: Page };
+const service = retainerServices.find((item) => item.path === page.path)!;
+---
+
+<InteriorPage>
+<PageHero slot="hero" image="care" alt="Gus discussing a care plan with clients at home">
+  <Fragment slot="title">{page.title}</Fragment>
+</PageHero>
+<section class="wrap retainer-detail-copy">
+  <a class="text-link page-back-link" href={links.services}>← All services</a>
+  <Blocks blocks={page.blocks} />
+  <div class="retainer-context">
+    <p>{pageAt(links.services).blocks[3].text!.split(". ")[0]}.</p>
+    <a class="text-link" href={`${links.services}#monthly-retainer-services`}>Explore monthly retainer services <Arrow /></a>
+  </div>
+  <a class="button" href={links.consultation}>Request Private Consultation <Arrow /></a>
+</section>
+<section class="section retainer-section">
+  <div class="wrap">
+    <div class="section-intro"><h2>Care that works <em>together.</em></h2></div>
+    <ServiceCards items={retainerServices.filter((item) => item.slug !== service.slug)} compact />
+  </div>
+</section>
+
+</InteriorPage>
