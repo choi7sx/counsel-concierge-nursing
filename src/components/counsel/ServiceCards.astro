@@ -1,0 +1,20 @@
+---
+import ServiceIcon from "./ServiceIcon.astro";
+import Arrow from "./Arrow.astro";
+interface Props {
+  items: { slug: string; path: string; title: string; text?: string }[];
+  compact?: boolean;
+}
+const { items, compact = false } = Astro.props;
+---
+
+<div class:list={["service-links", { "service-links-compact": compact }]}>
+  {items.map((service) => (
+    <a class="service-link-card" href={service.path}>
+      <ServiceIcon slug={service.slug} />
+      <h3>{service.title}</h3>
+      {!compact && <p>{service.text}</p>}
+      <span class="service-card-action">Explore service <Arrow /></span>
+    </a>
+  ))}
+</div>

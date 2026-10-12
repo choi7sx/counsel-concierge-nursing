@@ -1,0 +1,35 @@
+---
+import CounselImage from "./CounselImage.astro";
+import { pageAt, links } from "../../lib/counsel";
+import InteriorPage from "./InteriorPage.astro";
+import PageHero from "./PageHero.astro";
+import Blocks from "./Blocks.astro";
+const b = pageAt(links.about).blocks;
+---
+
+<InteriorPage>
+<PageHero slot="hero" image="porch" alt="Gus Osgood greeting a client on her front porch" position="center 40%">
+  <Fragment slot="title">Care with a<br /><em>clear purpose.</em></Fragment>
+</PageHero>
+<section class="wrap about-intro-copy">
+  <Blocks blocks={[b[0]]} />
+</section>
+<section class="section">
+  <div class="wrap founder-grid about-founder">
+    <div class="founder-image">
+      <CounselImage
+        src="/images/counsel/founder.webp"
+        sizes="(max-width: 760px) calc(100vw - 48px), 600px"
+        alt="Augustus Osgood, BSN, RN"
+        loading="lazy"
+      />
+    </div>
+    <div>
+      <Blocks blocks={[b[1], b[2]]} />
+      <p class="founder-credentials">{b[3].text}</p>
+      <Blocks blocks={[b[4]]} />
+    </div>
+  </div>
+</section>
+
+</InteriorPage>

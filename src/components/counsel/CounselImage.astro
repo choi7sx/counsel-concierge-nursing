@@ -1,0 +1,24 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import images from "../../../data/counsel-images.json";
+
+interface Props extends HTMLAttributes<"img"> {
+  src: string;
+  alt: string;
+}
+const { src, sizes = "100vw", width, height, ...attributes } = Astro.props;
+const key = src.split("/").pop()?.replace(/\.webp$/, "") as keyof typeof images;
+const asset = images[key];
+const srcset = asset?.widths.map((size) =>
+  `/images/counsel/${key}${size === asset.width ? "" : `-${size}`}.webp ${size}w`
+).join(", ");
+---
+
+<img
+  {...attributes}
+  src={src}
+  srcset={srcset}
+  sizes={srcset ? sizes : undefined}
+  width={width ?? asset?.width}
+  height={height ?? asset?.height}
+/>

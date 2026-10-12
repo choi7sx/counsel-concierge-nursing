@@ -1,0 +1,24 @@
+---
+import { links } from "../../lib/counsel";
+import Arrow from "./Arrow.astro";
+const consultationUrl = Astro.url.pathname.replace(/\/$/, "") === links.consultation
+  ? "#consultationform"
+  : links.consultation;
+---
+
+<section class="contact-band">
+  <div class="wrap contact-band-inner">
+    <div>
+      <h2>
+        Peace of mind begins
+        <br />
+        with understanding.
+      </h2>
+    </div>
+    <div class="contact-band-action">
+      <a class="button button-light" href={consultationUrl}>
+        Request Private Consultation <Arrow />
+      </a>
+    </div>
+  </div>
+</section>

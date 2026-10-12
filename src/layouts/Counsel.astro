@@ -1,0 +1,258 @@
+---
+import "../styles/counsel.css";
+import "../styles/counsel-system.css";
+import Brand from "../components/counsel/Brand.astro";
+import Arrow from "../components/counsel/Arrow.astro";
+import ContactBand from "../components/counsel/ContactBand.astro";
+import { links } from "../lib/counsel";
+const {
+  title = "Private Concierge Nursing in Nashville, TN",
+  description = "Counsel Concierge Nursing provides private nursing oversight, care coordination, and advocacy for independent adults and their families in Nashville and Middle Tennessee.",
+  image = "/images/counsel/consult.webp",
+} = Astro.props;
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const nav = [
+  ["About", links.about],
+  ["Services", links.services],
+  ["Our Approach", "/approach"],
+  ["Insights", "/insights"],
+];
+const canonical = new URL(
+  path === "/home"
+    ? "/"
+    : path === "/store"
+      ? links.services
+      : Astro.url.pathname,
+  "https://counselconciergenursing.com",
+);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#34463c" />
+    <title>{title} | Counsel Concierge Nursing</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta
+      property="og:title"
+      content={`${title} | Counsel Concierge Nursing`}
+    />
+    <meta property="og:description" content={description} />
+    <meta
+      property="og:type"
+      content={path.startsWith("/insights/") ? "article" : "website"}
+    />
+    <meta property="og:image" content={new URL(image, canonical).href} />
+    <meta property="og:url" content={canonical} />
+    <link
+      rel="preload"
+      href="/fonts/fraunces.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/geist.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
+    <header class:list={["site-header header-overlay", { "header-editorial": path === "/insights" }]}>
+      <div class="wrap header-inner">
+        <Brand />
+        <nav class="desktop-nav" aria-label="Main navigation">
+          {nav.map(([label, url]) => (
+            <a href={url} aria-current={path === url ? "page" : undefined}>
+              {label}
+            </a>
+          ))}
+        </nav>
+        <div class="header-actions">
+          <a
+            class="portal-link"
+            href={links.portal}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Client Portal <Arrow diagonal />
+          </a>
+          <a class="button button-small" href={links.consultation}>
+            Request Private Consultation
+          </a>
+        </div>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+        >
+          <span>Menu</span>
+          <span class="menu-lines" aria-hidden="true"></span>
+        </button>
+      </div>
+      <nav
+        id="mobile-nav"
+        class="mobile-nav"
+        aria-label="Mobile navigation"
+        hidden
+      >
+        {nav.map(([label, url]) => (
+          <a href={url} aria-current={path === url ? "page" : undefined}>
+            {label}
+            <Arrow />
+          </a>
+        ))}
+        <a href={links.postop}>
+          Post-Operative Care <Arrow />
+        </a>
+        <a href={links.contact}>
+          Contact <Arrow />
+        </a>
+        <a href={links.portal} target="_blank" rel="noopener noreferrer">
+          Client Portal <Arrow diagonal />
+        </a>
+        <a href={links.consultation}>
+          Request Private Consultation <Arrow />
+        </a>
+      </nav>
+    </header>
+    <main id="main">
+      <slot />
+      <ContactBand />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <Brand />
+            <p>
+              Independence, Enhanced.
+              <br />
+              Peace of Mind, Protected.
+            </p>
+          </div>
+          <div>
+            <h2>Explore</h2>
+            <a href={links.about}>Our Practice</a>
+            <a href={links.services}>Our Services</a>
+            <a href="/approach">Our Approach</a>
+            <a href={links.postop}>Post-Operative Care</a>
+            <a href="/insights">Insights</a>
+          </div>
+          <div>
+            <h2>Connect</h2>
+            <a href={links.consultation}>Request Private Consultation</a>
+            <a href={links.contact}>Contact Us</a>
+            <a href="/work-with-us">Work With Us</a>
+            <a href={links.portal} target="_blank" rel="noopener noreferrer">
+              Client Portal ↗
+            </a>
+          </div>
+          <div class="footer-contact">
+            <h2>We’re here to listen.</h2>
+            <a href="tel:+16159339208">(615) 933-9208</a>
+            <a href="mailto:info@counselconciergenursing.com">
+              info@counselconciergenursing.com
+            </a>
+            <p>
+              Serving Nashville and the
+              <br />
+              surrounding Middle Tennessee area.
+            </p>
+            <div class="social-links">
+              <a
+                href="https://www.instagram.com/counselconciergenursing"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Instagram ↗
+              </a>
+              <a
+                href="https://www.facebook.com/share/1CtNJRkpGv/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Facebook ↗
+              </a>
+              <a
+                href="https://linkedin.com/in/augustusosgood"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn ↗
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-disclaimer">
+          Counsel Concierge Nursing provides private, non-insurance-based
+          nursing oversight and does not replace the role of a primary care
+          provider or emergency services.
+        </div>
+        <div class="footer-bottom">
+          <span>
+            © 2026 Counsel Concierge Nursing, LLC. All rights reserved.
+          </span>
+          <div>
+            <a href="/privacy-policy">Privacy Policy</a>
+            <a href="/terms-of-use">Terms of Use</a>
+            <a href="#main">Back to top ↑</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script>
+      const header = document.querySelector<HTMLElement>(".site-header");
+      const toggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
+      const menu = document.querySelector<HTMLElement>("#mobile-nav");
+      function updateHeader() {
+        header?.classList.toggle("is-scrolled", window.scrollY > 24);
+      }
+      updateHeader();
+      window.addEventListener("scroll", updateHeader, { passive: true });
+      window.addEventListener("pageshow", updateHeader);
+      // Reveal hero links when keyboard navigation returns behind the content panel.
+      document.querySelector(".interior-hero")?.addEventListener("focusin", () => {
+        if (window.scrollY > 0) window.scrollTo({ top: 0, behavior: "instant" });
+      });
+      function closeMenu() {
+        if (toggle && menu) {
+          toggle.setAttribute("aria-expanded", "false");
+          menu.hidden = true;
+          header?.classList.remove("is-menu-open");
+        }
+      }
+      toggle?.addEventListener("click", () => {
+        if (!menu) return;
+        const open = toggle.getAttribute("aria-expanded") === "true";
+        toggle.setAttribute("aria-expanded", String(!open));
+        menu.hidden = open;
+        header?.classList.toggle("is-menu-open", !open);
+      });
+      document.addEventListener("keydown", (e) => {
+        if (
+          e.key === "Escape" &&
+          toggle?.getAttribute("aria-expanded") === "true"
+        ) {
+          closeMenu();
+          toggle.focus();
+        }
+      });
+      window
+        .matchMedia("(min-width: 1101px)")
+        .addEventListener("change", (e) => {
+          if (e.matches) closeMenu();
+        });
+    </script>
+  </body>
+</html>

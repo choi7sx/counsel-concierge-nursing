@@ -1,8 +1,8 @@
 {
-  "site_title": "Astro Starter",
-  "description": "A starter template for Astro with Editable Regions, for CloudCannon CMS.",
+  "site_title": "Counsel Concierge Nursing",
+  "description": "Private concierge nursing oversight for independent adults and their families in Nashville and Middle Tennessee.",
   "twitter_site": "",
-  "image": "/images/logos/minimal-logo-social.png",
-  "image_alt": "Minimal by CloudCannon logo",
-  "default_author": "CloudCannon"
+  "image": "/images/counsel/consult.webp",
+  "image_alt": "Gus Osgood meeting with a client and her family",
+  "default_author": "Gus Osgood"
 }

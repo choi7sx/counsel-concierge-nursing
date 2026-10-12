@@ -1,0 +1,19 @@
+---
+const { slug } = Astro.props;
+const paths: Record<string, string> = {
+  "continuous-clinical-oversight": "M3 12h4l3-7 4 14 3-7h4",
+  "care-coordination": "M9 5h6M9 19h6M5 9v6M19 9v6 M3 3h4v4H3z M17 3h4v4h-4z M3 17h4v4H3z M17 17h4v4h-4z",
+  "care-transitions": "M3 11 12 3l9 8M5 10v11h14V10M8 14h8m-3-3 3 3-3 3",
+  "medication-management": "m9 5-4 4a6 6 0 0 0 8 8l4-4a6 6 0 0 0-8-8ZM8 6l10 10",
+  "chronic-disease-management": "M20 8a8 8 0 1 0 0 8M20 3v5h-5M7 12h3l2-4 2 8 2-4h5",
+  "appointment-accompaniment": "M4 5h16v16H4zM8 3v4M16 3v4M4 10h16m-12 5 3 3 5-5",
+  "caregiving-companionship": "M12 20S3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 12-9 12Z",
+  "education": "M12 6C9 3 5 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 2Zm0 0v15",
+  "post-op-recovery": "M12 2 3 6v6c0 5 9 10 9 10s9-5 9-10V6l-9-4ZM8 12h8M12 8v8",
+  "travel-accompaniment": "m21 3-6 18-4-8-8-4 18-6ZM11 13 21 3",
+};
+---
+
+<svg class="service-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+  <path d={paths[slug] || paths["continuous-clinical-oversight"]} />
+</svg>

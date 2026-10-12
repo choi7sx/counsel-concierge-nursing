@@ -1,0 +1,38 @@
+---
+import { approach, pageAt, links } from "../../lib/counsel";
+import InteriorPage from "./InteriorPage.astro";
+import PageHero from "./PageHero.astro";
+import Blocks from "./Blocks.astro";
+const consultation = pageAt(links.consultation);
+---
+
+<InteriorPage>
+<PageHero slot="hero" image="care" alt="Gus reviewing a care plan with clients at their dining table">
+  <Fragment slot="title">Thoughtfully planned.<br /><em>Personally delivered.</em></Fragment>
+</PageHero>
+<section class="wrap approach-process" aria-label="The four steps of our approach">
+  <ol class="approach-process-grid">
+    {approach.map((step, i) => (
+      <li>
+        <span class="step-number" aria-hidden="true">0{i + 1}</span>
+        <h2>{step.title}</h2>
+        <p>{step.text}</p>
+      </li>
+    ))}
+  </ol>
+</section>
+<section class="section approach-consultation" aria-labelledby="getting-started-heading">
+  <div class="wrap">
+    <h2 id="getting-started-heading">Getting started with Counsel.</h2>
+    <div class="consultation-stages">
+      <section>
+        <Blocks blocks={[consultation.blocks[2]]} headingLevel={3} />
+      </section>
+      <section>
+        <Blocks blocks={[consultation.blocks[3]]} headingLevel={3} />
+      </section>
+    </div>
+  </div>
+</section>
+
+</InteriorPage>

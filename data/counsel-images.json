@@ -1,0 +1,122 @@
+{
+  "hero": {
+    "width": 2500,
+    "height": 1667,
+    "source": "https://images.squarespace-cdn.com/content/v1/694050afa2bc6e2835ed8656/2b9f6447-f3a0-4f77-b4d3-4920f73bebd8/C66F12D2-9292-45D6-94F0-6AAE5362A805.jpg",
+    "widths": [
+      480,
+      960,
+      1600,
+      1920,
+      2500
+    ]
+  },
+  "greeting": {
+    "width": 1932,
+    "height": 1284,
+    "source": "https://images.squarespace-cdn.com/content/v1/694050afa2bc6e2835ed8656/4cd9d923-9b89-4d99-9baa-5e004f6847b8/Counsel_01_door_greeting.jpg",
+    "widths": [
+      480,
+      960,
+      1600,
+      1920,
+      1932
+    ]
+  },
+  "consult": {
+    "width": 1022,
+    "height": 1538,
+    "source": "https://images.squarespace-cdn.com/content/v1/694050afa2bc6e2835ed8656/cbeedaf3-4425-4c89-915e-96e25cc44051/Counsel_07_kitchen_consult.jpg",
+    "widths": [
+      480,
+      960,
+      1022
+    ]
+  },
+  "care": {
+    "width": 1539,
+    "height": 1022,
+    "source": "https://images.squarespace-cdn.com/content/v1/694050afa2bc6e2835ed8656/d63a4510-d3fd-4046-9f06-679fce421997/IMG_4381.JPG",
+    "widths": [
+      480,
+      960,
+      1539
+    ]
+  },
+  "porch": {
+    "width": 1452,
+    "height": 1083,
+    "source": "https://images.squarespace-cdn.com/content/v1/694050afa2bc6e2835ed8656/46f371fc-1ff3-44e2-ab4b-5c09a0c6c51c/Counsel_03_porch_hug.jpg",
+    "widths": [
+      480,
+      960,
+      1452
+    ]
+  },
+  "founder": {
+    "width": 1023,
+    "height": 1537,
+    "source": "https://images.squarespace-cdn.com/content/v1/694050afa2bc6e2835ed8656/e398b580-a330-48b4-83ce-410269b6ab49/C42E166F-689A-40C6-9411-2731690F4C4E.png",
+    "widths": [
+      480,
+      960,
+      1023
+    ]
+  },
+  "recovery": {
+    "width": 1443,
+    "height": 1443,
+    "source": "https://images.squarespace-cdn.com/content/v1/694050afa2bc6e2835ed8656/476f6ca9-7cd2-4fd8-8d48-e60ffd746cfd/IMG_4390.png",
+    "widths": [
+      480,
+      960,
+      1443
+    ]
+  },
+  "travel": {
+    "width": 2500,
+    "height": 1875,
+    "source": "https://images.squarespace-cdn.com/content/v1/694050afa2bc6e2835ed8656/e23c162a-914e-4a31-bb14-c8dc2fbe997a/IMG_4395.JPG",
+    "widths": [
+      480,
+      960,
+      1600,
+      1920,
+      2500
+    ]
+  },
+  "transitions": {
+    "width": 2061,
+    "height": 2576,
+    "source": "https://images.squarespace-cdn.com/content/v1/694050afa2bc6e2835ed8656/c631de2a-cf76-4d82-b7b0-adc0e93b6019/IMG_4392.JPG",
+    "widths": [
+      480,
+      960,
+      1600,
+      1920,
+      2061
+    ]
+  },
+  "oversight": {
+    "width": 1001,
+    "height": 1001,
+    "source": "https://images.squarespace-cdn.com/content/v1/694050afa2bc6e2835ed8656/ade2890c-91d1-42ba-90ea-eed632f892c2/Counsel_05_medication_review.jpg",
+    "widths": [
+      480,
+      960,
+      1001
+    ]
+  },
+  "postop": {
+    "width": 2121,
+    "height": 1414,
+    "source": "https://images.squarespace-cdn.com/content/v1/694050afa2bc6e2835ed8656/1786226815687-ZPUAZE6HSEEQUWMZJ0LQ/GettyImages-2062608146.jpg",
+    "widths": [
+      480,
+      960,
+      1600,
+      1920,
+      2121
+    ]
+  }
+}

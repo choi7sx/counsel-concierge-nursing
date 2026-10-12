@@ -1,22 +1,66 @@
 ---
-import PageLayout from "../layouts/Page.astro";
-import { getCollection, type CollectionEntry } from "astro:content";
-
-export interface Props {
-  page: CollectionEntry<"pages">;
+import Counsel from "../layouts/Counsel.astro";
+import RetainerDetail from "../components/counsel/RetainerDetail.astro";
+import Home from "../components/counsel/Home.astro";
+import Services from "../components/counsel/Services.astro";
+import About from "../components/counsel/About.astro";
+import Approach from "../components/counsel/Approach.astro";
+import PostOp from "../components/counsel/PostOp.astro";
+import Article from "../components/counsel/Article.astro";
+import GeneralPage from "../components/counsel/GeneralPage.astro";
+import ServiceDetail from "../components/counsel/ServiceDetail.astro";
+import InsightCards from "../components/counsel/InsightCards.astro";
+import { pages, links, retainerPages } from "../lib/counsel";
+import type { Page } from "../lib/counsel";
+export function getStaticPaths() {
+  return [
+    ...pages,
+    ...retainerPages,
+    {
+      path: "/approach",
+      title: "Our Approach",
+      description:
+        "Discover, consult, design, and care. A personal approach to private nursing oversight in Nashville.",
+      blocks: [],
+    },
+  ].map((page) => ({ params: { slug: page.path.slice(1) }, props: { page } }));
 }
-
-export async function getStaticPaths() {
-  const pages = await getCollection("pages");
-  return pages.map((page) => {
-    const slug = page.id.replace(/index$/, "");
-    if (slug.length === 0)
-      return { params: { slug: undefined }, props: { page } };
-    return { params: { slug }, props: { page } };
-  });
-}
-
-const { page } = Astro.props;
+const { page } = Astro.props as { page: Page };
+const path = page.path;
 ---
 
-<PageLayout frontmatter={page.data} />
+{path === "/home" ? (
+  <Home />
+) : (
+  <Counsel
+    title={page.title.trim()}
+    description={page.description || undefined}
+  >
+    {path === links.services || path === "/store" ? (
+      <Services />
+    ) : path === links.about ? (
+      <About />
+    ) : path === "/approach" ? (
+      <Approach />
+    ) : path === links.postop ? (
+      <PostOp />
+    ) : path === "/insights" ? (
+      <div class="insights-editorial">
+        <header class="wrap insights-masthead">
+          <h1>Insights.</h1>
+        </header>
+        <section class="wrap insights-index" aria-label="All insights">
+          <InsightCards headingLevel={2} />
+        </section>
+      </div>
+    ) : path.startsWith("/insights/") ? (
+      <Article page={page} />
+    ) : path.startsWith("/services/") ? (
+      <RetainerDetail page={page} />
+    ) : path.startsWith("/store/p/") ? (
+      <ServiceDetail page={page} />
+    ) : (
+      <GeneralPage page={page} />
+    )}
+  </Counsel>
+)}

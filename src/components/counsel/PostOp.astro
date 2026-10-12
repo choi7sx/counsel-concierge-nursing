@@ -1,0 +1,48 @@
+---
+import { pageAt, links } from "../../lib/counsel";
+import InteriorPage from "./InteriorPage.astro";
+import PageHero from "./PageHero.astro";
+import Blocks from "./Blocks.astro";
+import Arrow from "./Arrow.astro";
+const b = pageAt(links.postop).blocks;
+---
+
+<InteriorPage>
+<PageHero slot="hero" image="postop" alt="A nurse providing attentive bedside support during recovery">
+  <Fragment slot="title">Post-Operative<br /><em>Recovery Care.</em></Fragment>
+</PageHero>
+<section class="wrap retainer-detail-copy">
+  <Blocks headingLevel={2} blocks={[b[1]]} />
+</section>
+<section class="section">
+  <div class="wrap support-grid two-col">
+    {[2, 4].map((n, i) => (
+      <article class="support-item">
+        <Blocks headingLevel={2} blocks={[b[n], b[n + 1]]} />
+      </article>
+    ))}
+  </div>
+</section>
+<section class="section scope-section">
+  <div class="wrap split-section">
+    <div>
+      <Blocks headingLevel={2} blocks={[b[6], b[7]]} />
+    </div>
+    <div class="investment-panel">
+      <Blocks headingLevel={2} blocks={[b[8], b[9]]} />
+      <a class="button" href={links.consultation}>
+        Request Private Consultation <Arrow />
+      </a>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap split-section">
+    <div class="section-sidebar">
+      <Blocks headingLevel={2} blocks={[b[10]]} />
+    </div>
+    <Blocks headingLevel={2} blocks={[b[11]]} />
+  </div>
+</section>
+
+</InteriorPage>
