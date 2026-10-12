@@ -1,0 +1,67 @@
+---
+import { links, pageAt } from '../../lib/counsel';
+const { id = 'consultation' } = Astro.props;
+const inboxKey = import.meta.env.PUBLIC_CLOUDCANNON_INBOX_KEY?.trim() || '';
+const deliveryReady = import.meta.env.PROD && Boolean(inboxKey);
+const existingForm = pageAt(links.consultation).form!.url;
+---
+<form class="consultation-form" data-consultation-form data-delivery-ready={String(deliveryReady)} method="post" action="/consultation-request-received/">
+  <input type="hidden" name="inbox_key" value={inboxKey} />
+  <input type="hidden" name="_subject" value="Private Consultation Request — Counsel Concierge Nursing" />
+  <p class="consultation-description">A private consultation is a personal conversation about your care needs and goals. Share a few details and we’ll follow up directly.</p>
+  <p class="consultation-location">Serving Nashville and surrounding areas.</p>
+  <p class="consultation-required">All fields are required unless marked optional.</p>
+  <fieldset class="consultation-fields">
+    <legend class="visually-hidden">Your consultation request</legend>
+    <div class="consultation-field-row">
+      <div class="consultation-field">
+        <label for={`${id}-first-name`}>First name</label>
+        <input id={`${id}-first-name`} name="firstName" autocomplete="given-name" required maxlength="80" />
+      </div>
+      <div class="consultation-field">
+        <label for={`${id}-last-name`}>Last name</label>
+        <input id={`${id}-last-name`} name="lastName" autocomplete="family-name" required maxlength="80" />
+      </div>
+    </div>
+    <div class="consultation-field-row">
+    <div class="consultation-field">
+      <label for={`${id}-phone`}>Preferred phone number</label>
+      <input id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" required maxlength="40" />
+    </div>
+    <div class="consultation-field">
+      <label for={`${id}-email`}>Email</label>
+      <input id={`${id}-email`} name="_replyto" type="email" autocomplete="email" required maxlength="254" />
+    </div>
+    </div>
+    <div class="consultation-field-row">
+    <div class="consultation-field">
+      <label for={`${id}-location`}>City / location <span>(optional)</span></label>
+      <input id={`${id}-location`} name="location" autocomplete="address-level2" maxlength="120" />
+    </div>
+    <div class="consultation-field">
+      <label for={`${id}-relationship`}>Relationship to client</label>
+      <select id={`${id}-relationship`} name="relationship" required>
+        <option value="" disabled selected>Select an option</option>
+        <option>Self</option>
+        <option>Family Member</option>
+        <option>Other</option>
+      </select>
+    </div>
+    </div>
+    <div class="consultation-field">
+      <label for={`${id}-message`}>Message <span>(optional)</span></label>
+      <textarea id={`${id}-message`} name="message" rows="3" maxlength="2000" placeholder="Briefly share what prompted your inquiry." aria-describedby={`${id}-message-hint`}></textarea>
+      <p id={`${id}-message-hint`} class="consultation-hint">Please leave out detailed medical information.</p>
+    </div>
+    <div hidden aria-hidden="true">
+      <label for={`${id}-website`}>Leave this field blank</label>
+      <input id={`${id}-website`} name="_gotcha" tabindex="-1" autocomplete="off" />
+    </div>
+  </fieldset>
+  <div class="consultation-status" data-form-status role="status" aria-live="polite" tabindex="-1" hidden></div>
+  <div class="consultation-submit-row">
+    <button class="button" type="submit" data-form-submit disabled={!deliveryReady}>Request Private Consultation <span aria-hidden="true">→</span></button>
+    <p class="consultation-privacy">Your details are used to respond to your inquiry. <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy policy<span class="visually-hidden"> (opens in a new tab)</span></a></p>
+  </div>
+  {!deliveryReady && <noscript><p>Please <a href={existingForm}>use our hosted consultation form</a> or call <a href="tel:+16159339208">(615) 933-9208</a> to request a consultation.</p></noscript>}
+</form>

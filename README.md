@@ -1,6 +1,6 @@
 # Counsel Concierge Nursing
 
-A responsive Astro website for a private nursing practice in Nashville and Middle Tennessee. The design uses warm ivory, muted olive, large editorial headings, and the client's existing photography.
+A responsive Astro website for a private nursing practice in Nashville and Middle Tennessee. The design uses deep navy, champagne accents, warm ivory, large editorial headings, and the client's existing photography.
 
 ## Development
 
@@ -23,7 +23,35 @@ The CloudCannon data editor is configured for the migrated content file. Existin
 
 Client Portal links open `https://portal.counselconciergenursing.com` in a new tab. Portal authentication remains with the existing provider.
 
-Consultation, general inquiry, and careers pages link to the client's existing forms on their permanent Squarespace hostname, with each original form's anchor. There is no new form submission backend and no simulated successful submissions. These hosted forms need to remain available until a replacement form integration is configured. Phone and email links also work directly.
+Consultation CTAs open a shared native dialog, which becomes a full-screen form on phones. The permanent consultation URL also includes the form inline. The form matches the original fields: first and last name, phone, email, optional location, relationship (Self, Family Member, Other), and an optional message. Draft values remain in the page when the dialog is closed; they are not written to browser storage. Escape, the close button, and browser Back dismiss the dialog.
+
+The consultation form uses [CloudCannon's hosted form service](https://cloudcannon.com/documentation/developer-articles/connecting-your-site-to-an-inbox/). It posts URL-encoded fields to `/consultation-request-received/`, using `inbox_key` for routing, `_replyto` for the visitor's email, `_subject` for the notification subject, and `_gotcha` for spam filtering. The recipient is configured in CloudCannon rather than supplied by the browser. JavaScript keeps visitors in the dialog and displays confirmation; without JavaScript, the configured form navigates to the receipt page. No submission data goes into a URL or browser storage. The receipt page is excluded from the sitemap and marked noindex.
+
+**Prepared for client review; live activation is intentionally deferred.** Leave `PUBLIC_CLOUDCANNON_INBOX_KEY` blank until the client decides to proceed. The form integration is implemented, but no CloudCannon Inbox, email target, or domain change has been activated from this workspace.
+
+When the client proceeds, complete this connection checklist:
+
+1. In CloudCannon Organization Settings → Hosting → Forms, create an Inbox for consultation requests. Under Manage → Add new target, choose Email and set `info@counselconciergenursing.com` as the target.
+2. Open the validation link sent to that email address. [CloudCannon requires this verification before forwarding submissions](https://cloudcannon.com/documentation/developer-articles/integrating-your-forms-with-email/).
+3. In this site's Settings → Hosting → Forms, link that Inbox. Copy its exact key into the site's build environment variable `PUBLIC_CLOUDCANNON_INBOX_KEY`, then rebuild. This is a public routing key, not an email password or API secret. Do not require CAPTCHA unless its matching widget is also added to the form; the current form uses CloudCannon's honeypot.
+4. On the CloudCannon-hosted HTTPS preview, submit an identifiable test request. Confirm it appears in the CloudCannon Inbox and arrives at `info@counselconciergenursing.com`, and that Reply addresses the visitor. Verify failure handling before connecting the production domain.
+
+An unset Inbox key, development build, or local/HTTP preview does not send requests. Failed submissions preserve the visitor's entries and offer direct email/phone contact. CloudCannon's HTTP 200 response must contain our receipt page marker before the client shows confirmation. Confirmation means the hosting service accepted the submission; delivery to the email inbox requires the live check above. Browser tests intercept responses and do not send email.
+
+General inquiry and careers pages still link to the client's existing Squarespace forms. Keep those forms available until they are migrated too. Phone and email links work directly.
+
+### Connect the Squarespace domain to CloudCannon
+
+The domain can remain registered with Squarespace, and the existing mailbox can remain with its current email provider. A registrar transfer is not needed to change website hosting.
+
+Current CloudCannon preview: https://composed-dove.cloudvent.net/. Deploy this branch's changes there before activating the Inbox key; the preview checked on October 12, 2026 still contained the earlier site without the consultation dialog.
+
+1. Add `counselconciergenursing.com` and the `www` hostname to the CloudCannon production site's domain configuration. Select external DNS and use the exact A/CNAME records shown by CloudCannon; do not guess IP addresses.
+2. Save a copy of the current Squarespace DNS records. Update only the website records CloudCannon specifies in Squarespace's domain DNS settings. Preserve MX records, email-related TXT/CNAME records (including SPF, DKIM, and DMARC), and the separate client portal hostname. Keep Squarespace nameservers when using external DNS.
+3. Confirm CloudCannon's domain verification and HTTPS certificate, check both root and `www` domains and their redirects, then repeat the live consultation form test and check that existing mailbox sending/receiving still works.
+4. Keep the domain registration and email subscriptions active. Do not cancel the old Squarespace website while general inquiry/careers still depend on its hosted forms.
+
+References: [CloudCannon external DNS](https://cloudcannon.com/documentation/developer-articles/configure-external-dns/) and [pointing a Squarespace domain to another host](https://support.squarespace.com/hc/en-us/articles/215744668-Pointing-a-Squarespace-domain). DNS and email target settings are account-level changes and are not applied by this repository.
 
 The old $0 product checkout presentation has been replaced with consultation-oriented service detail pages. The original post-operative starting price of $750 remains on the recovery care page.
 
@@ -41,6 +69,8 @@ Client photography is stored locally as responsive WebP images in `public/images
 - Cards use 8px corners and 1px borders; controls use 6px corners and at least 44px touch targets. Scrolling content panels have larger rounded corners (32px desktop, 24px mobile). Preserve the glass navigation and reduced-motion behavior. The Insights index uses an image-free editorial header with dark navigation on cream.
 - The navigation follows Parloa's live homepage proportions: a 64px bar and compact CTA (36px visible height with an extended 44px click area; 44px on touch devices). The homepage headline is 54px at a 1440px viewport, with the description directly below and one consultation CTA. This intentionally overrides the earlier reference's larger display scale.
 - Reuse the tokens in this stylesheet for new UI rather than adding one-off type sizes or spacing overrides. Font assets are local; the site makes no runtime requests to a font CDN.
+- Color tokens live in `counsel.css`: primary navy `#0A2139`, champagne accent `#D6B98C`, ivory `#F7F5F0`, and blue-gray mist `#EAF0F5`. Use the dark bronze accent `#795B36` for accent text on light surfaces; use champagne on navy. Navigation, photo overlays, buttons, borders, and scope cards share this palette.
+- Mobile layouts support 320px viewports with wrapping hero titles, single-column approach cards below 600px, and 44px minimum standalone navigation/contact targets. Clinical card icons stay in normal flow to avoid heading overlap. The mobile menu scrolls independently in short/landscape viewports, locks background scrolling and focus, and restores the page on close or desktop resize. These choices follow W3C guidance for [reflow](https://www.w3.org/WAI/WCAG22/Understanding/reflow.html) and [touch targets](https://www.w3.org/WAI/WCAG22/Understanding/target-size-enhanced.html).
 
 ## Review notes
 

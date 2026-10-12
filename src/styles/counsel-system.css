@@ -1,4 +1,4 @@
-/* Parloa-inspired type, spacing, and shape. Counsel's colors remain in counsel.css.
+/* Parloa-inspired type, spacing, and shape. Counsel's palette tokens live in counsel.css.
    Exposure30 is a commercial webfont; Fraunces is the reference's suggested
    open-source substitute until licensed Exposure30 assets are supplied. */
 @font-face {
@@ -262,8 +262,8 @@ h3,
   transition: border-color 0.2s, background 0.2s;
 }
 .retainer-card:hover, .retainer-card:focus-visible {
-  border-color: var(--green);
-  background: #eff1e9;
+  border-color: var(--primary);
+  background: var(--surface-hover);
 }
 .retainer-card:hover h3 {
   text-decoration: underline;
@@ -502,9 +502,9 @@ h3,
   height: auto;
   border-radius: var(--radius-card);
 }
-/* The green backing reveals the beige panels' curves at both transitions. */
+/* The navy backing reveals the beige panels' curves at both transitions. */
 .home-care-sections {
-  background: var(--green);
+  background: var(--primary);
 }
 .home-care-sections > .services-home {
   border-radius: 0 0 var(--radius-panel) var(--radius-panel);
@@ -664,7 +664,7 @@ h3,
   background: var(--sand);
 }
 .site-header.header-editorial:not(.is-scrolled):not(.is-menu-open) .brand-dot {
-  color: var(--gold);
+  color: var(--accent-strong);
 }
 .site-header.header-editorial:not(.is-scrolled):not(.is-menu-open) :focus-visible {
   outline-color: var(--ink);
@@ -675,8 +675,8 @@ h3,
   border-radius: var(--radius-card);
   background: var(--paper);
 }
-.scope-card-is { --scope-accent: #47644b; --scope-tint: #edf2e9; }
-.scope-card-is-not { --scope-accent: #9a5148; --scope-tint: #f6ece9; }
+.scope-card-is { --scope-accent: var(--primary); --scope-tint: var(--mist); }
+.scope-card-is-not { --scope-accent: var(--accent-strong); --scope-tint: var(--sand); }
 .scope-grid > .scope-card { border-color: var(--scope-accent); }
 .scope-card-heading {
   display: flex;
@@ -807,18 +807,39 @@ h3,
 @media (max-width: 1100px) {
   .interior-hero-description { flex-basis: 240px; }
   .interior-hero-content { gap: var(--space-8); }
+  .approach-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mobile-nav {
+    max-height: calc(100dvh - 65px);
+    padding: var(--space-2) var(--page-gutter) max(var(--space-6), env(safe-area-inset-bottom));
+    overscroll-behavior-y: contain;
+  }
+  .mobile-nav > a { gap: var(--space-4); min-height: 48px; }
+  .mobile-nav > a[aria-current] {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+  }
 }
+html.menu-open, html.menu-open body { overflow: hidden; }
 @media (max-width: 760px) {
   :root {
     --page-gutter: 24px;
     --section-space: 48px;
-    --text-display: clamp(34px, 8.8vw, 44px);
+    --text-display: clamp(28px, 8.5vw, 40px);
     --text-heading-lg: clamp(36px, 8.5vw, 52px);
     --text-heading: 36px;
     --radius-panel: 24px;
   }
   .header-inner { height: 64px; }
   .site-header.is-scrolled .header-inner { height: 64px; }
+  .site-header .brand { min-height: 44px; justify-content: center; }
+  .menu-toggle { min-width: 44px; min-height: 44px; }
+  .home-hero h1, .interior-hero h1, .insights-masthead h1 {
+    font-size: var(--text-display);
+    line-height: 1.12;
+    overflow-wrap: anywhere;
+  }
+  .home-hero h1 > span, .home-hero h1 > em { white-space: normal; }
   .home-hero { padding-block: 128px var(--space-8); }
   .home-hero-description { font-size: var(--text-body); }
   .home-hero-actions { gap: var(--space-2) var(--space-4); margin-top: var(--space-6); }
@@ -829,6 +850,22 @@ h3,
   .service-grid, .service-links, .insight-grid { gap: var(--space-6); }
   .scope-grid { gap: var(--space-6); }
   .scope-grid > .scope-card { padding: var(--space-6); }
+  .clinical .pillar .line-icon { position: static; margin-bottom: var(--space-4); }
+  .founder-image-label { flex-wrap: wrap; gap: var(--space-2) var(--space-4); }
+  .button, .text-link { max-width: 100%; }
+  .button { text-align: center; }
+  .contact-band-action, .contact-aside, .general-copy { min-width: 0; }
+  .contact-band-action .button, .home-hero-actions .button { width: 100%; }
+  .prose, .footer-contact { overflow-wrap: anywhere; }
+  .contact-aside > div > a:not(.text-link) { font-size: var(--text-body); }
+  .contact-aside > div > a, .footer-top > div > a:not(.brand),
+  .social-links a, .footer-bottom a, .phone-link {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .social-links, .footer-bottom > div { flex-wrap: wrap; gap: var(--space-2) var(--space-6); }
+  .insight-article .article-sidebar { position: static; }
   .insights-editorial { padding-top: 112px; }
   .insights-masthead { padding-bottom: var(--space-6); margin-bottom: var(--space-8); }
   .service-links-compact .service-link-card { gap: 0 var(--space-4); }
@@ -837,6 +874,13 @@ h3,
   .article-layout { display: block; }
   .contact-band-inner, .founder-grid, .split-section, .general-layout { gap: var(--space-8); }
   .contact-aside { position: static; }
+}
+@media (max-width: 600px) {
+  .approach-steps { grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
+}
+@media (max-width: 390px) {
+  :root { --page-gutter: 20px; --text-heading: 32px; }
+  .footer-top { grid-template-columns: minmax(0, 1fr); }
 }
 @media (pointer: coarse) {
   .header-actions .button { min-height: 44px; }

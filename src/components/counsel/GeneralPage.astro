@@ -6,6 +6,7 @@ import InteriorPage from "./InteriorPage.astro";
 import PageHero from "./PageHero.astro";
 import Blocks from "./Blocks.astro";
 import Arrow from "./Arrow.astro";
+import ConsultationForm from "./ConsultationForm.astro";
 const { page } = Astro.props as { page: Page };
 const isConsultation = page.path === links.consultation;
 const isContact = page.path === links.contact;
@@ -37,8 +38,14 @@ const blocks = page.blocks
 </PageHero>
 <section class:list={["wrap", "general-layout", { "legal-layout": isLegal }]}>
   <div class="general-copy">
+    {isConsultation && (
+      <section id="consultationform" class="consultation-inline" aria-labelledby="consultation-page-title">
+        <h2 id="consultation-page-title">Consultation Request</h2>
+        <ConsultationForm id="page-consultation" />
+      </section>
+    )}
     <Blocks blocks={blocks} headingLevel={2} />
-    {page.form && (
+    {page.form && !isConsultation && (
       <div id="consultationform" class="form-handoff">
         <a
           class={isConsultation ? "button" : "text-link"}

@@ -1,0 +1,17 @@
+---
+import Counsel from '../layouts/Counsel.astro';
+import InteriorPage from '../components/counsel/InteriorPage.astro';
+import PageHero from '../components/counsel/PageHero.astro';
+---
+<Counsel title="Consultation request received" noindex>
+  <InteriorPage>
+    <PageHero slot="hero" image="greeting" alt="Gus greeting a client at her front door">
+      <Fragment slot="title">Thank you for reaching out.</Fragment>
+    </PageHero>
+    <section class="wrap retainer-detail-copy" data-consultation-receipt>
+      <h2>Your consultation request has been received.</h2>
+      <p class="lead">We’ll follow up directly to discuss your care needs and next steps.</p>
+      <a class="text-link" href="/">Return home →</a>
+    </section>
+  </InteriorPage>
+</Counsel>

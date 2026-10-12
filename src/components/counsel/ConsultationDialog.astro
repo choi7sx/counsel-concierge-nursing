@@ -1,0 +1,18 @@
+---
+import ConsultationForm from './ConsultationForm.astro';
+import '../../styles/consultation.css';
+---
+<dialog id="consultation-dialog" class="consultation-dialog" aria-labelledby="consultation-dialog-title">
+  <div class="consultation-dialog-header">
+    <h2 id="consultation-dialog-title" tabindex="-1" autofocus>Consultation Request</h2>
+    <button type="button" class="consultation-close" data-close-consultation aria-label="Close consultation request">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+    </button>
+  </div>
+  <div class="consultation-dialog-body">
+    <ConsultationForm id="modal-consultation" />
+  </div>
+</dialog>
+<script>
+  import '../../scripts/consultation';
+</script>
