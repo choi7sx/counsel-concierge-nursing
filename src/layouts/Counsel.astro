@@ -4,11 +4,13 @@ import "../styles/counsel-system.css";
 import Brand from "../components/counsel/Brand.astro";
 import Arrow from "../components/counsel/Arrow.astro";
 import ContactBand from "../components/counsel/ContactBand.astro";
+import ConsultationDialog from "../components/counsel/ConsultationDialog.astro";
 import { links } from "../lib/counsel";
 const {
   title = "Private Concierge Nursing in Nashville, TN",
   description = "Counsel Concierge Nursing provides private nursing oversight, care coordination, and advocacy for independent adults and their families in Nashville and Middle Tennessee.",
   image = "/images/counsel/consult.webp",
+  noindex = false,
 } = Astro.props;
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 const nav = [
@@ -32,9 +34,10 @@ const canonical = new URL(
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#34463c" />
+    <meta name="theme-color" content="#0a2139" />
     <title>{title} | Counsel Concierge Nursing</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta
@@ -211,10 +214,12 @@ const canonical = new URL(
         </div>
       </div>
     </footer>
+    <ConsultationDialog />
     <script>
       const header = document.querySelector<HTMLElement>(".site-header");
       const toggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
       const menu = document.querySelector<HTMLElement>("#mobile-nav");
+      const pageContent = document.querySelectorAll<HTMLElement>("main, .site-footer");
       function updateHeader() {
         header?.classList.toggle("is-scrolled", window.scrollY > 24);
       }
@@ -230,16 +235,45 @@ const canonical = new URL(
           toggle.setAttribute("aria-expanded", "false");
           menu.hidden = true;
           header?.classList.remove("is-menu-open");
+          document.documentElement.classList.remove("menu-open");
+          pageContent.forEach((element) => { element.inert = false; });
+          toggle.querySelector("span")!.textContent = "Menu";
         }
       }
+      document.addEventListener("counsel:open-consultation", closeMenu);
       toggle?.addEventListener("click", () => {
         if (!menu) return;
         const open = toggle.getAttribute("aria-expanded") === "true";
-        toggle.setAttribute("aria-expanded", String(!open));
-        menu.hidden = open;
-        header?.classList.toggle("is-menu-open", !open);
+        if (open) {
+          closeMenu();
+          return;
+        }
+        toggle.setAttribute("aria-expanded", "true");
+        toggle.querySelector("span")!.textContent = "Close";
+        menu.hidden = false;
+        header?.classList.add("is-menu-open");
+        document.documentElement.classList.add("menu-open");
+        pageContent.forEach((element) => { element.inert = true; });
       });
+      menu?.addEventListener("click", (event) => {
+        if ((event.target as Element).closest("a")) closeMenu();
+      });
+      document.addEventListener("click", (event) => {
+        if (!header?.contains(event.target as Node)) closeMenu();
+      });
+      window.addEventListener("pageshow", closeMenu);
       document.addEventListener("keydown", (e) => {
+        if (e.key === "Tab" && toggle?.getAttribute("aria-expanded") === "true") {
+          const first = header?.querySelector<HTMLAnchorElement>(".brand");
+          const last = menu?.querySelector<HTMLAnchorElement>("a:last-child");
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last?.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first?.focus();
+          }
+        }
         if (
           e.key === "Escape" &&
           toggle?.getAttribute("aria-expanded") === "true"
