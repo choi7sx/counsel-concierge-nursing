@@ -1,6 +1,47 @@
-<a class="brand" href="/" aria-label="Counsel Concierge Nursing home">
-  <span class="brand-name">
-    counsel<span class="brand-dot">.</span>
-  </span>
-  <span class="brand-descriptor">CONCIERGE NURSING</span>
+---
+const { stacked = false } = Astro.props;
+const id = stacked ? "counsel-footer" : "counsel-header";
+---
+
+<a class:list={["brand", "brand-logo", { "brand-logo-stacked": stacked }]} href="/" aria-label="Counsel Concierge Nursing home">
+  <svg class="brand-artwork" viewBox={stacked ? "40 230 1180 750" : "0 0 1430 360"} aria-hidden="true" focusable="false">
+    <defs>
+      <!-- Render the supplied artwork itself, preserving its lettering and mark.
+           The mask drops the JPEG's navy field and follows the header/footer color. -->
+      <filter id={`${id}-background`} color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  1.1 0 0 0 -0.065" />
+      </filter>
+      <mask id={`${id}-artwork`} maskUnits="userSpaceOnUse" x="0" y="0" width="1261" height="1261" style="mask-type: alpha">
+        <image href="/images/brand/counsel-logo-original.jpeg" width="1261" height="1261" filter={`url(#${id}-background)`} />
+      </mask>
+    </defs>
+    {stacked ? (
+      <rect width="1261" height="1261" fill="currentColor" mask={`url(#${id}-artwork)`} />
+    ) : (
+      <>
+        <svg x="0" y="0" width="210" height="360" viewBox="540 240 180 310">
+          <rect width="1261" height="1261" fill="currentColor" mask={`url(#${id}-artwork)`} />
+        </svg>
+        <svg x="250" y="0" width="1180" height="360" viewBox="40 620 1180 360">
+          <rect width="1261" height="1261" fill="currentColor" mask={`url(#${id}-artwork)`} />
+        </svg>
+      </>
+    )}
+  </svg>
 </a>
+
+<style>
+  .brand.brand-logo {
+    display: inline-flex;
+    flex: 0 0 auto;
+    width: 160px;
+    max-width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  .brand-artwork { display: block; width: 100%; height: auto; overflow: hidden; }
+  .brand.brand-logo-stacked { width: 220px; }
+  @media (max-width: 1250px) and (min-width: 1101px) {
+    .brand.brand-logo:not(.brand-logo-stacked) { width: 150px; }
+  }
+</style>
