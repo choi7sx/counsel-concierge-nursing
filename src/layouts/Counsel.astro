@@ -5,6 +5,7 @@ import Brand from "../components/counsel/Brand.astro";
 import Arrow from "../components/counsel/Arrow.astro";
 import ContactBand from "../components/counsel/ContactBand.astro";
 import ConsultationDialog from "../components/counsel/ConsultationDialog.astro";
+import ServicesNav from "../components/counsel/ServicesNav.astro";
 import { links } from "../lib/counsel";
 const {
   title = "Private Concierge Nursing in Nashville, TN",
@@ -75,6 +76,7 @@ const canonical = new URL(
         <Brand />
         <nav class="desktop-nav" aria-label="Main navigation">
           {nav.map(([label, url]) => (
+            url === links.services ? <ServicesNav /> :
             <a href={url} aria-current={path === url ? "page" : undefined}>
               {label}
             </a>
@@ -110,6 +112,7 @@ const canonical = new URL(
         hidden
       >
         {nav.map(([label, url]) => (
+          url === links.services ? <ServicesNav /> :
           <a href={url} aria-current={path === url ? "page" : undefined}>
             {label}
             <Arrow />
@@ -137,7 +140,7 @@ const canonical = new URL(
       <div class="wrap">
         <div class="footer-top">
           <div class="footer-brand">
-            <Brand />
+            <Brand stacked />
             <p>
               Independence, Enhanced.
               <br />
@@ -146,17 +149,13 @@ const canonical = new URL(
           </div>
           <div>
             <h2>Explore</h2>
-            <a href={links.about}>Our Practice</a>
-            <a href={links.services}>Our Services</a>
-            <a href="/approach">Our Approach</a>
-            <a href={links.postop}>Post-Operative Care</a>
-            <a href="/insights">Insights</a>
+            {nav.map(([label, url]) => (
+              <a href={url}>{label}</a>
+            ))}
           </div>
           <div>
             <h2>Connect</h2>
             <a href={links.consultation}>Request Private Consultation</a>
-            <a href={links.contact}>Contact Us</a>
-            <a href="/work-with-us">Work With Us</a>
             <a href={links.portal} target="_blank" rel="noopener noreferrer">
               Client Portal ↗
             </a>
@@ -265,7 +264,7 @@ const canonical = new URL(
       document.addEventListener("keydown", (e) => {
         if (e.key === "Tab" && toggle?.getAttribute("aria-expanded") === "true") {
           const first = header?.querySelector<HTMLAnchorElement>(".brand");
-          const last = menu?.querySelector<HTMLAnchorElement>("a:last-child");
+          const last = menu?.querySelector<HTMLAnchorElement>(":scope > a:last-child");
           if (e.shiftKey && document.activeElement === first) {
             e.preventDefault();
             last?.focus();
