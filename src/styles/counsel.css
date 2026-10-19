@@ -793,7 +793,6 @@ a:hover .arrow.diagonal {
 .footer-disclaimer {
   font-size: 10px;
   line-height: 1.9;
-  max-width: 800px;
   color: var(--muted);
   margin-top: 45px;
 }
