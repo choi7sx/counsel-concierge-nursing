@@ -1,6 +1,5 @@
 ---
 import Counsel from "../layouts/Counsel.astro";
-import RetainerDetail from "../components/counsel/RetainerDetail.astro";
 import Home from "../components/counsel/Home.astro";
 import Services from "../components/counsel/Services.astro";
 import About from "../components/counsel/About.astro";
@@ -10,12 +9,12 @@ import Article from "../components/counsel/Article.astro";
 import GeneralPage from "../components/counsel/GeneralPage.astro";
 import ServiceDetail from "../components/counsel/ServiceDetail.astro";
 import InsightCards from "../components/counsel/InsightCards.astro";
-import { pages, links, retainerPages } from "../lib/counsel";
+import { pages, links, servicePages } from "../lib/counsel";
 import type { Page } from "../lib/counsel";
 export function getStaticPaths() {
   return [
     ...pages,
-    ...retainerPages,
+    ...servicePages,
     {
       path: "/approach",
       title: "Our Approach",
@@ -33,10 +32,10 @@ const path = page.path;
   <Home />
 ) : (
   <Counsel
-    title={page.title.trim()}
+    title={(page.metaTitle || page.title).trim()}
     description={page.description || undefined}
   >
-    {path === links.services || path === "/store" ? (
+    {path === links.services ? (
       <Services />
     ) : path === links.about ? (
       <About />
@@ -56,8 +55,6 @@ const path = page.path;
     ) : path.startsWith("/insights/") ? (
       <Article page={page} />
     ) : path.startsWith("/services/") ? (
-      <RetainerDetail page={page} />
-    ) : path.startsWith("/store/p/") ? (
       <ServiceDetail page={page} />
     ) : (
       <GeneralPage page={page} />

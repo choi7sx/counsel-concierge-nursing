@@ -20,12 +20,9 @@ const nav = [
   ["Our Approach", "/approach"],
   ["Insights", "/insights"],
 ];
+const footerNav = [...nav.slice(0, 2), ["Post-Op Care", links.postop], ...nav.slice(2)];
 const canonical = new URL(
-  path === "/home"
-    ? "/"
-    : path === "/store"
-      ? links.services
-      : Astro.url.pathname,
+  path === "/home" ? "/" : Astro.url.pathname,
   "https://counselconciergenursing.com",
 );
 ---
@@ -54,14 +51,14 @@ const canonical = new URL(
     <meta property="og:url" content={canonical} />
     <link
       rel="preload"
-      href="/fonts/fraunces.woff2"
+      href="/fonts/eb-garamond.woff2"
       as="font"
       type="font/woff2"
       crossorigin
     />
     <link
       rel="preload"
-      href="/fonts/geist.woff2"
+      href="/fonts/montserrat.woff2"
       as="font"
       type="font/woff2"
       crossorigin
@@ -118,9 +115,6 @@ const canonical = new URL(
             <Arrow />
           </a>
         ))}
-        <a href={links.postop}>
-          Post-Operative Care <Arrow />
-        </a>
         <a href={links.contact}>
           Contact <Arrow />
         </a>
@@ -144,7 +138,7 @@ const canonical = new URL(
           </div>
           <div>
             <h2>Explore</h2>
-            {nav.map(([label, url]) => (
+            {footerNav.map(([label, url]) => (
               <a href={url}>{label}</a>
             ))}
           </div>

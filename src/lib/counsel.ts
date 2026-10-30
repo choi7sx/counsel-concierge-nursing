@@ -8,6 +8,7 @@ export type Block = {
 export type Page = {
   path: string;
   title: string;
+  metaTitle?: string;
   description: string;
   blocks: Block[];
   date?: string;
@@ -78,57 +79,44 @@ export const approach = [
     text: "Ongoing clinical oversight built on proactive prevention — designed to enhance independence.",
   },
 ];
-// Preserve original store URLs, but use the main Services page for the service catalog.
-export const originalStoreServices = [
-  {
-    slug: "continuous-clinical-oversight",
-    image: "oversight",
-    label: "Ongoing peace of mind",
-    title: "Continuous Clinical Oversight",
-  },
-  {
-    slug: "care-transitions",
-    image: "transitions",
-    label: "A steady hand through change",
-    title: "Care Transitions",
-  },
-  {
-    slug: "post-op-recovery",
-    image: "recovery",
-    label: "Recovery, thoughtfully supported",
-    title: "Post-Op Recovery",
-  },
-  {
-    slug: "travel-accompaniment",
-    image: "travel",
-    label: "Confidence wherever you go",
-    title: "Travel Accompaniment",
-  },
-].map((s) => ({
-  ...s,
-  path: "/store/p/" + s.slug,
-  text: pageAt("/store/p/" + s.slug).blocks[0].text,
-}));
-// One catalog, sourced from the client's seven Monthly Retainer Services.
+const servicesBlocks = pageAt(links.services).blocks;
 // Card summaries use the client's own bold introductory phrases verbatim.
-export const retainerServices = pageAt(links.services).blocks[4].items!.map((item) => {
+const serviceEntry = (item: { title: string; html: string }) => {
   const slug = item.title.toLowerCase().replace(/ & /g, " ").replace(/\s+/g, "-");
   return {
     ...item,
     slug,
-    path: `/services/${slug}`,
+    // Post-op keeps its established page rather than moving under /services/.
+    path: slug === "post-op-recovery-care" ? links.postop : `/services/${slug}`,
     summary: plainText(item.html.match(/<strong>(.*?)<\/strong>/)?.[1] || item.html),
     text: plainText(item.html),
   };
-});
-export const retainerPages: Page[] = retainerServices
-  .filter((service) => service.path.startsWith("/services/"))
+};
+export const retainerServices = servicesBlocks[4].items!.map(serviceEntry);
+export const situationalServices = servicesBlocks[8].items!.map(serviceEntry);
+export const postOpService = situationalServices.find((service) => service.path === links.postop)!;
+// A service offered both ways is listed in both groups but keeps one URL, so
+// its retainer and situational descriptions share a page instead of competing.
+export const servicePages: Page[] = [...retainerServices, ...situationalServices]
+  .filter((service, i, all) =>
+    service.path.startsWith("/services/") && all.findIndex((s) => s.path === service.path) === i,
+  )
   .map((service) => ({
     path: service.path,
     title: service.title,
+    metaTitle: `${service.title} in Nashville, TN`,
     description: service.text,
     blocks: [{ type: "html", html: service.html, text: service.text }],
   }));
+// Longer service copy kept on the Services page content entry.
+export const serviceDetails: Record<string, Block> = {
+  "care-transitions": servicesBlocks[7],
+  "travel-accompaniment": servicesBlocks[6],
+};
+export const serviceHeroes: Record<string, { image: string; alt: string }> = {
+  "care-transitions": { image: "transitions", alt: "A hospital stretcher waiting in a quiet corridor" },
+  "travel-accompaniment": { image: "travel", alt: "The cabin of a private aircraft" },
+};
 export const articles = pages
   .filter((p) => p.path.startsWith("/insights/"))
   .map((p) => ({
