@@ -1,0 +1,9 @@
+{
+  "routes": [
+    { "from": "/store", "to": "/concierge-nursing-services-nashville", "status": 301 },
+    { "from": "/store/p/care-transitions", "to": "/services/care-transitions", "status": 301 },
+    { "from": "/store/p/travel-accompaniment", "to": "/services/travel-accompaniment", "status": 301 },
+    { "from": "/store/p/post-op-recovery", "to": "/post-operative-care-nashville", "status": 301 },
+    { "from": "/store/p/continuous-clinical-oversight", "to": "/concierge-nursing-services-nashville", "status": 301 }
+  ]
+}

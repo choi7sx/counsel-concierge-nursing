@@ -1,9 +1,10 @@
 ---
-import { pageAt, links } from "../../lib/counsel";
+import { pageAt, links, postOpService, situationalServices } from "../../lib/counsel";
 import InteriorPage from "./InteriorPage.astro";
 import PageHero from "./PageHero.astro";
 import Blocks from "./Blocks.astro";
 import Arrow from "./Arrow.astro";
+import ServiceCards from "./ServiceCards.astro";
 const b = pageAt(links.postop).blocks;
 ---
 
@@ -12,6 +13,7 @@ const b = pageAt(links.postop).blocks;
   <Fragment slot="title">Post-Operative<br /><em>Recovery Care.</em></Fragment>
 </PageHero>
 <section class="wrap retainer-detail-copy">
+  <a class="text-link page-back-link" href={links.services}>← All services</a>
   <Blocks headingLevel={2} blocks={[b[1]]} />
 </section>
 <section class="section">
@@ -42,6 +44,12 @@ const b = pageAt(links.postop).blocks;
       <Blocks headingLevel={2} blocks={[b[10]]} />
     </div>
     <Blocks headingLevel={2} blocks={[b[11]]} />
+  </div>
+</section>
+<section class="section retainer-section">
+  <div class="wrap">
+    <div class="section-intro"><h2>More situational <em>services.</em></h2></div>
+    <ServiceCards items={situationalServices.filter((service) => service !== postOpService)} compact />
   </div>
 </section>
 

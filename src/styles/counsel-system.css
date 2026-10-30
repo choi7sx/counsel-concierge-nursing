@@ -1,30 +1,29 @@
-/* Parloa-inspired type, spacing, and shape. Counsel's palette tokens live in counsel.css.
-   Exposure30 is a commercial webfont; Fraunces is the reference's suggested
-   open-source substitute until licensed Exposure30 assets are supplied. */
+/* Parloa-inspired spacing and shape, with Counsel's brand type: Garamond headings
+   and Montserrat text, matching its social media. Palette tokens live in counsel.css. */
 @font-face {
-  font-family: Geist;
-  src: url('/fonts/geist.woff2') format('woff2');
+  font-family: Montserrat;
+  src: url('/fonts/montserrat.woff2') format('woff2');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: Geist;
-  src: url('/fonts/geist-italic.woff2') format('woff2');
+  font-family: Montserrat;
+  src: url('/fonts/montserrat-italic.woff2') format('woff2');
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
-  font-family: Fraunces;
-  src: url('/fonts/fraunces.woff2') format('woff2');
-  font-weight: 100 900;
+  font-family: 'EB Garamond';
+  src: url('/fonts/eb-garamond.woff2') format('woff2');
+  font-weight: 400 800;
   font-style: normal;
   font-display: swap;
 }
 :root {
-  --serif: 'Fraunces', Georgia, serif;
-  --sans: 'Geist', Arial, sans-serif;
+  --serif: 'EB Garamond', Georgia, serif;
+  --sans: 'Montserrat', Arial, sans-serif;
   --brand-serif: 'Counsel Serif', Georgia, serif;
   --space-1: 4px;
   --space-2: 8px;
@@ -40,13 +39,13 @@
   --content-width: 1200px;
   --page-gutter: 48px;
   --section-space: var(--space-20);
-  --text-display: clamp(40px, 3.75vw, 60px);
+  --text-display: clamp(44px, 4.25vw, 68px);
   --text-heading-lg: clamp(42px, 5.2vw, 82px);
-  --text-heading: 42px;
-  --text-heading-sm: 24px;
+  --text-heading: 48px;
+  --text-heading-sm: 27px;
   --text-body: 16px;
-  --text-lead: 18px;
-  --text-ui: 14px;
+  --text-lead: 17px;
+  --text-ui: 13px;
   --text-caption: 11px;
   --radius-control: 6px;
   --radius-card: 8px;
@@ -58,7 +57,7 @@ body {
   font-size: var(--text-body);
   font-weight: 400;
   line-height: 1.5;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
 }
 .brand-name,
 .founder-signature {
@@ -70,8 +69,7 @@ body {
 h1, h2, h3, h4, h5,
 .prose h2, .prose h3, .prose h4, .prose h5 {
   font-family: var(--serif);
-  font-optical-sizing: auto;
-  font-weight: 350;
+  font-weight: 400;
   letter-spacing: -0.01em;
   line-height: 1.1;
 }
@@ -82,7 +80,7 @@ h1 em, h2 em, h3 em {
 .home-hero h1, .interior-hero h1, .insights-masthead h1 {
   /* Match at every viewport, independent of each hero's text container. */
   font-size: max(22px, min(var(--text-display), calc(8vw - var(--page-gutter) * 0.16)));
-  font-weight: 350;
+  font-weight: 400;
   line-height: 1.05;
   letter-spacing: -0.01em;
   max-width: none;
@@ -119,19 +117,19 @@ h3,
   font-size: var(--text-heading-sm);
   font-weight: 400;
   line-height: 1.3;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
 }
 .prose h4, .prose h5, .support-item .prose h4 {
   font-size: var(--text-heading-sm);
   font-weight: 400;
   line-height: 1.3;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
 }
 .support-item .prose h2, .scope-grid .prose h2 {
   font-size: 28px;
   font-weight: 400;
   line-height: 1.2;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
 }
 .prose,
 .section-sidebar .prose,
@@ -153,14 +151,14 @@ h3,
   font-size: var(--text-body);
   font-weight: 400;
   line-height: 1.5;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
 }
 .lead, .home-hero-description, .interior-hero-description,
 .article-body .prose {
   font-size: var(--text-lead);
   font-weight: 400;
   line-height: 1.5;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
 }
 .eyebrow,
 .home-hero .eyebrow,
@@ -182,7 +180,7 @@ h3,
   font-size: var(--text-ui);
   font-weight: 400;
   line-height: 1.4;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
 }
 .mobile-nav > a {
   font-family: var(--sans);
@@ -200,7 +198,7 @@ h3,
   font-size: var(--text-ui);
   font-weight: 500;
   line-height: 1.4;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
   border-radius: var(--radius-control);
   padding: var(--space-3);
   min-height: 48px;
@@ -265,17 +263,38 @@ h3,
   border-color: var(--primary);
   background: var(--surface-hover);
 }
-.retainer-card:hover h3 {
+.retainer-card:hover h4 {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 5px;
 }
-.retainer-card > .service-icon {
-  width: 28px;
-  height: 28px;
+.retainer-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
   margin-bottom: var(--space-6);
 }
-.retainer-card h3 {
+.retainer-card .service-icon {
+  width: 28px;
+  height: 28px;
+}
+.most-requested {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  width: fit-content;
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--primary);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+.retainer-card-top .most-requested { align-self: center; }
+.retainer-card h4 {
   font-size: var(--text-heading-sm);
   font-weight: 400;
   line-height: 1.2;
@@ -289,6 +308,79 @@ h3,
 }
 .retainer-card .service-card-action {
   padding-top: var(--space-3);
+}
+.retainer-card-feature,
+.retainer-card-feature:hover, .retainer-card-feature:focus-visible {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+}
+.retainer-card-feature:hover, .retainer-card-feature:focus-visible {
+  background: var(--primary-hover);
+}
+.retainer-card-feature .service-icon { color: var(--accent); }
+.retainer-card-feature > p { color: var(--on-dark); }
+.retainer-card-feature .service-card-action { border-top-color: rgb(255 255 255 / 22%); }
+.social-links { font-size: var(--text-caption); }
+.services-home-group + .services-home-group { margin-top: var(--space-12); }
+.services-home-group-heading { margin-bottom: var(--space-6); }
+.services-home-group-heading h3 { margin-bottom: var(--space-2); }
+.services-home-group-heading p { margin: 0; color: var(--muted); }
+.postop-feature {
+  position: relative;
+  display: block;
+  padding-left: 50%;
+  margin-bottom: var(--space-4);
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--primary);
+  color: #fff;
+  transition: background 0.2s;
+}
+.postop-feature:hover, .postop-feature:focus-visible { background: var(--primary-hover); }
+.postop-feature-image {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+}
+.postop-feature-copy {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-10);
+}
+.postop-feature-copy .most-requested { margin-bottom: var(--space-4); }
+.postop-feature-copy h3 {
+  margin-bottom: var(--space-4);
+  font-size: 32px;
+  line-height: 1.15;
+}
+.postop-feature-copy p:not(.eyebrow) {
+  margin-bottom: var(--space-6);
+  color: var(--on-dark);
+}
+.postop-feature-copy .service-card-action { border-top-color: rgb(255 255 255 / 22%); }
+.service-offerings { margin-bottom: var(--space-8); }
+.service-offerings-both {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-8);
+}
+.service-offerings .retainer-context { margin-top: var(--space-8); }
+.service-offerings h2 {
+  margin-bottom: var(--space-3);
+  font-size: var(--text-heading-sm);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+@media (max-width: 760px) {
+  .postop-feature { padding-left: 0; }
+  .postop-feature-image { position: static; width: 100%; height: 220px; }
+  .service-offerings-both { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .postop-feature-copy { padding: var(--space-6); }
+  .postop-feature-copy h3 { font-size: 28px; }
 }
 @media (max-width: 1100px) {
   .retainer-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -328,7 +420,7 @@ h3,
   min-height: 0;
 }
 .service-link-card h3, .service-card h3, .pillar h3,
-.insight-card h3, .related-grid h3 {
+.insight-card :is(h2, h3), .related-grid h3 {
   margin-bottom: var(--space-4);
 }
 .service-link-card .service-icon, .line-icon {
@@ -357,7 +449,7 @@ h3,
   font-family: var(--serif);
   font-size: 28px;
   font-weight: 400;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
 }
 .approach-detail-step {
   gap: var(--space-6);
@@ -462,7 +554,7 @@ h3,
   font-size: var(--text-heading-sm);
   font-weight: 400;
   line-height: 1.3;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
   padding: var(--space-6) 0;
   gap: var(--space-6);
 }
@@ -616,7 +708,7 @@ h3,
   font-family: var(--sans);
   font-size: 13px;
   font-weight: 500;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
 }
 .footer-brand > p {
   font-size: 24px;
@@ -825,9 +917,9 @@ html.menu-open, html.menu-open body { overflow: hidden; }
   :root {
     --page-gutter: 24px;
     --section-space: 48px;
-    --text-display: clamp(28px, 8.5vw, 40px);
+    --text-display: clamp(32px, 9.5vw, 46px);
     --text-heading-lg: clamp(36px, 8.5vw, 52px);
-    --text-heading: 36px;
+    --text-heading: 40px;
     --radius-panel: 24px;
   }
   .header-inner { height: 64px; }
@@ -879,7 +971,7 @@ html.menu-open, html.menu-open body { overflow: hidden; }
   .approach-steps { grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
 }
 @media (max-width: 390px) {
-  :root { --page-gutter: 20px; --text-heading: 32px; }
+  :root { --page-gutter: 20px; --text-heading: 36px; }
   .footer-top { grid-template-columns: minmax(0, 1fr); }
 }
 @media (pointer: coarse) {

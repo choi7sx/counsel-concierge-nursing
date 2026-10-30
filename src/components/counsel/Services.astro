@@ -1,6 +1,6 @@
 ---
 import CounselImage from "./CounselImage.astro";
-import { pageAt, links, retainerServices } from "../../lib/counsel";
+import { pageAt, links, postOpService, retainerServices, situationalServices } from "../../lib/counsel";
 import InteriorPage from "./InteriorPage.astro";
 import PageHero from "./PageHero.astro";
 import ServiceCards from "./ServiceCards.astro";
@@ -24,23 +24,27 @@ const b = pageAt(links.services).blocks;
     <ServiceCards items={retainerServices} compact />
   </div>
 </section>
-<section class="section">
+<section class="section" id="situational-services">
   <div class="wrap">
-    <div class="section-intro">
+    <div class="retainer-intro">
       <Blocks blocks={[b[5]]} />
     </div>
-    <div class="support-grid">
-      {[6, 7, 8].map((n, i) => (
-        <article class="support-item">
-          <Blocks blocks={[b[n]]} />
-          {n === 8 && (
-            <a class="text-link" href={links.postop}>
-              Explore post-operative care <Arrow />
-            </a>
-          )}
-        </article>
-      ))}
-    </div>
+    <a class="postop-feature" href={links.postop}>
+      <CounselImage
+        class="postop-feature-image"
+        sizes="(max-width: 760px) calc(100vw - 48px), 568px"
+        src="/images/counsel/postop.webp"
+        alt=""
+        loading="lazy"
+      />
+      <div class="postop-feature-copy">
+        <span class="most-requested">Most Requested</span>
+        <h3>{postOpService.title}</h3>
+        <p>{postOpService.text}</p>
+        <span class="service-card-action">Explore post-operative care <Arrow /></span>
+      </div>
+    </a>
+    <ServiceCards items={situationalServices.filter((service) => service !== postOpService)} compact />
   </div>
 </section>
 <section class="scope-section section">
