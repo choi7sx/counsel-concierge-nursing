@@ -704,6 +704,16 @@ h3,
 .site-footer {
   padding-block: var(--section-space) var(--space-6);
 }
+@media (min-width: 1101px) {
+  /* Size the logo and contact columns to their content so the email stays on one line. */
+  .footer-top {
+    grid-template-columns: auto auto minmax(0, 1fr) minmax(0, 0.8fr) auto;
+    column-gap: var(--space-6);
+  }
+}
+@media (min-width: 761px) and (max-width: 1100px) {
+  .footer-top { grid-template-columns: 1.1fr 0.7fr 1.3fr 1fr; }
+}
 .footer-top h2 {
   font-family: var(--sans);
   font-size: 13px;
