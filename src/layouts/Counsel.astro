@@ -6,7 +6,7 @@ import Arrow from "../components/counsel/Arrow.astro";
 import ContactBand from "../components/counsel/ContactBand.astro";
 import ConsultationDialog from "../components/counsel/ConsultationDialog.astro";
 import ServicesNav from "../components/counsel/ServicesNav.astro";
-import { links } from "../lib/counsel";
+import { links, postOpService, servicePages } from "../lib/counsel";
 const {
   title = "Private Concierge Nursing in Nashville, TN",
   description = "Counsel Concierge Nursing provides private nursing oversight, care coordination, and advocacy for independent adults and their families in Nashville and Middle Tennessee.",
@@ -20,7 +20,7 @@ const nav = [
   ["Our Approach", "/approach"],
   ["Insights", "/insights"],
 ];
-const footerNav = [...nav.slice(0, 2), ["Post-Op Care", links.postop], ...nav.slice(2)];
+const footerServices = [postOpService, ...servicePages];
 const canonical = new URL(
   path === "/home" ? "/" : Astro.url.pathname,
   "https://counselconciergenursing.com",
@@ -138,8 +138,14 @@ const canonical = new URL(
           </div>
           <div>
             <h2>Explore</h2>
-            {footerNav.map(([label, url]) => (
+            {nav.map(([label, url]) => (
               <a href={url}>{label}</a>
+            ))}
+          </div>
+          <div>
+            <h2>Services</h2>
+            {footerServices.map((service) => (
+              <a href={service.path}>{service.title}</a>
             ))}
           </div>
           <div>

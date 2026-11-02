@@ -1,11 +1,11 @@
 ---
-import { links, postOpService, retainerServices, servicePages, situationalServices } from "../../lib/counsel";
-import Arrow from "./Arrow.astro";
+import { links, postOpService, servicePages } from "../../lib/counsel";
 const path = Astro.url.pathname.replace(/\/$/, "");
 const active = path === links.services || path === links.postop || servicePages.some((page) => page.path === path);
-const groups = [
-  { title: "Monthly Retainer Services", path: `${links.services}#monthly-retainer-services`, services: retainerServices },
-  { title: "Situational Services", path: `${links.services}#situational-services`, services: situationalServices.filter((service) => service !== postOpService) },
+const items = [
+  { title: postOpService.title, text: postOpService.summary, path: postOpService.path, featured: true },
+  { title: "Monthly Retainer Services", text: "Ongoing care plans, built around your needs.", path: `${links.services}#monthly-retainer-services` },
+  { title: "Situational Services", text: "Focused support, typically for a day or two.", path: `${links.services}#situational-services` },
 ];
 ---
 
@@ -16,40 +16,23 @@ const groups = [
       <path d="m3 4.5 3 3 3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
     </svg>
   </summary>
-  <div class="services-dropdown">
-    <div class="services-dropdown-heading">
-      <a class="services-overview-link" href={links.services} aria-current={path === links.services ? "page" : undefined}>
-        View All Services <Arrow />
-      </a>
-    </div>
-    <div class="services-dropdown-groups">
-      <a class="services-group services-postop" href={postOpService.path} aria-current={path === postOpService.path ? "page" : undefined}>
-        <span class="most-requested">Most Requested</span>
-        <span class="services-postop-title">{postOpService.title}</span>
-        <span class="services-postop-text">{postOpService.summary}</span>
-        <span class="services-postop-action">Explore post-op care <Arrow /></span>
-      </a>
-      {groups.map((group) => (
-        <div class="services-group">
-          <a class="services-group-title" href={group.path}>{group.title}</a>
-          <ul class="services-dropdown-list">
-            {group.services.map((service) => (
-              <li>
-                <a href={service.path} aria-current={path === service.path ? "page" : undefined}>
-                  {service.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </div>
-  </div>
+  <ul class="services-dropdown">
+    {items.map((item) => (
+      <li>
+        <a href={item.path} aria-current={path === item.path ? "page" : undefined}>
+          <span class="services-item-title">
+            {item.title}
+            {item.featured && <span class="most-requested">Most Requested</span>}
+          </span>
+          <span class="services-item-text">{item.text}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
 </details>
 
 <style>
-  /* Center the menu on the header so it stays on screen at every desktop width. */
-  :global(.header-inner) { position: relative; }
+  .services-nav { position: relative; }
   .services-trigger {
     display: flex;
     align-items: center;
@@ -70,78 +53,39 @@ const groups = [
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    width: 920px;
-    padding: var(--space-8);
+    display: grid;
+    gap: var(--space-1);
+    width: 420px;
+    margin: 0;
+    padding: var(--space-3);
     border: 1px solid var(--line);
     border-radius: var(--radius-card);
     background: var(--paper);
     color: var(--ink);
     box-shadow: 0 20px 48px rgb(var(--primary-rgb) / 16%);
+    list-style: none;
   }
-  .services-dropdown-heading {
-    display: flex;
-    align-items: center;
-    padding: 0 var(--space-3) var(--space-4);
-    border-bottom: 1px solid var(--line);
-    margin-bottom: var(--space-4);
-    font-size: var(--text-ui);
-  }
-  .services-overview-link { display: inline-flex; align-items: center; gap: var(--space-2); }
-  .services-overview-link:hover { text-decoration: underline; text-underline-offset: 4px; }
-  .services-dropdown-groups {
+  .services-dropdown a {
     display: grid;
-    grid-template-columns: minmax(0, 0.9fr) repeat(2, minmax(0, 1fr));
-    gap: var(--space-6);
-  }
-  .services-group-title {
-    display: flex;
-    align-items: center;
+    gap: var(--space-1);
     min-height: 44px;
-    padding-inline: var(--space-3);
-    color: var(--accent-strong);
-    font-size: var(--text-ui);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-control);
+  }
+  .services-dropdown a:hover, .services-dropdown a[aria-current] { background: var(--mist); }
+  .services-item-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-1) var(--space-3);
+    font-size: var(--text-body);
     font-weight: 500;
     line-height: 1.4;
   }
-  .services-group-title:hover { text-decoration: underline; text-underline-offset: 4px; }
-  .services-dropdown-list {
-    display: grid;
-    gap: var(--space-1);
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .services-dropdown-list a {
-    display: flex;
-    align-items: center;
-    min-height: 44px;
-    padding: var(--space-2) var(--space-3);
-    border-radius: var(--radius-control);
-    font-size: var(--text-body);
-    line-height: 1.4;
-  }
-  .services-dropdown-list a:hover, .services-dropdown-list a[aria-current] { background: var(--mist); }
-  .services-postop {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    padding: var(--space-6);
-    border-radius: var(--radius-card);
-    background: var(--primary);
-    color: #fff;
-    transition: background 0.2s;
-  }
-  .services-postop:hover, .services-postop[aria-current] { background: var(--primary-hover); }
-  .services-postop-title { font: 400 var(--text-heading-sm)/1.2 var(--serif); }
-  .services-postop-text { color: var(--on-dark); font-size: var(--text-ui); line-height: 1.5; }
-  .services-postop-action {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-2);
-    margin-top: auto;
-    padding-top: var(--space-4);
+  .services-item-text {
+    color: var(--muted);
     font-size: var(--text-ui);
+    line-height: 1.5;
   }
   :global(.site-header) .services-dropdown a:focus-visible { outline-color: var(--primary); }
   @media (max-width: 1100px) {
@@ -156,17 +100,11 @@ const groups = [
       position: static;
       transform: none;
       width: auto;
-      padding: var(--space-4);
+      padding: var(--space-2);
       margin-bottom: var(--space-4);
       box-shadow: none;
     }
-    .services-dropdown-heading { padding-inline: 0; }
-    .services-overview-link { min-height: 44px; }
-    .services-dropdown-groups { grid-template-columns: 1fr; }
-    .services-group-title { padding-inline: 0; }
-    .services-dropdown-list { gap: 0; }
-    .services-dropdown-list a { padding-inline: 0; }
-    .services-postop { padding: var(--space-4); }
+    .services-dropdown a { padding-inline: var(--space-3); }
   }
 </style>
 
