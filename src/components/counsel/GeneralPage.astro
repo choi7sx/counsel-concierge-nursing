@@ -37,7 +37,7 @@ const blocks = page.blocks
 >
   <Fragment slot="title">{title}<span class="heading-period">.</span></Fragment>
 </PageHero>
-<section class:list={["wrap", "general-layout", { "legal-layout": isLegal, "contact-layout": isContact }]}>
+<section class:list={["wrap", "general-layout", { "legal-layout": isLegal }]}>
   <div class="general-copy">
     {isConsultation && (
       <section class="consultation-inline" aria-labelledby="consultation-page-title">
@@ -46,11 +46,27 @@ const blocks = page.blocks
       </section>
     )}
     <Blocks blocks={blocks} headingLevel={2} />
+    {isContact && (
+      <section class="contact-card" aria-labelledby="contact-card-title">
+        <h2 id="contact-card-title">We’re here <em>to help.</em></h2>
+        <dl class="contact-card-details">
+          <div>
+            <dt>Phone</dt>
+            <dd><a href="tel:+16159339208">(615) 933-9208</a></dd>
+          </div>
+          <div>
+            <dt>Email</dt>
+            <dd><a href="mailto:info@counselconciergenursing.com">info@counselconciergenursing.com</a></dd>
+          </div>
+        </dl>
+        <a class="button" href={links.consultation}>Request Private Consultation <Arrow /></a>
+      </section>
+    )}
     {isCareer && (
       <DirectContact id="career-contact-title" title="Share Your Background" text="Email your resume and a short note about your experience, or call to introduce yourself." emailLabel="Email Your Resume" subject="Work With Us — Resume" />
     )}
   </div>
-  {!isLegal && (
+  {!isLegal && !isContact && (
     <aside class="contact-aside">
       {isConsultation && (
         <CounselImage
