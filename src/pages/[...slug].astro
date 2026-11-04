@@ -9,6 +9,9 @@ import Article from "../components/counsel/Article.astro";
 import GeneralPage from "../components/counsel/GeneralPage.astro";
 import ServiceDetail from "../components/counsel/ServiceDetail.astro";
 import InsightCards from "../components/counsel/InsightCards.astro";
+import EditorialPage from "../components/counsel/EditorialPage.astro";
+import Reviews from "../components/counsel/Reviews.astro";
+import InvestmentGuide from "../components/counsel/InvestmentGuide.astro";
 import { pages, links, servicePages } from "../lib/counsel";
 import type { Page } from "../lib/counsel";
 export function getStaticPaths() {
@@ -34,6 +37,8 @@ const path = page.path;
   <Counsel
     title={(page.metaTitle || page.title).trim()}
     description={page.description || undefined}
+    noindex={page.noindex}
+    editorial={["/insights", "/reviews", "/post-op-investment-guide"].includes(path)}
   >
     {path === links.services ? (
       <Services />
@@ -44,14 +49,15 @@ const path = page.path;
     ) : path === links.postop ? (
       <PostOp />
     ) : path === "/insights" ? (
-      <div class="insights-editorial">
-        <header class="wrap insights-masthead">
-          <h1>Insights.</h1>
-        </header>
+      <EditorialPage title="Insights.">
         <section class="wrap insights-index" aria-label="All insights">
           <InsightCards headingLevel={2} />
         </section>
-      </div>
+      </EditorialPage>
+    ) : path === "/reviews" ? (
+      <Reviews page={page} />
+    ) : path === "/post-op-investment-guide" ? (
+      <InvestmentGuide page={page} />
     ) : path.startsWith("/insights/") ? (
       <Article page={page} />
     ) : path.startsWith("/services/") ? (

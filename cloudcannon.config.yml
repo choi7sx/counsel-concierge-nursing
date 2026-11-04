@@ -71,6 +71,14 @@ _inputs:
     hidden: true
   form:
     type: object
-    comment: Existing hosted form destination. Keep this until a replacement submission service is configured.
+    comment: Fields shown on this page's form. Submissions are delivered through the CloudCannon Inbox.
   fields:
     hidden: true
+  noindex:
+    type: checkbox
+    comment: Hide this page from search engines and the sitemap. Used for pages people reach by QR code.
+  price:
+    type: text
+    comment: Shown exactly as written, for example $750.
+  url:
+    type: url

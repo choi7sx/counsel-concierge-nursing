@@ -156,7 +156,6 @@
         }
       ],
       "form": {
-        "url": "https://grape-coconut-2jjt.squarespace.com/contact-concierge-nursing-nashville#block-yui_3_17_2_1_1765907215092_1060",
         "name": "Contact Form",
         "fields": [
           {
@@ -254,7 +253,6 @@
         }
       ],
       "form": {
-        "url": "https://grape-coconut-2jjt.squarespace.com/private-nursing-consultation-nashville#block-cad6cba57d5e1011d4a2",
         "name": "Consultation Form",
         "fields": [
           {
@@ -521,7 +519,6 @@
         }
       ],
       "form": {
-        "url": "https://grape-coconut-2jjt.squarespace.com/work-with-us#block-yui_3_17_2_1_1784143043504_444",
         "name": "Work With Us ",
         "fields": [
           {
@@ -621,6 +618,195 @@
           }
         ]
       }
+    },
+    {
+      "path": "/reviews",
+      "title": "Reviews",
+      "description": "Share your experience with Counsel Concierge Nursing on Google, Facebook, or Nextdoor, or leave a testimonial for our website.",
+      "noindex": true,
+      "blocks": [
+        {
+          "type": "html",
+          "html": "<h2>With Our Thanks</h2><p>It has been our privilege to be a part of your care. Much of our practice grows through the word of families like yours. If you would like to share your experience, it would mean a great deal to us and may help other families find the support they need.</p>"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "title": "Review us on Google",
+              "url": "https://g.page/r/CaEvTipzdtWHEBM/review",
+              "html": ""
+            },
+            {
+              "title": "Recommend us on Facebook",
+              "url": "https://www.facebook.com/profile.php?id=61588239073909&sk=reviews",
+              "html": ""
+            },
+            {
+              "title": "Recommend us on Nextdoor",
+              "url": "https://nextdoor.com/page/compass-concierge-nursing",
+              "html": ""
+            }
+          ]
+        },
+        {
+          "type": "html",
+          "html": "<h2>Leave a Featured Testimonial for Our Website</h2><p>Please only share what you are comfortable sharing. Thank you.</p>"
+        }
+      ],
+      "form": {
+        "name": "Reviews Form",
+        "fields": [
+          {
+            "description": "",
+            "id": "name-349f91ee-c636-4e68-b3f6-451ca716cc35",
+            "locked": false,
+            "required": true,
+            "title": "Name",
+            "type": "name",
+            "name": "Name 1",
+            "customConstraints": {
+              "requireFirstName": {
+                "enabled": true
+              },
+              "requireLastName": {
+                "enabled": true
+              },
+              "showFirstName": {
+                "enabled": true
+              },
+              "showLastName": {
+                "enabled": true
+              }
+            }
+          },
+          {
+            "required": true,
+            "locked": false,
+            "description": "",
+            "id": "email-2371d316-fa12-4055-b98a-0e1fe9b2bd1f",
+            "email": true,
+            "type": "email",
+            "placeholder": "",
+            "title": "Email"
+          },
+          {
+            "required": true,
+            "locked": false,
+            "description": "",
+            "id": "select-813c6813-7df4-4182-948c-79a47bfa1200",
+            "select": true,
+            "type": "select",
+            "canHaveFollowUpQuestions": true,
+            "placeholder": "Select an option",
+            "options": [
+              "Self",
+              "Spouse",
+              "Son",
+              "Daughter",
+              "Other"
+            ],
+            "title": "Relation to Client",
+            "followUpQuestions": []
+          },
+          {
+            "description": "",
+            "id": "textarea-54fc3923-f254-4d30-90d5-4ab3580307af",
+            "locked": false,
+            "maxLength": "",
+            "placeholder": "Please only share what you are comfortable sharing. Your privacy will be protected.",
+            "required": true,
+            "textarea": true,
+            "title": "Review",
+            "type": "textarea",
+            "name": "Message 1"
+          }
+        ]
+      }
+    },
+    {
+      "path": "/post-op-investment-guide",
+      "title": "Post-Op Investment & Care Options",
+      "description": "Rates for Counsel Concierge Nursing's most common surgical and post-operative services in Nashville, including day-of-surgery RN escort and extended recovery care.",
+      "noindex": true,
+      "blocks": [
+        {
+          "type": "html",
+          "html": "<h2>Post-Operative Investment &amp; Care Options</h2><p>Every client engagement begins with a consultation to confirm scope, scheduling, and pricing before care begins. The listed rates reflect our most common surgical and post-operative offerings.</p>"
+        },
+        {
+          "type": "pricing",
+          "title": "Pre-Op Appointment Accompaniment",
+          "html": "",
+          "items": [
+            {
+              "title": "Up to 2 hours",
+              "price": "$250",
+              "html": "<p>Discounted to $225 when booked alongside an extended recovery package.</p>"
+            }
+          ]
+        },
+        {
+          "type": "pricing",
+          "title": "Day-of-Surgery RN Escort",
+          "html": "",
+          "items": [
+            {
+              "title": "Up to 9 hours",
+              "price": "$750",
+              "html": "<p>RN accompaniment from pickup to return home.</p>"
+            }
+          ]
+        },
+        {
+          "type": "pricing",
+          "title": "Extended Recovery Packages",
+          "html": "<p>Continuous clinical presence, available starting pre-op at home, at the surgical facility, or post-discharge.</p>",
+          "items": [
+            {
+              "title": "24-Hour Post-Op Care",
+              "price": "$2,000",
+              "html": ""
+            },
+            {
+              "title": "48-Hour Post-Op Care",
+              "price": "$4,000",
+              "html": ""
+            },
+            {
+              "title": "72-Hour Post-Op Care",
+              "price": "$6,000",
+              "html": ""
+            }
+          ]
+        },
+        {
+          "type": "pricing",
+          "title": "Overnight & Daytime Options",
+          "html": "",
+          "items": [
+            {
+              "title": "Overnight, 8 hours",
+              "price": "$1,000",
+              "html": ""
+            },
+            {
+              "title": "Overnight, 12 hours",
+              "price": "$1,500",
+              "html": ""
+            },
+            {
+              "title": "Day, 4 hours",
+              "price": "$400",
+              "html": "<p>Must be scheduled 24 hours in advance, with a 4-hour minimum.</p>"
+            }
+          ]
+        },
+        {
+          "type": "html",
+          "html": "<p>It is our standard to meet each client’s individual needs. Additional services may be provided and discussed during the initial pre-op consultation. Counsel operates on a private-pay basis and does not replace emergency services.</p>"
+        }
+      ]
     },
     {
       "path": "/post-operative-care-nashville",

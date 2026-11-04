@@ -1158,24 +1158,6 @@ a:hover .arrow.diagonal {
   margin-top: 25px;
   font-size: 12px;
 }
-.form-handoff {
-  padding: 40px;
-  background: var(--mist);
-  margin-top: 40px;
-  scroll-margin-top: 140px;
-}
-.form-handoff h2 {
-  font-size: 40px;
-  margin-bottom: 22px;
-}
-.form-handoff > p:not(.eyebrow) {
-  font-size: 16px;
-  margin-bottom: 25px;
-}
-.form-handoff .form-note {
-  font-size: 12px !important;
-  margin: 15px 0 0 !important;
-}
 .insights-index {
   padding-bottom: 110px;
 }
@@ -2060,16 +2042,6 @@ a:hover .arrow.diagonal {
   .contact-aside p:not(.eyebrow) {
     font-size: 16px;
   }
-  .form-handoff {
-    padding: 28px;
-  }
-  .form-handoff h2 {
-    font-size: 36px;
-  }
-  .form-handoff .button {
-    gap: 15px;
-    font-size: 13px;
-  }
   .legal-layout .prose h2 {
     font-size: 31px;
   }
@@ -2192,12 +2164,6 @@ a:hover .arrow.diagonal {
   }
   .article-header h1 {
     font-size: 42px;
-  }
-  .form-handoff {
-    padding: 24px;
-  }
-  .form-handoff .button {
-    font-size: 12px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

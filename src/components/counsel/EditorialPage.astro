@@ -1,0 +1,12 @@
+---
+// Image-free page with a masthead, so content starts near the top on phones.
+const { title } = Astro.props as { title: string };
+---
+
+<div class="editorial-page">
+  <header class="wrap editorial-masthead">
+    <h1 set:html={title} />
+    <slot name="intro" />
+  </header>
+  <slot />
+</div>

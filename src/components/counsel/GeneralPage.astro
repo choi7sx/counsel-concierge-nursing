@@ -7,6 +7,7 @@ import PageHero from "./PageHero.astro";
 import Blocks from "./Blocks.astro";
 import Arrow from "./Arrow.astro";
 import ConsultationForm from "./ConsultationForm.astro";
+import SiteForm from "./SiteForm.astro";
 const { page } = Astro.props as { page: Page };
 const isConsultation = page.path === links.consultation;
 const isContact = page.path === links.contact;
@@ -39,29 +40,21 @@ const blocks = page.blocks
 <section class:list={["wrap", "general-layout", { "legal-layout": isLegal }]}>
   <div class="general-copy">
     {isConsultation && (
-      <section id="consultationform" class="consultation-inline" aria-labelledby="consultation-page-title">
+      <section class="consultation-inline" aria-labelledby="consultation-page-title">
         <h2 id="consultation-page-title">Consultation Request</h2>
         <ConsultationForm id="page-consultation" />
       </section>
     )}
     <Blocks blocks={blocks} headingLevel={2} />
-    {page.form && !isConsultation && (
-      <div id="consultationform" class="form-handoff">
-        <a
-          class={isConsultation ? "button" : "text-link"}
-          href={page.form.url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {isCareer
-            ? "Open application form"
-            : isContact
-              ? "Open contact form"
-              : "Request Private Consultation"}{" "}
-          <Arrow diagonal />
-        </a>
-        <p class="form-note">Opens the Counsel form in a new tab.</p>
-      </div>
+    {page.form && (isContact || isCareer) && (
+      <section class="consultation-inline" aria-labelledby={`${isCareer ? "career" : "contact"}-form-title`}>
+        <h2 id={`${isCareer ? "career" : "contact"}-form-title`}>{isCareer ? "Share Your Background" : "Send a Message"}</h2>
+        {isCareer ? (
+          <SiteForm form={page.form} id="career" subject="Work With Us Application — Counsel Concierge Nursing" submitLabel="Submit Application" success="Thank you. Your application has been received. Gus reviews every application personally and will reach out if an opportunity is a fit." />
+        ) : (
+          <SiteForm form={page.form} id="contact" subject="General Inquiry — Counsel Concierge Nursing" submitLabel="Send Message" success="Thank you. Your message has been received, and we will respond promptly." />
+        )}
+      </section>
     )}
   </div>
   {!isLegal && (

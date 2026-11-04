@@ -74,7 +74,8 @@ window.addEventListener('popstate', () => {
 });
 if (location.hash === '#consultation-request') openConsultation(null, false);
 
-for (const form of document.querySelectorAll<HTMLFormElement>('[data-consultation-form]')) {
+// Consultation, contact, careers, and testimonial forms share CloudCannon's form service.
+for (const form of document.querySelectorAll<HTMLFormElement>('[data-site-form]')) {
   const submit = form.querySelector<HTMLButtonElement>('[data-form-submit]')!;
   const fields = form.querySelector<HTMLFieldSetElement>('fieldset')!;
   const status = form.querySelector<HTMLElement>('[data-form-status]')!;
@@ -98,60 +99,68 @@ for (const form of document.querySelectorAll<HTMLFormElement>('[data-consultatio
 
   form.addEventListener('input', event => {
     const input = event.target;
-    if (input instanceof HTMLInputElement) input.setCustomValidity('');
+    if (input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement) input.setCustomValidity('');
   });
   form.addEventListener('submit', async event => {
     event.preventDefault();
     if (sending) return;
-    const first = form.elements.namedItem('firstName') as HTMLInputElement;
-    const last = form.elements.namedItem('lastName') as HTMLInputElement;
-    const phone = form.elements.namedItem('phone') as HTMLInputElement;
-    for (const name of [first, last]) {
-      name.value = name.value.trim();
-      name.setCustomValidity(name.value ? '' : 'Please enter your name.');
+    for (const input of form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[data-trim]')) {
+      input.value = input.value.trim();
+      input.setCustomValidity(input.required && !input.value ? 'Please fill in this field.' : '');
     }
-    const digits = phone.value.replace(/\D/g, '');
-    phone.setCustomValidity(digits.length >= 7 && digits.length <= 20 ? '' : 'Please enter a phone number we can reach you on.');
+    const phone = form.elements.namedItem('phone') as HTMLInputElement | null;
+    if (phone) {
+      const digits = phone.value.replace(/\D/g, '');
+      const valid = (!phone.required && !digits) || (digits.length >= 7 && digits.length <= 20);
+      phone.setCustomValidity(valid ? '' : 'Please enter a phone number we can reach you on.');
+    }
+    for (const input of form.querySelectorAll<HTMLInputElement>('input[type="file"]')) {
+      const tooLarge = [...input.files ?? []].some(file => file.size > Number(input.dataset.maxBytes));
+      input.setCustomValidity(tooLarge ? 'Please choose a file smaller than 5MB.' : '');
+    }
     if (!form.reportValidity()) return;
 
     const inboxKey = (form.elements.namedItem('inbox_key') as HTMLInputElement).value;
     // Static development servers cannot deliver CloudCannon forms, even if they return 200.
     const localPreview = location.protocol !== 'https:' || ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
     if (form.dataset.deliveryReady !== 'true' || !inboxKey || localPreview) {
-      showStatus('Online requests are currently unavailable. Your request has not been sent. Please email us or call (615) 933-9208.', 'error');
+      showStatus('Online forms are currently unavailable. Your message has not been sent. Please email us or call (615) 933-9208.', 'error');
       return;
     }
-    const payload = new URLSearchParams();
-    for (const [name, value] of new FormData(form)) payload.append(name, String(value));
-    payload.set('page', location.pathname);
+    const data = new FormData(form);
+    data.set('page', location.pathname);
     // Include the address in the message body as well as CloudCannon's Reply-To header.
-    payload.set('email', payload.get('_replyto') || '');
+    data.set('email', String(data.get('_replyto') || ''));
+    // Files need a multipart body; other forms keep the URL-encoded format.
+    const multipart = form.enctype === 'multipart/form-data';
+    const body = multipart ? data : new URLSearchParams([...data].map(([name, value]) => [name, String(value)]));
     status.hidden = true;
     sending = true;
     submit.disabled = true;
-    fields.disabled = true;
     form.setAttribute('aria-busy', 'true');
-    submit.textContent = 'Sending your request…';
+    submit.textContent = 'Sending…';
     const controller = new AbortController();
-    const timeout = window.setTimeout(() => controller.abort(), 20000);
+    const timeout = window.setTimeout(() => controller.abort(), multipart ? 60000 : 20000);
+    // Disable fields only after reading them; disabled fields are not submitted.
+    fields.disabled = true;
     try {
       const response = await fetch(form.action, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded', Accept: 'text/html' },
-        body: payload.toString(),
+        headers: multipart ? { Accept: 'text/html' } : { 'Content-Type': 'application/x-www-form-urlencoded', Accept: 'text/html' },
+        body,
         signal: controller.signal,
         credentials: 'same-origin',
       });
       // CloudCannon returns the form's action page after accepting a submission.
       // Check our receipt marker so a login, error, or generic fallback page is not success.
       const receipt = new DOMParser().parseFromString(await response.text(), 'text/html');
-      if (response.status !== 200 || !receipt.querySelector('[data-consultation-receipt]')) throw new Error('Request not accepted');
+      if (response.status !== 200 || !receipt.querySelector('[data-form-receipt]')) throw new Error('Submission not accepted');
       form.reset();
       fields.hidden = true;
       submitRow.hidden = true;
-      showStatus('Thank you. Your consultation request has been received. We’ll follow up directly to discuss the next steps.', 'success');
+      showStatus(form.dataset.success!, 'success');
     } catch {
-      showStatus('We couldn’t confirm that your request was received. Your details are still here. Please try again, or contact us directly.', 'error');
+      showStatus('We couldn’t confirm that your message was received. Your details are still here. Please try again, or contact us directly.', 'error');
     } finally {
       window.clearTimeout(timeout);
       sending = false;

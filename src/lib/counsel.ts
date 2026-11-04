@@ -3,20 +3,30 @@ export type Block = {
   type: string;
   html?: string;
   text?: string;
-  items?: { title: string; html: string }[];
+  title?: string;
+  items?: { title: string; html: string; price?: string; url?: string }[];
 };
 export type Page = {
   path: string;
   title: string;
   metaTitle?: string;
   description: string;
+  noindex?: boolean;
   blocks: Block[];
   date?: string;
   author?: string;
   category?: string;
   image?: string;
   excerpt?: string;
-  form?: { url: string; name: string; fields: unknown[] };
+  form?: { name: string; fields: FormField[] };
+};
+// Field definitions migrated from the client's original forms.
+export type FormField = {
+  type: "name" | "email" | "phone" | "text" | "textarea" | "select" | "file";
+  title: string;
+  required?: boolean;
+  placeholder?: string;
+  options?: string[];
 };
 const plainText = (html: string) =>
   html
@@ -95,6 +105,24 @@ const serviceEntry = (item: { title: string; html: string }) => {
 export const retainerServices = servicesBlocks[4].items!.map(serviceEntry);
 export const situationalServices = servicesBlocks[8].items!.map(serviceEntry);
 export const postOpService = situationalServices.find((service) => service.path === links.postop)!;
+// The three ways services are presented in the menu and on the homepage.
+export const serviceTypes = [
+  { title: postOpService.title, text: postOpService.summary, path: postOpService.path, featured: true, services: [] },
+  {
+    title: "Monthly Retainer Services",
+    text: "Ongoing care plans, built around your needs.",
+    path: `${links.services}#monthly-retainer-services`,
+    featured: false,
+    services: retainerServices,
+  },
+  {
+    title: "Situational Services",
+    text: "Focused support, typically for a day or two.",
+    path: `${links.services}#situational-services`,
+    featured: false,
+    services: situationalServices.filter((service) => service !== postOpService),
+  },
+];
 // A service offered both ways is listed in both groups but keeps one URL, so
 // its retainer and situational descriptions share a page instead of competing.
 export const servicePages: Page[] = [...retainerServices, ...situationalServices]
