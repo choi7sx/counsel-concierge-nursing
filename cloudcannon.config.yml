@@ -69,11 +69,6 @@ _inputs:
     hidden: true
   text:
     hidden: true
-  form:
-    type: object
-    comment: Fields shown on this page's form. Submissions are delivered through the CloudCannon Inbox.
-  fields:
-    hidden: true
   noindex:
     type: checkbox
     comment: Hide this page from search engines and the sitemap. Used for pages people reach by QR code.

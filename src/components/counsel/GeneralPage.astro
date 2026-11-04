@@ -7,7 +7,7 @@ import PageHero from "./PageHero.astro";
 import Blocks from "./Blocks.astro";
 import Arrow from "./Arrow.astro";
 import ConsultationForm from "./ConsultationForm.astro";
-import SiteForm from "./SiteForm.astro";
+import DirectContact from "./DirectContact.astro";
 const { page } = Astro.props as { page: Page };
 const isConsultation = page.path === links.consultation;
 const isContact = page.path === links.contact;
@@ -46,18 +46,27 @@ const blocks = page.blocks
       </section>
     )}
     <Blocks blocks={blocks} headingLevel={2} />
-    {page.form && (isContact || isCareer) && (
-      <section class="consultation-inline" aria-labelledby={`${isCareer ? "career" : "contact"}-form-title`}>
-        <h2 id={`${isCareer ? "career" : "contact"}-form-title`}>{isCareer ? "Share Your Background" : "Send a Message"}</h2>
-        {isCareer ? (
-          <SiteForm form={page.form} id="career" subject="Work With Us Application — Counsel Concierge Nursing" submitLabel="Submit Application" success="Thank you. Your application has been received. Gus reviews every application personally and will reach out if an opportunity is a fit." />
-        ) : (
-          <SiteForm form={page.form} id="contact" subject="General Inquiry — Counsel Concierge Nursing" submitLabel="Send Message" success="Thank you. Your message has been received, and we will respond promptly." />
-        )}
+    {isContact && (
+      <section class="contact-card" aria-labelledby="contact-card-title">
+        <h2 id="contact-card-title">We’re here <em>to help.</em></h2>
+        <dl class="contact-card-details">
+          <div>
+            <dt>Phone</dt>
+            <dd><a href="tel:+16159339208">(615) 933-9208</a></dd>
+          </div>
+          <div>
+            <dt>Email</dt>
+            <dd><a href="mailto:info@counselconciergenursing.com">info@counselconciergenursing.com</a></dd>
+          </div>
+        </dl>
+        <a class="button" href={links.consultation}>Request Private Consultation <Arrow /></a>
       </section>
     )}
+    {isCareer && (
+      <DirectContact id="career-contact-title" title="Share Your Background" text="Email your resume and a short note about your experience, or call to introduce yourself." emailLabel="Email Your Resume" subject="Work With Us — Resume" />
+    )}
   </div>
-  {!isLegal && (
+  {!isLegal && !isContact && (
     <aside class="contact-aside">
       {isConsultation && (
         <CounselImage
