@@ -82,6 +82,12 @@ html.consultation-open, html.consultation-open body { overflow: hidden; }
   background: var(--paper);
   scroll-margin-block: 24px;
 }
+/* Replace the native arrow, which sits against the right edge, with an inset chevron in --primary. */
+.consultation-field select {
+  appearance: none;
+  padding-right: 44px;
+  background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%230a2139' stroke-width='1.5'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E") no-repeat right 16px center / 16px;
+}
 .consultation-field textarea { resize: vertical; }
 .consultation-field textarea::placeholder { color: var(--muted); opacity: 1; }
 .consultation-field :is(input, select, textarea):focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }

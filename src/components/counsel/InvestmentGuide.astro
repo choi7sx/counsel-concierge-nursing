@@ -1,0 +1,42 @@
+---
+import type { Page } from "../../lib/counsel";
+import { links } from "../../lib/counsel";
+import EditorialPage from "./EditorialPage.astro";
+import Arrow from "./Arrow.astro";
+const { page } = Astro.props as { page: Page };
+// Block order: introduction, pricing groups, closing note.
+const [intro, ...rest] = page.blocks;
+const heading = intro.html!.match(/<h2>(.*?)<\/h2>/)![1];
+const groups = rest.filter((block) => block.type === "pricing");
+const notes = rest.filter((block) => block.type === "html");
+---
+
+<EditorialPage title={`${heading}.`}>
+  <div slot="intro" class="lead editorial-intro" set:html={intro.html!.replace(/<h2>.*?<\/h2>/, "")} />
+  <section class="wrap editorial-content pricing-content">
+    <div class="pricing-grid">
+      {groups.map((group) => (
+        <section class="pricing-card">
+          <h2>{group.title}</h2>
+          {group.html && <div class="pricing-note" set:html={group.html} />}
+          <ul class="price-list">
+            {group.items!.map((item) => (
+              <li>
+                <div class="price-row">
+                  <span class="price-name">{item.title}</span>
+                  <span class="price-amount">{item.price}</span>
+                </div>
+                {item.html && <div class="price-detail" set:html={item.html} />}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+    {notes.map((note) => <div class="pricing-closing" set:html={note.html} />)}
+    <div class="pricing-actions">
+      <a class="button" href={links.consultation}>Schedule Pre-Op Consultation <Arrow /></a>
+      <a class="text-link" href={links.postop}>About post-operative recovery care <Arrow /></a>
+    </div>
+  </section>
+</EditorialPage>

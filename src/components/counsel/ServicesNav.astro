@@ -1,12 +1,7 @@
 ---
-import { links, postOpService, servicePages } from "../../lib/counsel";
+import { links, servicePages, serviceTypes } from "../../lib/counsel";
 const path = Astro.url.pathname.replace(/\/$/, "");
 const active = path === links.services || path === links.postop || servicePages.some((page) => page.path === path);
-const items = [
-  { title: postOpService.title, text: postOpService.summary, path: postOpService.path, featured: true },
-  { title: "Monthly Retainer Services", text: "Ongoing care plans, built around your needs.", path: `${links.services}#monthly-retainer-services` },
-  { title: "Situational Services", text: "Focused support, typically for a day or two.", path: `${links.services}#situational-services` },
-];
 ---
 
 <details class="services-nav">
@@ -17,7 +12,7 @@ const items = [
     </svg>
   </summary>
   <ul class="services-dropdown">
-    {items.map((item) => (
+    {serviceTypes.map((item) => (
       <li>
         <a href={item.path} aria-current={path === item.path ? "page" : undefined}>
           <span class="services-item-title">

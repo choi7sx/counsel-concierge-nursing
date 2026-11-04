@@ -1,19 +1,14 @@
 ---
 import CounselImage from "./CounselImage.astro";
 import Counsel from "../../layouts/Counsel.astro";
-import { links, pageAt, postOpService, retainerServices, situationalServices, approach } from "../../lib/counsel";
+import { links, pageAt, serviceTypes, approach } from "../../lib/counsel";
 import Arrow from "./Arrow.astro";
-import ServiceIcon from "./ServiceIcon.astro";
 import InsightCards from "./InsightCards.astro";
 const home = pageAt("/home");
 const intro = home.blocks[2].text!;
 const sentenceEnd = intro.search(/\.\s/);
 const firstSentence = sentenceEnd < 0 ? intro : intro.slice(0, sentenceEnd + 1);
 const remaining = sentenceEnd < 0 ? "" : intro.slice(sentenceEnd + 1).trim();
-const serviceGroups = [
-  { title: "Monthly Retainer Services", text: "Ongoing care plans, built from a combination of these services.", services: retainerServices },
-  { title: "Situational Services", text: "Focused support for a specific need, typically for a day or two.", services: situationalServices },
-];
 ---
 
 <Counsel>
@@ -101,27 +96,38 @@ const serviceGroups = [
           Explore all services <Arrow />
         </a>
       </div>
-      {serviceGroups.map((group) => (
-        <div class="services-home-group">
-          <div class="services-home-group-heading">
-            <h3>{group.title}</h3>
-            <p>{group.text}</p>
+      <div class="service-type-grid">
+        {serviceTypes.map((type) => type.featured ? (
+          <a class="service-type-card service-type-feature" href={type.path}>
+            <CounselImage
+              class="service-type-image"
+              sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 1100px) 50vw, 390px"
+              src="/images/counsel/postop.webp"
+              alt=""
+              loading="lazy"
+            />
+            <div class="service-type-body">
+              <span class="most-requested">Most Requested</span>
+              <h3>{type.title}</h3>
+              <p>{type.text}</p>
+              <span class="service-card-action">Learn more <Arrow /></span>
+            </div>
+          </a>
+        ) : (
+          <div class="service-type-card">
+            <div class="service-type-body">
+              <h3>{type.title}</h3>
+              <p>{type.text}</p>
+              <ul class="service-type-list">
+                {type.services.map((service) => (
+                  <li><a href={service.path}>{service.title}</a></li>
+                ))}
+              </ul>
+              <a class="service-card-action" href={type.path}>Explore {type.title.toLowerCase()} <Arrow /></a>
+            </div>
           </div>
-          <div class="retainer-card-grid">
-            {group.services.map((service) => (
-              <a class:list={["retainer-card", { "retainer-card-feature": service === postOpService }]} href={service.path}>
-                <span class="retainer-card-top">
-                  <ServiceIcon slug={service.slug} />
-                  {service === postOpService && <span class="most-requested">Most Requested</span>}
-                </span>
-                <h4>{service.title}</h4>
-                <p>{service.summary}</p>
-                <span class="service-card-action">Learn more <Arrow /></span>
-              </a>
-            ))}
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   </section>
   <section class="section approach-section" id="approach">

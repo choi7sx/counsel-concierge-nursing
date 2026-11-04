@@ -3,8 +3,8 @@ export function GET() {
   const paths = [
     "/",
     ...pages
-      .map((page) => page.path)
-      .filter((path) => path !== "/home"),
+      .filter((page) => page.path !== "/home" && !page.noindex)
+      .map((page) => page.path),
     "/approach",
     ...servicePages.map((page) => page.path),
   ];

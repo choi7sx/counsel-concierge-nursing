@@ -1,0 +1,30 @@
+---
+import type { Page } from "../../lib/counsel";
+import EditorialPage from "./EditorialPage.astro";
+import Blocks from "./Blocks.astro";
+import Arrow from "./Arrow.astro";
+import SiteForm from "./SiteForm.astro";
+const { page } = Astro.props as { page: Page };
+// Block order: thank-you message, review sites, testimonial request.
+const [intro, reviewSites, testimonial] = page.blocks;
+const heading = intro.html!.match(/<h2>(.*?)<\/h2>/)![1];
+---
+
+<EditorialPage title={`${heading}.`}>
+  <div slot="intro" class="lead editorial-intro" set:html={intro.html!.replace(/<h2>.*?<\/h2>/, "")} />
+  <section class="wrap editorial-content">
+    <ul class="review-links">
+      {reviewSites.items!.map((site, i) => (
+        <li>
+          <a class:list={["button", { "button-outline": i > 0 }]} href={site.url} target="_blank" rel="noopener noreferrer">
+            {site.title} <Arrow diagonal />
+          </a>
+        </li>
+      ))}
+    </ul>
+    <section class="consultation-inline review-form">
+      <Blocks blocks={[testimonial]} headingLevel={2} />
+      <SiteForm form={page.form!} id="testimonial" subject="Website Testimonial — Counsel Concierge Nursing" submitLabel="Share Testimonial" success="Thank you for sharing your experience with Counsel. Your testimonial has been received." />
+    </section>
+  </section>
+</EditorialPage>

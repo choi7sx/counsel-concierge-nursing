@@ -12,6 +12,7 @@ const {
   description = "Counsel Concierge Nursing provides private nursing oversight, care coordination, and advocacy for independent adults and their families in Nashville and Middle Tennessee.",
   image = "/images/counsel/consult.webp",
   noindex = false,
+  editorial = false,
 } = Astro.props;
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 const nav = [
@@ -22,7 +23,8 @@ const nav = [
 ];
 const footerServices = [postOpService, ...servicePages];
 const canonical = new URL(
-  path === "/home" ? "/" : Astro.url.pathname,
+  // Match the sitemap and the original Squarespace URLs, which have no trailing slash.
+  path === "/home" ? "/" : path,
   "https://counselconciergenursing.com",
 );
 ---
@@ -68,7 +70,7 @@ const canonical = new URL(
     <a class="skip-link" href="#main">
       Skip to content
     </a>
-    <header class:list={["site-header header-overlay", { "header-editorial": path === "/insights" }]}>
+    <header class:list={["site-header header-overlay", { "header-editorial": editorial }]}>
       <div class="wrap header-inner">
         <Brand />
         <nav class="desktop-nav" aria-label="Main navigation">
@@ -154,6 +156,7 @@ const canonical = new URL(
             <a href={links.portal} target="_blank" rel="noopener noreferrer">
               Client Portal ↗
             </a>
+            <a href="/work-with-us">Work With Us</a>
           </div>
           <div class="footer-contact">
             <h2>We’re here to listen.</h2>
