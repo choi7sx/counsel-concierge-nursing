@@ -74,7 +74,7 @@ window.addEventListener('popstate', () => {
 });
 if (location.hash === '#consultation-request') openConsultation(null, false);
 
-// Consultation, contact, and testimonial forms share CloudCannon's form service.
+// The consultation form (dialog and page) submits through CloudCannon's form service.
 for (const form of document.querySelectorAll<HTMLFormElement>('[data-site-form]')) {
   const submit = form.querySelector<HTMLButtonElement>('[data-form-submit]')!;
   const fields = form.querySelector<HTMLFieldSetElement>('fieldset')!;

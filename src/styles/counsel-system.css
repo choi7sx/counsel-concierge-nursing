@@ -768,14 +768,14 @@ h3,
   list-style: none;
 }
 .review-links .button { justify-content: space-between; width: 100%; }
-.review-form { max-width: 720px; margin-top: var(--space-12); margin-bottom: 0; }
-.review-form h2 { margin-bottom: var(--space-3); font-size: var(--text-heading-sm); line-height: 1.2; }
-.review-form .prose, .review-form > p { margin-bottom: var(--space-6); }
-.general-copy .consultation-inline:last-child { margin-top: var(--space-12); margin-bottom: 0; }
-.career-contact h2 { margin-bottom: var(--space-3); }
-.career-contact-actions { display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: var(--space-3); margin: var(--space-6) 0 var(--space-3); }
+.review-testimonial { max-width: 420px; margin-top: var(--space-6); }
+.review-testimonial .button { justify-content: space-between; gap: var(--space-3); width: 100%; text-align: left; }
+.review-testimonial .consultation-hint { margin-top: var(--space-3); }
+.general-copy .direct-contact:last-child { margin-top: var(--space-12); margin-bottom: 0; }
+.direct-contact h2 { margin-bottom: var(--space-3); }
+.direct-contact-actions { display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: var(--space-3); margin: var(--space-6) 0 var(--space-3); }
 /* Stack on phones; the shared column keeps both buttons as wide as the longer one. */
-@media (max-width: 600px) { .career-contact-actions { grid-auto-flow: row; } }
+@media (max-width: 600px) { .direct-contact-actions { grid-auto-flow: row; } }
 .pricing-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

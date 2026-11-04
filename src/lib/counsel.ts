@@ -18,15 +18,6 @@ export type Page = {
   category?: string;
   image?: string;
   excerpt?: string;
-  form?: { name: string; fields: FormField[] };
-};
-// Field definitions migrated from the client's original forms.
-export type FormField = {
-  type: "name" | "email" | "phone" | "text" | "textarea" | "select";
-  title: string;
-  required?: boolean;
-  placeholder?: string;
-  options?: string[];
 };
 const plainText = (html: string) =>
   html

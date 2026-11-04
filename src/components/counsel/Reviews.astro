@@ -1,13 +1,14 @@
 ---
 import type { Page } from "../../lib/counsel";
 import EditorialPage from "./EditorialPage.astro";
-import Blocks from "./Blocks.astro";
 import Arrow from "./Arrow.astro";
-import SiteForm from "./SiteForm.astro";
 const { page } = Astro.props as { page: Page };
 // Block order: thank-you message, review sites, testimonial request.
 const [intro, reviewSites, testimonial] = page.blocks;
 const heading = intro.html!.match(/<h2>(.*?)<\/h2>/)![1];
+// The testimonial request becomes an email button labelled with its heading.
+const testimonialLabel = testimonial.html!.match(/<h2>(.*?)<\/h2>/)![1];
+const testimonialNote = testimonial.html!.replace(/<h2>.*?<\/h2>/, "");
 ---
 
 <EditorialPage title={`${heading}.`}>
@@ -22,9 +23,11 @@ const heading = intro.html!.match(/<h2>(.*?)<\/h2>/)![1];
         </li>
       ))}
     </ul>
-    <section class="consultation-inline review-form">
-      <Blocks blocks={[testimonial]} headingLevel={2} />
-      <SiteForm form={page.form!} id="testimonial" subject="Website Testimonial — Counsel Concierge Nursing" submitLabel="Share Testimonial" success="Thank you for sharing your experience with Counsel. Your testimonial has been received." />
-    </section>
+    <div class="review-testimonial">
+      <a class="button button-outline" href={`mailto:info@counselconciergenursing.com?subject=${encodeURIComponent("Featured Testimonial — Counsel Concierge Nursing")}`}>
+        {testimonialLabel} <Arrow />
+      </a>
+      <div class="consultation-hint" set:html={testimonialNote} />
+    </div>
   </section>
 </EditorialPage>

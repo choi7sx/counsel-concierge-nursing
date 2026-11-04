@@ -152,79 +152,9 @@
         },
         {
           "type": "html",
-          "html": "<p>We recognize that every client’s needs are distinct. For general inquiries, questions, or additional information, please submit the contact form, and we will respond promptly. For private consultation requests, please use <a href=\"/private-nursing-consultation-nashville#consultationform\">Request Private Consultation</a>.</p><p><em>Serving clients in Nashville and surrounding areas.</em></p>"
+          "html": "<p>We recognize that every client’s needs are distinct. For general inquiries, questions, or additional information, please email or call us, and we will respond promptly. For private consultation requests, please use <a href=\"/private-nursing-consultation-nashville#consultationform\">Request Private Consultation</a>.</p><p><em>Serving clients in Nashville and surrounding areas.</em></p>"
         }
-      ],
-      "form": {
-        "name": "Contact Form",
-        "fields": [
-          {
-            "type": "name",
-            "id": "name-38362e79-f568-4fec-9940-a45ba557a878",
-            "locked": false,
-            "title": "Name",
-            "description": "",
-            "required": true,
-            "name": "Name 1",
-            "customConstraints": {
-              "requireFirstName": {
-                "enabled": true
-              },
-              "requireLastName": {
-                "enabled": true
-              },
-              "showFirstName": {
-                "enabled": true
-              },
-              "showLastName": {
-                "enabled": true
-              }
-            }
-          },
-          {
-            "type": "email",
-            "id": "email-ab683289-df1d-4ed6-8640-5e66ff61f922",
-            "locked": false,
-            "title": "Email",
-            "description": "",
-            "placeholder": "",
-            "required": true,
-            "name": "Email 1"
-          },
-          {
-            "required": false,
-            "locked": false,
-            "description": "",
-            "id": "phone-07a3a70c-a13b-42df-bc45-eed500b1df78",
-            "phone": true,
-            "type": "phone",
-            "showCountryCode": false,
-            "title": "Phone"
-          },
-          {
-            "required": false,
-            "locked": false,
-            "description": "",
-            "id": "text-86db4ddc-3b58-425a-8f26-f220bce6834b",
-            "text": true,
-            "type": "text",
-            "placeholder": "",
-            "title": "City/Location"
-          },
-          {
-            "type": "textarea",
-            "id": "textarea-d4a7db00-92eb-4eb0-b1ba-83f0749a4771",
-            "locked": false,
-            "title": "Message",
-            "description": "",
-            "placeholder": "",
-            "required": true,
-            "textarea": true,
-            "maxLength": "",
-            "name": "Message 1"
-          }
-        ]
-      }
+      ]
     },
     {
       "path": "/private-nursing-consultation-nashville",
@@ -251,94 +181,7 @@
           "type": "html",
           "html": "<h2>Consultation Request</h2><p>Please complete this form to request a private consultation. This initial inquiry helps us understand your needs and determine how we may best support you. All inquiries are handled with discretion, and we will follow up directly.</p><p><em>Private consultations are available in Nashville and surrounding areas.</em></p>"
         }
-      ],
-      "form": {
-        "name": "Consultation Form",
-        "fields": [
-          {
-            "type": "name",
-            "id": "name-a2059df8-2b05-4bfc-ae9d-ac389c7148e3",
-            "locked": false,
-            "title": "Name",
-            "description": "",
-            "required": true,
-            "name": "Name 1",
-            "customConstraints": {
-              "requireFirstName": {
-                "enabled": true
-              },
-              "requireLastName": {
-                "enabled": true
-              },
-              "showFirstName": {
-                "enabled": true
-              },
-              "showLastName": {
-                "enabled": true
-              }
-            }
-          },
-          {
-            "required": true,
-            "locked": false,
-            "description": "",
-            "id": "phone-cc307d9d-06be-48d3-8b76-8664b27a666d",
-            "phone": true,
-            "type": "phone",
-            "showCountryCode": false,
-            "title": "Preferred Phone Number"
-          },
-          {
-            "type": "email",
-            "id": "email-4e0ce5d8-a866-44f0-8ce1-813403fc1573",
-            "locked": false,
-            "title": "Email",
-            "description": "",
-            "placeholder": "",
-            "required": true,
-            "name": "Email 1"
-          },
-          {
-            "required": false,
-            "locked": false,
-            "description": "",
-            "id": "text-118ceeea-274c-4f2b-b0ee-830daa197fa1",
-            "text": true,
-            "type": "text",
-            "placeholder": "",
-            "title": "City/Location"
-          },
-          {
-            "required": true,
-            "locked": false,
-            "description": "",
-            "id": "select-3c506852-01b2-4174-90a2-b541ecabb894",
-            "select": true,
-            "type": "select",
-            "canHaveFollowUpQuestions": true,
-            "placeholder": "Select an option",
-            "options": [
-              "Self",
-              "Family Member",
-              "Other"
-            ],
-            "title": "Relationship to Client",
-            "followUpQuestions": []
-          },
-          {
-            "type": "textarea",
-            "id": "textarea-91fa2141-0dde-4d97-9e13-2955f6bff91f",
-            "locked": false,
-            "title": "Message",
-            "description": "",
-            "placeholder": "Briefly share what prompted your inquiry (optional)",
-            "required": false,
-            "textarea": true,
-            "maxLength": "",
-            "name": "Message 1"
-          }
-        ]
-      }
+      ]
     },
     {
       "path": "/concierge-nursing-services-nashville",
@@ -553,76 +396,7 @@
           "type": "html",
           "html": "<h2>Leave a Featured Testimonial for Our Website</h2><p>Please only share what you are comfortable sharing. Thank you.</p>"
         }
-      ],
-      "form": {
-        "name": "Reviews Form",
-        "fields": [
-          {
-            "description": "",
-            "id": "name-349f91ee-c636-4e68-b3f6-451ca716cc35",
-            "locked": false,
-            "required": true,
-            "title": "Name",
-            "type": "name",
-            "name": "Name 1",
-            "customConstraints": {
-              "requireFirstName": {
-                "enabled": true
-              },
-              "requireLastName": {
-                "enabled": true
-              },
-              "showFirstName": {
-                "enabled": true
-              },
-              "showLastName": {
-                "enabled": true
-              }
-            }
-          },
-          {
-            "required": true,
-            "locked": false,
-            "description": "",
-            "id": "email-2371d316-fa12-4055-b98a-0e1fe9b2bd1f",
-            "email": true,
-            "type": "email",
-            "placeholder": "",
-            "title": "Email"
-          },
-          {
-            "required": true,
-            "locked": false,
-            "description": "",
-            "id": "select-813c6813-7df4-4182-948c-79a47bfa1200",
-            "select": true,
-            "type": "select",
-            "canHaveFollowUpQuestions": true,
-            "placeholder": "Select an option",
-            "options": [
-              "Self",
-              "Spouse",
-              "Son",
-              "Daughter",
-              "Other"
-            ],
-            "title": "Relation to Client",
-            "followUpQuestions": []
-          },
-          {
-            "description": "",
-            "id": "textarea-54fc3923-f254-4d30-90d5-4ab3580307af",
-            "locked": false,
-            "maxLength": "",
-            "placeholder": "Please only share what you are comfortable sharing. Your privacy will be protected.",
-            "required": true,
-            "textarea": true,
-            "title": "Review",
-            "type": "textarea",
-            "name": "Message 1"
-          }
-        ]
-      }
+      ]
     },
     {
       "path": "/post-op-investment-guide",

@@ -7,7 +7,7 @@ import PageHero from "./PageHero.astro";
 import Blocks from "./Blocks.astro";
 import Arrow from "./Arrow.astro";
 import ConsultationForm from "./ConsultationForm.astro";
-import SiteForm from "./SiteForm.astro";
+import DirectContact from "./DirectContact.astro";
 const { page } = Astro.props as { page: Page };
 const isConsultation = page.path === links.consultation;
 const isContact = page.path === links.contact;
@@ -46,22 +46,11 @@ const blocks = page.blocks
       </section>
     )}
     <Blocks blocks={blocks} headingLevel={2} />
-    {page.form && isContact && (
-      <section class="consultation-inline" aria-labelledby="contact-form-title">
-        <h2 id="contact-form-title">Send a Message</h2>
-        <SiteForm form={page.form} id="contact" subject="General Inquiry — Counsel Concierge Nursing" submitLabel="Send Message" success="Thank you. Your message has been received, and we will respond promptly." />
-      </section>
+    {isContact && (
+      <DirectContact id="contact-direct-title" title="Get in Touch" text="Email us or call, and we will respond promptly." emailLabel="Email Us" subject="General Inquiry — Counsel Concierge Nursing" />
     )}
     {isCareer && (
-      <section class="consultation-inline career-contact" aria-labelledby="career-contact-title">
-        <h2 id="career-contact-title">Share Your Background</h2>
-        <p>Email your resume and a short note about your experience, or call to introduce yourself.</p>
-        <div class="career-contact-actions">
-          <a class="button" href="mailto:info@counselconciergenursing.com?subject=Work%20With%20Us%20%E2%80%94%20Resume">Email Your Resume <Arrow /></a>
-          <a class="button button-outline" href="tel:+16159339208">Call (615) 933-9208</a>
-        </div>
-        <p class="consultation-hint">info@counselconciergenursing.com</p>
-      </section>
+      <DirectContact id="career-contact-title" title="Share Your Background" text="Email your resume and a short note about your experience, or call to introduce yourself." emailLabel="Email Your Resume" subject="Work With Us — Resume" />
     )}
   </div>
   {!isLegal && (
