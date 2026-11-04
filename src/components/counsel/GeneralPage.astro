@@ -46,14 +46,21 @@ const blocks = page.blocks
       </section>
     )}
     <Blocks blocks={blocks} headingLevel={2} />
-    {page.form && (isContact || isCareer) && (
-      <section class="consultation-inline" aria-labelledby={`${isCareer ? "career" : "contact"}-form-title`}>
-        <h2 id={`${isCareer ? "career" : "contact"}-form-title`}>{isCareer ? "Share Your Background" : "Send a Message"}</h2>
-        {isCareer ? (
-          <SiteForm form={page.form} id="career" subject="Work With Us Application — Counsel Concierge Nursing" submitLabel="Submit Application" success="Thank you. Your application has been received. Gus reviews every application personally and will reach out if an opportunity is a fit." />
-        ) : (
-          <SiteForm form={page.form} id="contact" subject="General Inquiry — Counsel Concierge Nursing" submitLabel="Send Message" success="Thank you. Your message has been received, and we will respond promptly." />
-        )}
+    {page.form && isContact && (
+      <section class="consultation-inline" aria-labelledby="contact-form-title">
+        <h2 id="contact-form-title">Send a Message</h2>
+        <SiteForm form={page.form} id="contact" subject="General Inquiry — Counsel Concierge Nursing" submitLabel="Send Message" success="Thank you. Your message has been received, and we will respond promptly." />
+      </section>
+    )}
+    {isCareer && (
+      <section class="consultation-inline career-contact" aria-labelledby="career-contact-title">
+        <h2 id="career-contact-title">Share Your Background</h2>
+        <p>Email your resume and a short note about your experience, or call to introduce yourself.</p>
+        <div class="career-contact-actions">
+          <a class="button" href="mailto:info@counselconciergenursing.com?subject=Work%20With%20Us%20%E2%80%94%20Resume">Email Your Resume <Arrow /></a>
+          <a class="button button-outline" href="tel:+16159339208">Call (615) 933-9208</a>
+        </div>
+        <p class="consultation-hint">info@counselconciergenursing.com</p>
       </section>
     )}
   </div>

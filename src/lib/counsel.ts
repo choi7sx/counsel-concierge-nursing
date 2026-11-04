@@ -22,7 +22,7 @@ export type Page = {
 };
 // Field definitions migrated from the client's original forms.
 export type FormField = {
-  type: "name" | "email" | "phone" | "text" | "textarea" | "select" | "file";
+  type: "name" | "email" | "phone" | "text" | "textarea" | "select";
   title: string;
   required?: boolean;
   placeholder?: string;
