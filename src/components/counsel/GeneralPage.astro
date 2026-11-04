@@ -37,7 +37,7 @@ const blocks = page.blocks
 >
   <Fragment slot="title">{title}<span class="heading-period">.</span></Fragment>
 </PageHero>
-<section class:list={["wrap", "general-layout", { "legal-layout": isLegal }]}>
+<section class:list={["wrap", "general-layout", { "legal-layout": isLegal, "contact-layout": isContact }]}>
   <div class="general-copy">
     {isConsultation && (
       <section class="consultation-inline" aria-labelledby="consultation-page-title">
@@ -46,9 +46,6 @@ const blocks = page.blocks
       </section>
     )}
     <Blocks blocks={blocks} headingLevel={2} />
-    {isContact && (
-      <DirectContact id="contact-direct-title" title="Get in Touch" text="Email us or call, and we will respond promptly." emailLabel="Email Us" subject="General Inquiry — Counsel Concierge Nursing" />
-    )}
     {isCareer && (
       <DirectContact id="career-contact-title" title="Share Your Background" text="Email your resume and a short note about your experience, or call to introduce yourself." emailLabel="Email Your Resume" subject="Work With Us — Resume" />
     )}

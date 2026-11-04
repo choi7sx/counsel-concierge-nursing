@@ -31,7 +31,7 @@ Consultation CTAs open a shared native dialog, which becomes a full-screen form 
 
 The consultation form is the site's only form. It uses [CloudCannon's hosted form service](https://cloudcannon.com/documentation/developer-articles/connecting-your-site-to-an-inbox/) and does not depend on the old Squarespace site. It posts URL-encoded fields to `/consultation-request-received/`, using `inbox_key` for routing, `_replyto` for the visitor's email, `_subject` for the notification subject, and `_gotcha` for spam filtering. The recipient is configured in CloudCannon rather than supplied by the browser. JavaScript keeps visitors in the dialog and displays confirmation; without JavaScript, the configured form navigates to the receipt page. No submission data goes into a URL or browser storage. The receipt page is excluded from the sitemap and marked noindex.
 
-Contact and Work With Us have no forms. `DirectContact.astro` shows an email button, which opens the visitor's mail app with the subject pre-filled, and a call button. The site never receives or stores files.
+Contact and Work With Us have no forms. Contact shows the phone and email card below its copy. Work With Us uses `DirectContact.astro`: an email button, which opens the visitor's mail app with the subject pre-filled, and a call button. The site never receives or stores files.
 
 **Prepared for client review; live activation is intentionally deferred.** Leave `PUBLIC_CLOUDCANNON_INBOX_KEY` blank until the client decides to proceed. The form integration is implemented, but no CloudCannon Inbox, email target, or domain change has been activated from this workspace.
 
