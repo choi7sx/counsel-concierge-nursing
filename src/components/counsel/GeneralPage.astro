@@ -7,7 +7,7 @@ import PageHero from "./PageHero.astro";
 import Blocks from "./Blocks.astro";
 import Arrow from "./Arrow.astro";
 import ConsultationForm from "./ConsultationForm.astro";
-import DirectContact from "./DirectContact.astro";
+import CareerForm from "./CareerForm.astro";
 const { page } = Astro.props as { page: Page };
 const isConsultation = page.path === links.consultation;
 const isContact = page.path === links.contact;
@@ -63,7 +63,10 @@ const blocks = page.blocks
       </section>
     )}
     {isCareer && (
-      <DirectContact id="career-contact-title" title="Share Your Background" text="Email your resume and a short note about your experience, or call to introduce yourself." emailLabel="Email Your Resume" subject="Work With Us — Resume" />
+      <section class="consultation-inline career-form" aria-labelledby="career-form-title">
+        <h2 id="career-form-title">Share Your Background</h2>
+        <CareerForm />
+      </section>
     )}
   </div>
   {!isLegal && !isContact && (

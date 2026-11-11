@@ -1,0 +1,89 @@
+---
+// Work With Us application. Fields match the original site's form.
+const id = 'career';
+const inboxKey = import.meta.env.PUBLIC_CLOUDCANNON_INBOX_KEY?.trim() || '';
+const deliveryReady = import.meta.env.PROD && Boolean(inboxKey);
+// CloudCannon Inboxes accept files up to 5MB.
+const maxFileBytes = 5 * 1024 * 1024;
+const titles = ['Registered Nurse', 'Licensed Practical Nurse', 'Certified Nursing Assistant/Caregiver', 'Other'];
+---
+<form
+  class="consultation-form"
+  data-site-form
+  data-delivery-ready={String(deliveryReady)}
+  data-success="Thank you. Your application has been received. Gus reviews every application personally and will reach out if an opportunity is a fit."
+  method="post"
+  action="/application-received/"
+  enctype="multipart/form-data"
+>
+  <input type="hidden" name="inbox_key" value={inboxKey} />
+  <input type="hidden" name="_subject" value="Work With Us Application — Counsel Concierge Nursing" />
+  <p class="consultation-required" data-pre-send>All fields are required unless marked optional.</p>
+  <fieldset class="consultation-fields">
+    <legend class="visually-hidden">Your application</legend>
+    <div class="consultation-field-row">
+      <div class="consultation-field">
+        <label for={`${id}-first-name`}>First name</label>
+        <input id={`${id}-first-name`} name="firstName" autocomplete="given-name" required maxlength="80" data-trim />
+      </div>
+      <div class="consultation-field">
+        <label for={`${id}-last-name`}>Last name</label>
+        <input id={`${id}-last-name`} name="lastName" autocomplete="family-name" required maxlength="80" data-trim />
+      </div>
+    </div>
+    <div class="consultation-field-row">
+      <div class="consultation-field">
+        <label for={`${id}-email`}>Email</label>
+        <input id={`${id}-email`} name="_replyto" type="email" autocomplete="email" required maxlength="254" />
+      </div>
+      <div class="consultation-field">
+        <label for={`${id}-phone`}>Phone</label>
+        <input id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" required maxlength="40" />
+      </div>
+    </div>
+    <div class="consultation-field-row">
+      <div class="consultation-field">
+        <label for={`${id}-title`}>Title</label>
+        <select id={`${id}-title`} name="title" required>
+          <option value="" disabled selected>Select an option</option>
+          {titles.map((title) => <option>{title}</option>)}
+        </select>
+      </div>
+      <div class="consultation-field">
+        <label for={`${id}-experience`}>Years of experience</label>
+        <input id={`${id}-experience`} name="yearsOfExperience" required maxlength="40" data-trim />
+      </div>
+    </div>
+    <div class="consultation-field">
+      <label for={`${id}-message`}>Anything you’d like us to know <span>(optional)</span></label>
+      <textarea id={`${id}-message`} name="message" rows="5" maxlength="4000" data-trim></textarea>
+    </div>
+    <div class="consultation-field">
+      <label for={`${id}-resume`}>Resume/CV</label>
+      <div class="file-drop">
+        <input
+          id={`${id}-resume`}
+          name="resume"
+          type="file"
+          required
+          accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          data-max-bytes={maxFileBytes}
+          aria-describedby={`${id}-resume-hint`}
+        />
+        <span class="file-drop-icon" aria-hidden="true">+</span>
+        <span class="file-drop-label" data-file-name>Add a file</span>
+      </div>
+      <p id={`${id}-resume-hint`} class="consultation-hint">PDF or Word document, up to 5MB.</p>
+    </div>
+    <div hidden aria-hidden="true">
+      <label for={`${id}-website`}>Leave this field blank</label>
+      <input id={`${id}-website`} name="_gotcha" tabindex="-1" autocomplete="off" />
+    </div>
+  </fieldset>
+  <div class="consultation-status" data-form-status role="status" aria-live="polite" tabindex="-1" hidden></div>
+  <div class="consultation-submit-row">
+    <button class="button" type="submit" data-form-submit disabled={!deliveryReady}>Submit Application <span aria-hidden="true">→</span></button>
+    <p class="consultation-privacy">Your details are used only to review your application. <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy policy<span class="visually-hidden"> (opens in a new tab)</span></a></p>
+  </div>
+  {!deliveryReady && <noscript><p>Online applications are not available yet. Please email your resume to <a href="mailto:info@counselconciergenursing.com">info@counselconciergenursing.com</a> or call <a href="tel:+16159339208">(615) 933-9208</a>.</p></noscript>}
+</form>

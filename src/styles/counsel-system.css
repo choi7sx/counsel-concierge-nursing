@@ -771,7 +771,7 @@ h3,
 .review-testimonial { max-width: 420px; margin-top: var(--space-6); }
 .review-testimonial .button { justify-content: space-between; gap: var(--space-3); width: 100%; text-align: left; }
 .review-testimonial .consultation-hint { margin-top: var(--space-3); }
-.general-copy .direct-contact:last-child { margin-top: var(--space-12); margin-bottom: 0; }
+.general-copy .career-form:last-child { margin-top: var(--space-12); margin-bottom: 0; }
 /* Contact has no sidebar; its contact card sits below the copy. */
 .contact-card { margin-top: var(--space-12); padding: var(--space-10); border-radius: var(--radius-card); background: var(--mist); }
 .contact-card h2 { font-size: 40px; }
@@ -788,10 +788,6 @@ h3,
   .contact-card-details dd { font-size: 20px; }
   .contact-card .button { width: 100%; }
 }
-.direct-contact h2 { margin-bottom: var(--space-3); }
-.direct-contact-actions { display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: var(--space-3); margin: var(--space-6) 0 var(--space-3); }
-/* Stack on phones; the shared column keeps both buttons as wide as the longer one. */
-@media (max-width: 600px) { .direct-contact-actions { grid-auto-flow: row; } }
 .pricing-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
