@@ -92,6 +92,14 @@ html.consultation-open, html.consultation-open body { overflow: hidden; }
 .consultation-field textarea::placeholder { color: var(--muted); opacity: 1; }
 .consultation-field :is(input, select, textarea):focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 .consultation-field [aria-invalid="true"] { border-color: var(--accent-strong); }
+/* Resume upload: the transparent file input covers the box, so click and drag-and-drop both work natively. */
+.file-drop { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; min-height: 140px; padding: 24px; border: 1px dashed var(--line-strong); border-radius: var(--radius-card); background: var(--paper); text-align: center; }
+.consultation-field .file-drop input { position: absolute; inset: 0; width: 100%; height: 100%; min-height: 0; padding: 0; border: 0; opacity: 0; cursor: pointer; }
+.file-drop:hover, .file-drop:has(input:focus-visible) { border-color: var(--primary); }
+.file-drop:has(input:focus-visible) { outline: 2px solid var(--primary); outline-offset: 2px; }
+.file-drop:has([aria-invalid="true"]) { border-color: var(--accent-strong); }
+.file-drop-icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--primary); color: var(--paper); font-size: 28px; line-height: 1; }
+.file-drop-label { font-size: 16px; overflow-wrap: anywhere; }
 .consultation-hint, .consultation-privacy { font-size: 13px; color: var(--muted); }
 .consultation-submit-row { margin-top: 24px; }
 .consultation-submit-row .button { width: 100%; cursor: pointer; min-height: 48px; }

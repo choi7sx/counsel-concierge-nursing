@@ -74,7 +74,7 @@ window.addEventListener('popstate', () => {
 });
 if (location.hash === '#consultation-request') openConsultation(null, false);
 
-// The consultation form (dialog and page) submits through CloudCannon's form service.
+// The consultation and Work With Us forms submit through CloudCannon's form service.
 for (const form of document.querySelectorAll<HTMLFormElement>('[data-site-form]')) {
   const submit = form.querySelector<HTMLButtonElement>('[data-form-submit]')!;
   const fields = form.querySelector<HTMLFieldSetElement>('fieldset')!;
@@ -101,6 +101,17 @@ for (const form of document.querySelectorAll<HTMLFormElement>('[data-site-form]'
     const input = event.target;
     if (input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement) input.setCustomValidity('');
   });
+  // Show the chosen file's name in the upload box.
+  for (const input of form.querySelectorAll<HTMLInputElement>('input[type="file"]')) {
+    const label = input.parentElement!.querySelector<HTMLElement>('[data-file-name]')!;
+    const empty = label.textContent;
+    const update = () => {
+      input.setCustomValidity('');
+      label.textContent = input.files?.[0]?.name || empty;
+    };
+    input.addEventListener('change', update);
+    form.addEventListener('reset', () => setTimeout(update));
+  }
   form.addEventListener('submit', async event => {
     event.preventDefault();
     if (sending) return;
@@ -114,6 +125,10 @@ for (const form of document.querySelectorAll<HTMLFormElement>('[data-site-form]'
       const valid = (!phone.required && !digits) || (digits.length >= 7 && digits.length <= 20);
       phone.setCustomValidity(valid ? '' : 'Please enter a phone number we can reach you on.');
     }
+    for (const input of form.querySelectorAll<HTMLInputElement>('input[type="file"]')) {
+      const tooLarge = [...input.files ?? []].some(file => file.size > Number(input.dataset.maxBytes));
+      input.setCustomValidity(tooLarge ? 'Please choose a file smaller than 5MB.' : '');
+    }
     if (!form.reportValidity()) return;
 
     const inboxKey = (form.elements.namedItem('inbox_key') as HTMLInputElement).value;
@@ -123,25 +138,27 @@ for (const form of document.querySelectorAll<HTMLFormElement>('[data-site-form]'
       showStatus('Online forms are currently unavailable. Your message has not been sent. Please email us or call (615) 933-9208.', 'error');
       return;
     }
-    const payload = new URLSearchParams();
-    for (const [name, value] of new FormData(form)) payload.append(name, String(value));
-    payload.set('page', location.pathname);
+    const data = new FormData(form);
+    data.set('page', location.pathname);
     // Include the address in the message body as well as CloudCannon's Reply-To header.
-    payload.set('email', payload.get('_replyto') || '');
+    data.set('email', String(data.get('_replyto') || ''));
+    // Files need a multipart body; the consultation form keeps the URL-encoded format.
+    const multipart = form.enctype === 'multipart/form-data';
+    const body = multipart ? data : new URLSearchParams([...data].map(([name, value]) => [name, String(value)]));
     status.hidden = true;
     sending = true;
     submit.disabled = true;
     form.setAttribute('aria-busy', 'true');
     submit.textContent = 'Sending…';
     const controller = new AbortController();
-    const timeout = window.setTimeout(() => controller.abort(), 20000);
+    const timeout = window.setTimeout(() => controller.abort(), multipart ? 60000 : 20000);
     // Disable fields only after reading them; disabled fields are not submitted.
     fields.disabled = true;
     try {
       const response = await fetch(form.action, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded', Accept: 'text/html' },
-        body: payload.toString(),
+        headers: multipart ? { Accept: 'text/html' } : { 'Content-Type': 'application/x-www-form-urlencoded', Accept: 'text/html' },
+        body,
         signal: controller.signal,
         credentials: 'same-origin',
       });
