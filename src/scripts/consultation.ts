@@ -150,8 +150,8 @@ for (const form of document.querySelectorAll<HTMLFormElement>('[data-site-form]'
       const receipt = new DOMParser().parseFromString(await response.text(), 'text/html');
       if (response.status !== 200 || !receipt.querySelector('[data-form-receipt]')) throw new Error('Submission not accepted');
       form.reset();
-      fields.hidden = true;
-      submitRow.hidden = true;
+      // Once sent, show only the heading, the one-line introduction, and the confirmation.
+      for (const element of [fields, submitRow, ...form.querySelectorAll<HTMLElement>('[data-pre-send]')]) element.hidden = true;
       showStatus(form.dataset.success!, 'success');
     } catch {
       showStatus('We couldn’t confirm that your message was received. Your details are still here. Please try again, or contact us directly.', 'error');
