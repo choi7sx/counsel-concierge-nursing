@@ -114,6 +114,17 @@ export const serviceTypes = [
     services: situationalServices.filter((service) => service !== postOpService),
   },
 ];
+// Search results show about 155 characters, so keep whole sentences that fit
+// and name the location, which the service copy itself does not.
+const searchDescription = (text: string) => {
+  const suffix = " Private concierge nursing in Nashville, TN.";
+  let description = "";
+  for (const sentence of text.match(/[^.!?]+[.!?]+/g) || [text]) {
+    if ((description + sentence).trim().length + suffix.length > 160 && description) break;
+    description += sentence;
+  }
+  return description.trim() + suffix;
+};
 // A service offered both ways is listed in both groups but keeps one URL, so
 // its retainer and situational descriptions share a page instead of competing.
 export const servicePages: Page[] = [...retainerServices, ...situationalServices]
@@ -123,8 +134,8 @@ export const servicePages: Page[] = [...retainerServices, ...situationalServices
   .map((service) => ({
     path: service.path,
     title: service.title,
-    metaTitle: `${service.title} in Nashville, TN`,
-    description: service.text,
+    metaTitle: `${service.slug === "education" ? "Patient & Family Health Education" : service.title} in Nashville, TN`,
+    description: searchDescription(service.text),
     blocks: [{ type: "html", html: service.html, text: service.text }],
   }));
 // Longer service copy kept on the Services page content entry.

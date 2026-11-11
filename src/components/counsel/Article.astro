@@ -1,6 +1,6 @@
 ---
 import CounselImage from "./CounselImage.astro";
-import { articles, dateLabel } from "../../lib/counsel";
+import { articles, dateLabel, links } from "../../lib/counsel";
 import type { Page } from "../../lib/counsel";
 import InteriorPage from "./InteriorPage.astro";
 import PageHero from "./PageHero.astro";
@@ -21,9 +21,9 @@ const related = articles.filter((a) => a.path !== page.path).slice(0, 2);
     <div class="article-byline">
       <CounselImage src="/images/counsel/founder.webp" sizes="56px" width="56" height="56" alt="" />
       <div>
-        <span>Written by {page.author || "Gus Osgood"}</span>
+        <span>Written by <a href={links.about} rel="author">{page.author || "Gus Osgood"}</a></span>
         <span>
-          {dateLabel(page.date)} ·{" "}
+          <time datetime={page.date}>{dateLabel(page.date)}</time> ·{" "}
           {Math.ceil((page.blocks[0].text?.split(/\s+/).length || 500) / 200)}{" "}
           min read
         </span>

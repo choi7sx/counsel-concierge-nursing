@@ -3,7 +3,8 @@
     {
       "path": "/insights",
       "title": "Insights",
-      "description": "Clinical insights on aging at home, fall prevention, medication management, and care coordination from a registered nurse in Nashville, TN",
+      "metaTitle": "Nursing Insights on Aging at Home & Surgical Recovery",
+      "description": "Clinical insights on aging at home, fall prevention, medication management, surgical recovery, and care coordination from a registered nurse in Nashville, TN.",
       "blocks": []
     },
     {
@@ -354,7 +355,8 @@
     {
       "path": "/work-with-us",
       "title": "Work With Us",
-      "description": "",
+      "metaTitle": "Concierge Nursing Careers in Nashville, TN",
+      "description": "Experienced registered nurses in Nashville: share your background with Counsel Concierge Nursing for future concierge nursing opportunities.",
       "blocks": [
         {
           "type": "html",
@@ -485,7 +487,7 @@
     {
       "path": "/post-operative-care-nashville",
       "title": "Post-Operative Recovery Care in Nashville, TN",
-      "description": "In-home post-op nursing care in Nashville — pre-op preparation, post-operative monitoring and coordination.",
+      "description": "In-home post-operative nursing care in Nashville, TN: pre-op preparation, day-of-surgery RN accompaniment from $750, and in-home recovery monitoring and coordination.",
       "blocks": [
         {
           "type": "html",

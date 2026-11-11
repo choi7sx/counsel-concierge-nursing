@@ -63,7 +63,24 @@ The old $0 product checkout pages have been replaced with consultation-oriented 
 
 ## Assets and metadata
 
-Client photography is stored locally as responsive WebP images in `public/images/counsel/`. `data/counsel-images.json` records original source URLs, dimensions, and available sizes; `node scripts/prepare-counsel-images.mjs` rebuilds these assets without upscaling. Some original photographs have limited resolution, so larger photographer originals are needed for sharper large-screen heroes. Fonts are self-hosted, with license files in `public/fonts/`. The site includes canonical URLs, Open Graph metadata, `sitemap.xml`, and `robots.txt`.
+Client photography is stored locally as responsive WebP images in `public/images/counsel/`. `data/counsel-images.json` records original source URLs, dimensions, and available sizes; `node scripts/prepare-counsel-images.mjs` rebuilds these assets without upscaling. Some original photographs have limited resolution, so larger photographer originals are needed for sharper large-screen heroes. Fonts are self-hosted, with license files in `public/fonts/`. `node scripts/prepare-share-assets.mjs` rebuilds the 1200×630 share images in `public/images/og/` and the favicon set from `public/favicon.svg`.
+
+## Search engines and AI assistants
+
+Search metadata lives in `src/layouts/Counsel.astro` and `src/lib/seo.ts`, and is built from the page content, so edits in CloudCannon update it automatically.
+
+- Every page has a title, description, canonical URL (no trailing slash, matching the original Squarespace URLs), Open Graph and Twitter cards with a 1200×630 JPEG, and favicons. In CloudCannon, `metaTitle` sets an optional search title; the practice name is appended unless the title already includes it. Keep descriptions around 150–160 characters.
+- Indexable pages include schema.org JSON-LD: the practice as a concierge nursing practice (`LocalBusiness`, since schema.org has no nursing-practice type; `MedicalBusiness` would class it with clinics) with phone, email, Nashville / Middle Tennessee service area, and social profiles; its founder as a `Person` with BSN and RN credentials, `BreadcrumbList`s, a `Service` for each service page (post-op care includes its $750 starting price), `FAQPage` for the FAQ accordions on the Services and Post-Op pages, and `BlogPosting` for Insights articles. A page's FAQ markup comes from the accordion that follows a "Frequently Asked Questions" heading.
+- `/llms.txt` summarizes the practice, services, articles, and FAQs in plain text for AI assistants ([llmstxt.org](https://llmstxt.org)). `/insights/rss.xml` lists the articles. `/sitemap.xml` lists indexable pages, with article dates as `lastmod`.
+- `robots.txt` allows all crawlers, including AI search and assistant crawlers. The current Squarespace site blocks them (Squarespace's AI-crawler setting), so ChatGPT, Claude, Perplexity, and Gemini cannot currently read or cite the practice's pages. Pages marked `noindex` stay crawlable so search engines can see the tag.
+- The CloudCannon preview domain (`*.cloudvent.net`) sends `X-Robots-Tag: noindex`, which is expected for a preview. After connecting the domain, confirm production responses do not: `curl -sI https://counselconciergenursing.com/ | grep -i x-robots` should print nothing.
+
+After the domain points to CloudCannon, complete these account-level steps. They cannot be done from this repository:
+
+1. **Google Search Console.** Add a Domain property for `counselconciergenursing.com` and verify it with the DNS TXT record Google provides, added in Squarespace's DNS settings alongside the existing records. Submit `https://counselconciergenursing.com/sitemap.xml`, then use URL Inspection → Request indexing for the homepage, Services, and Post-Op pages. If the Squarespace site was already verified, keep the property; its history carries over. If DNS isn't an option, set `PUBLIC_GOOGLE_SITE_VERIFICATION` to the HTML tag's `content` value in CloudCannon's build environment and rebuild.
+2. **Bing Webmaster Tools.** Choose Import from Google Search Console, or verify separately (`PUBLIC_BING_SITE_VERIFICATION` for the tag method), and submit the sitemap. Bing's index also feeds Copilot and DuckDuckGo and is one of the sources for ChatGPT search.
+3. **Google Business Profile.** Claim or create the profile as a service-area business (Nashville and surrounding Middle Tennessee, hiding any street address), category *Nursing agency* or the closest match, with the same name, phone `(615) 933-9208`, and website as the site. This drives map and "near me" results more than anything on the website. Ask clients for reviews there; `/reviews` already links to Google. Use the same name, phone, and site on Apple Business Connect, Yelp, Facebook, and Nextdoor.
+4. **After launch.** Two weeks after switching, check Search Console → Pages for 404s from old URLs and add any to `.cloudcannon/routing.json` as 301 redirects. Test a few pages in [Google's Rich Results Test](https://search.google.com/test/rich-results).
 
 ## Typography, spacing, and shape
 
