@@ -33,9 +33,12 @@ _inputs:
     comment: Website path beginning with /. New articles use /insights/your-article-title.
   title:
     type: text
+  metaTitle:
+    type: text
+    comment: Optional title for search results and link previews, about 60 characters. Leave blank to use the page title. The practice name is added automatically.
   description:
     type: textarea
-    comment: Search engine description.
+    comment: Search result and link preview description, about 150 to 160 characters. Say what the page offers and where, for example Nashville, TN.
   date:
     type: datetime
   author:
