@@ -160,41 +160,21 @@ const canonical = new URL(
     </main>
     <footer class="site-footer">
       <div class="wrap">
-        <div class="footer-top">
-          <div class="footer-brand">
+        <div class="footer-main">
+          <div class="footer-card">
             <Brand stacked />
-          </div>
-          <div>
-            <h2>Explore</h2>
-            {nav.map(([label, url]) => (
-              <a href={url}>{label}</a>
-            ))}
-          </div>
-          <div>
-            <h2>Services</h2>
-            {footerServices.map((service) => (
-              <a href={service.path}>{service.title}</a>
-            ))}
-          </div>
-          <div>
-            <h2>Connect</h2>
-            <a href={links.consultation}>Request Private Consultation</a>
-            <a href={links.portal} target="_blank" rel="noopener noreferrer">
-              Client Portal ↗
-            </a>
-            <a href="/work-with-us">Work With Us</a>
-          </div>
-          <div class="footer-contact">
             <h2>We’re here to listen.</h2>
-            <a href="tel:+16159339208">(615) 933-9208</a>
-            <a href="mailto:info@counselconciergenursing.com">
-              info@counselconciergenursing.com
-            </a>
-            <p>
-              Serving Nashville and the
-              <br />
-              surrounding Middle Tennessee area.
-            </p>
+            <div class="footer-reach">
+              <a class="footer-phone" href="tel:+16159339208">
+                <span class="footer-reach-full">(615) 933-9208</span>
+                <span class="footer-reach-short">Call (615) 933-9208</span>
+              </a>
+              <a class="footer-email" href="mailto:info@counselconciergenursing.com">
+                <span class="footer-reach-full">info@counselconciergenursing.com</span>
+                <span class="footer-reach-short">Email us</span>
+              </a>
+            </div>
+            <p>Serving Nashville and the surrounding Middle Tennessee area.</p>
             <div class="social-links">
               <a
                 href="https://www.instagram.com/counselconciergenursing"
@@ -219,23 +199,59 @@ const canonical = new URL(
               </a>
             </div>
           </div>
+          <!-- Link groups are open by default (and without JavaScript); on phones the
+               script below collapses them into an accordion. -->
+          <nav class="footer-links" aria-label="Footer">
+            <details class="footer-group" open>
+              <summary><h2>Services</h2></summary>
+              <ul>
+                {footerServices.map((service) => (
+                  <li><a href={service.path}>{service.title}</a></li>
+                ))}
+              </ul>
+            </details>
+            <div>
+              <details class="footer-group" open>
+                <summary><h2>Explore</h2></summary>
+                <ul>
+                  {nav.map(([label, url]) => (
+                    <li><a href={url}>{label}</a></li>
+                  ))}
+                </ul>
+              </details>
+              <details class="footer-group" open>
+                <summary><h2>Connect</h2></summary>
+                <ul>
+                  <li><a href={links.consultation}>Request Private Consultation</a></li>
+                  <li>
+                    <a href={links.portal} target="_blank" rel="noopener noreferrer">
+                      Client Portal ↗
+                    </a>
+                  </li>
+                  <li><a href="/work-with-us">Work With Us</a></li>
+                </ul>
+              </details>
+            </div>
+          </nav>
         </div>
-        <div class="footer-disclaimer">
-          Counsel Concierge Nursing provides private, non-insurance-based
-          nursing oversight and does not replace the role of a primary care
-          provider or emergency services.
-        </div>
-        <div class="footer-bottom">
-          <span>
-            © 2026 Counsel Concierge Nursing, LLC. All rights reserved.
-          </span>
-          <div>
-            <a href="/privacy-policy">Privacy Policy</a>
-            <a href="/terms-of-use">Terms of Use</a>
-            <a href="https://devotioncreative.com/" target="_blank" rel="noopener noreferrer">
-              Built by Devotion Creative
-            </a>
-            <a href="#main">Back to top ↑</a>
+        <div class="footer-legal">
+          <p class="footer-disclaimer">
+            Counsel Concierge Nursing provides private, non-insurance-based
+            nursing oversight and does not replace the role of a primary care
+            provider or emergency services.
+          </p>
+          <div class="footer-bottom">
+            <span>
+              © 2026 Counsel Concierge Nursing, LLC. All rights reserved.
+            </span>
+            <div>
+              <a href="/privacy-policy">Privacy Policy</a>
+              <a href="/terms-of-use">Terms of Use</a>
+              <a href="https://devotioncreative.com/" target="_blank" rel="noopener noreferrer">
+                Built by Devotion Creative
+              </a>
+              <a href="#main">Back to top ↑</a>
+            </div>
           </div>
         </div>
       </div>
@@ -313,6 +329,23 @@ const canonical = new URL(
         .addEventListener("change", (e) => {
           if (e.matches) closeMenu();
         });
+      // Footer link groups: an accordion on phones, always-open columns on larger screens.
+      const footerPhone = window.matchMedia("(max-width: 760px)");
+      const footerGroups = document.querySelectorAll<HTMLDetailsElement>(".footer-group");
+      function syncFooterGroups() {
+        footerGroups.forEach((group) => {
+          group.open = !footerPhone.matches;
+          // Fixed columns on larger screens: keep their headings out of the tab order.
+          group.querySelector("summary")!.tabIndex = footerPhone.matches ? 0 : -1;
+        });
+      }
+      syncFooterGroups();
+      footerPhone.addEventListener("change", syncFooterGroups);
+      footerGroups.forEach((group) => {
+        group.querySelector("summary")!.addEventListener("click", (event) => {
+          if (!footerPhone.matches) event.preventDefault();
+        });
+      });
     </script>
   </body>
 </html>
