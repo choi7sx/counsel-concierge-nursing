@@ -6,9 +6,9 @@ const deliveryReady = import.meta.env.PROD && Boolean(inboxKey);
 <form class="consultation-form" data-site-form data-delivery-ready={String(deliveryReady)} data-success="Thank you. Your consultation request has been received. We’ll follow up directly to discuss the next steps." method="post" action="/consultation-request-received/">
   <input type="hidden" name="inbox_key" value={inboxKey} />
   <input type="hidden" name="_subject" value="Private Consultation Request — Counsel Concierge Nursing" />
-  <p class="consultation-description">A private consultation is a personal conversation about your care needs and goals. Share a few details and we’ll follow up directly.</p>
-  <p class="consultation-location">Serving Nashville and surrounding areas.</p>
-  <p class="consultation-required">All fields are required unless marked optional.</p>
+  <p class="consultation-description">A private consultation is a personal conversation about your care needs and goals.<span data-pre-send> Share a few details and we’ll follow up directly.</span></p>
+  <p class="consultation-location" data-pre-send>Serving Nashville and surrounding areas.</p>
+  <p class="consultation-required" data-pre-send>All fields are required unless marked optional.</p>
   <fieldset class="consultation-fields">
     <legend class="visually-hidden">Your consultation request</legend>
     <div class="consultation-field-row">
