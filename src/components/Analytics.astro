@@ -1,0 +1,15 @@
+---
+// The client's existing GA4 web stream, carried over from the Squarespace site so
+// reporting history continues. An empty PUBLIC_GA_MEASUREMENT_ID override disables tracking.
+const measurementId = (import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? "G-VNLPGMFKCT").trim();
+if (measurementId && !/^G-[A-Z0-9]+$/.test(measurementId)) {
+  throw new Error("PUBLIC_GA_MEASUREMENT_ID must be a GA4 Measurement ID beginning with G-");
+}
+---
+
+{import.meta.env.PROD && measurementId && <meta name="ga-measurement-id" content={measurementId} />}
+<script>
+  import { initializeAnalytics } from "../lib/analytics";
+  const measurementId = document.querySelector<HTMLMetaElement>('meta[name="ga-measurement-id"]')?.content;
+  if (measurementId) initializeAnalytics(window, measurementId);
+</script>
