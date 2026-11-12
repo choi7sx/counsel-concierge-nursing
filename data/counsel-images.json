@@ -76,6 +76,7 @@
   "travel": {
     "width": 2500,
     "height": 1875,
+    "quality": 80,
     "source": "https://images.squarespace-cdn.com/content/v1/694050afa2bc6e2835ed8656/e23c162a-914e-4a31-bb14-c8dc2fbe997a/IMG_4395.JPG",
     "widths": [
       480,
