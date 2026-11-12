@@ -83,6 +83,10 @@ Complete these account-level steps now that the domain points to CloudCannon. Th
 3. **Google Business Profile.** Claim or create the profile as a service-area business (Nashville and surrounding Middle Tennessee, hiding any street address), category *Nursing agency* or the closest match, with the same name, phone `(615) 933-9208`, and website as the site. This drives map and "near me" results more than anything on the website. Ask clients for reviews there; `/reviews` already links to Google. Use the same name, phone, and site on Apple Business Connect, Yelp, Facebook, and Nextdoor.
 4. **After launch.** Two weeks after switching, check Search Console → Pages for 404s from old URLs and add any to `.cloudcannon/routing.json` as 301 redirects. Test a few pages in [Google's Rich Results Test](https://search.google.com/test/rich-results).
 
+## Analytics
+
+GA4 is wired into the shared layout on every page. It uses the practice's existing Measurement ID, `G-VNLPGMFKCT`, which the Squarespace site also used, so reporting history continues. Tracking runs only on `counselconciergenursing.com`, not in development or on the CloudCannon preview domain. `PUBLIC_GA_MEASUREMENT_ID` can override the ID, or turn tracking off with an empty value. Named events cover consultation, phone, email, portal, and review clicks. Confirmed consultation requests send `generate_lead`, and confirmed applications send `application_submit`. Form contents are never sent. One GA4 admin setting must be changed so the consultation dialog isn't counted as extra page views. See [the analytics setup and reporting guide](docs/analytics.md).
+
 ## Typography, spacing, and shape
 
 `src/styles/counsel-system.css` is the final design layer, imported after the component layouts in `counsel.css`. It adapts the [Parloa reference](https://styles.refero.design/style/c90e63f8-76c1-4159-9460-29e0d18751ae) while retaining Counsel's existing colors, photography, and scrolling hero treatment.

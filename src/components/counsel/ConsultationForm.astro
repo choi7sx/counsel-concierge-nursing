@@ -3,7 +3,7 @@ const { id = 'consultation' } = Astro.props;
 const inboxKey = import.meta.env.PUBLIC_CLOUDCANNON_INBOX_KEY?.trim() || '';
 const deliveryReady = import.meta.env.PROD && Boolean(inboxKey);
 ---
-<form class="consultation-form" data-site-form data-delivery-ready={String(deliveryReady)} data-success="Thank you. Your consultation request has been received. We’ll follow up directly to discuss the next steps." method="post" action="/consultation-request-received/">
+<form class="consultation-form" data-site-form data-analytics-form="consultation" data-delivery-ready={String(deliveryReady)} data-success="Thank you. Your consultation request has been received. We’ll follow up directly to discuss the next steps." method="post" action="/consultation-request-received/">
   <input type="hidden" name="inbox_key" value={inboxKey} />
   <input type="hidden" name="_subject" value="Private Consultation Request — Counsel Concierge Nursing" />
   <p class="consultation-description">A private consultation is a personal conversation about your care needs and goals.<span data-pre-send> Share a few details and we’ll follow up directly.</span></p>

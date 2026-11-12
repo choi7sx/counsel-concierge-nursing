@@ -170,6 +170,8 @@ for (const form of document.querySelectorAll<HTMLFormElement>('[data-site-form]'
       // Once sent, show only the heading, the one-line introduction, and the confirmation.
       for (const element of [fields, submitRow, ...form.querySelectorAll<HTMLElement>('[data-pre-send]')]) element.hidden = true;
       showStatus(form.dataset.success!, 'success');
+      // Analytics records only which form was sent (src/lib/analytics.ts).
+      document.dispatchEvent(new CustomEvent('counsel:form-sent', { detail: { form: form.dataset.analyticsForm, element: form } }));
     } catch {
       showStatus('We couldn’t confirm that your message was received. Your details are still here. Please try again, or contact us directly.', 'error');
     } finally {

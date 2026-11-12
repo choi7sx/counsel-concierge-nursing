@@ -6,6 +6,7 @@ import Arrow from "../components/counsel/Arrow.astro";
 import ContactBand from "../components/counsel/ContactBand.astro";
 import ConsultationDialog from "../components/counsel/ConsultationDialog.astro";
 import ServicesNav from "../components/counsel/ServicesNav.astro";
+import Analytics from "../components/Analytics.astro";
 import { articles, links, postOpService, servicePages } from "../lib/counsel";
 import { SITE, SITE_NAME, absolute, shareImage, structuredData } from "../lib/seo";
 const {
@@ -42,6 +43,7 @@ const canonical = new URL(
 <html lang="en-US">
   <head>
     <meta charset="UTF-8" />
+    <Analytics />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0a2139" />
     <title>{fullTitle}</title>
