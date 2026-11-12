@@ -11,7 +11,9 @@ const key = image.split("/").pop()?.replace(/\.webp$/, "") as keyof typeof image
 const asset = images[key];
 const ratio = asset ? asset.width / asset.height : 1.5;
 // Cover images can be wider than the viewport before their sides are cropped.
-const sizes = `(max-width: 760px) max(100vw, ${Math.ceil(540 * ratio)}px), max(100vw, ${Math.ceil(680 * ratio)}px)`;
+// Phones request a viewport-width image instead: the hero sits under a dark
+// overlay, and the 1600px+ files it would otherwise pick slowed mobile LCP.
+const sizes = `(max-width: 760px) 100vw, max(100vw, ${Math.ceil(680 * ratio)}px)`;
 ---
 
 <section class="interior-hero">
