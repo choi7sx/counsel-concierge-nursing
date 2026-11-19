@@ -112,6 +112,21 @@
         {
           "type": "html",
           "html": "<h2>Our Services</h2>"
+        },
+        {
+          "type": "testimonials",
+          "title": "In our clients’ own words",
+          "html": "",
+          "items": [
+            {
+              "title": "Bill H., Brentwood, TN",
+              "html": "<p>The owner, Gus Osgood, is a highly experienced RN who is both extremely professional, knowledgeable in all aspects of daily nursing care, but also is able to resolve care issues by thinking “outside the box.” His team will go to extraordinary lengths to be sure patients are given the highest level of care and support.</p>"
+            },
+            {
+              "title": "David T., Nashville, TN",
+              "html": "<p>If you need highly skilled post surgical care and support, Gus Osgood and his team at Counsel Concierge are the Gold Standard.</p>"
+            }
+          ]
         }
       ]
     },
