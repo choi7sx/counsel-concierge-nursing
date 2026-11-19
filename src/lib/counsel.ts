@@ -1,6 +1,7 @@
 import source from "../../data/counsel-content.json";
 export type Block = {
   type: string;
+  url?: string;
   html?: string;
   text?: string;
   title?: string;

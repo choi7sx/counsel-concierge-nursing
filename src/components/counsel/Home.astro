@@ -9,6 +9,8 @@ const intro = home.blocks[2].text!;
 const sentenceEnd = intro.search(/\.\s/);
 const firstSentence = sentenceEnd < 0 ? intro : intro.slice(0, sentenceEnd + 1);
 const remaining = sentenceEnd < 0 ? "" : intro.slice(sentenceEnd + 1).trim();
+// Found by type, not position, so the excerpts can be edited independently.
+const reviews = home.blocks.find((block) => block.type === "testimonials");
 ---
 
 <Counsel>
@@ -42,6 +44,39 @@ const remaining = sentenceEnd < 0 ? "" : intro.slice(sentenceEnd + 1).trim();
       <span>Nashville & Middle Tennessee</span>
     </div>
   </div>
+  {reviews?.items?.length ? (
+    <section class="client-reviews" aria-labelledby="client-reviews-heading">
+      <div class="wrap client-reviews-grid">
+        <div class="client-reviews-heading">
+          <h2 id="client-reviews-heading">
+            In our clients’
+            <br />
+            <em>own words.</em>
+          </h2>
+          {reviews.url && (
+            <a class="text-link" href={reviews.url} target="_blank" rel="noopener noreferrer">
+              Read our reviews on Google <Arrow diagonal />
+            </a>
+          )}
+        </div>
+        <div class="review-list">
+          {reviews.items.map((review) => (
+            <figure class="review">
+              <blockquote set:html={review.html} />
+              <figcaption>
+                {review.title}
+                {review.url && (
+                  <a class="text-link" href={review.url}>
+                    Read the full account <Arrow />
+                  </a>
+                )}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  ) : null}
   <section class="section clinical">
     <div class="wrap">
       <div class="section-heading clinical-heading">

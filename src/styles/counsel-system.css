@@ -1229,3 +1229,62 @@ html.menu-open, html.menu-open body { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .footer-group summary::after { transition: none; }
 }
+/* Client review excerpts on the homepage, above "The clinical layer": heading
+   beside the quotes to keep the section short, on sand so it stands apart
+   from the cream section below. */
+.client-reviews {
+  padding-block: var(--space-16);
+  background: var(--sand);
+}
+.client-reviews-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  gap: var(--space-12);
+  align-items: start;
+}
+.client-reviews-heading h2 {
+  margin: 0 0 var(--space-4);
+  font-size: 40px;
+}
+.client-reviews .text-link { border-color: var(--line-strong); }
+.client-reviews .text-link:hover { color: var(--accent-strong); border-color: var(--accent-strong); }
+.review {
+  margin: 0;
+  padding-block: var(--space-5);
+  border-top: 1px solid var(--line-strong);
+}
+.review:first-child { padding-top: 0; border-top: 0; }
+.review:last-child { padding-bottom: 0; }
+.review blockquote {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.5;
+}
+.review blockquote p { margin: 0; }
+.review figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 var(--space-6);
+  margin-top: var(--space-2);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.review figcaption .text-link {
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+}
+@media (max-width: 760px) {
+  .client-reviews { padding-block: var(--space-10); }
+  .client-reviews-grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
+  .client-reviews-heading h2 { font-size: 32px; }
+  .review blockquote { font-size: 17px; }
+}
