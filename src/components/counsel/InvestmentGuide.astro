@@ -9,6 +9,10 @@ const [intro, ...rest] = page.blocks;
 const heading = intro.html!.match(/<h2>(.*?)<\/h2>/)![1];
 const groups = rest.filter((block) => block.type === "pricing");
 const notes = rest.filter((block) => block.type === "html");
+// Each guide leads to a consultation and back to the service it prices.
+const actions = page.path === "/care-transitions-investment-guide"
+  ? { consultation: "Request Private Consultation", service: "/services/care-transitions", serviceLabel: "About care transitions" }
+  : { consultation: "Schedule Pre-Op Consultation", service: links.postop, serviceLabel: "About post-operative recovery care" };
 ---
 
 <EditorialPage title={`${heading}.`}>
@@ -16,7 +20,7 @@ const notes = rest.filter((block) => block.type === "html");
   <section class="wrap editorial-content pricing-content">
     <div class="pricing-grid">
       {groups.map((group) => (
-        <section class="pricing-card">
+        <section class:list={["pricing-card", { "pricing-card-wide": group.wide }]}>
           <h2>{group.title}</h2>
           {group.html && <div class="pricing-note" set:html={group.html} />}
           <ul class="price-list">
@@ -35,8 +39,8 @@ const notes = rest.filter((block) => block.type === "html");
     </div>
     {notes.map((note) => <div class="pricing-closing" set:html={note.html} />)}
     <div class="pricing-actions">
-      <a class="button" href={links.consultation}>Schedule Pre-Op Consultation <Arrow /></a>
-      <a class="text-link" href={links.postop}>About post-operative recovery care <Arrow /></a>
+      <a class="button" href={links.consultation}>{actions.consultation} <Arrow /></a>
+      <a class="text-link" href={actions.service}>{actions.serviceLabel} <Arrow /></a>
     </div>
   </section>
 </EditorialPage>

@@ -799,6 +799,15 @@ h3,
   white-space: nowrap;
 }
 .price-detail p { margin: var(--space-1) 0 0; color: var(--muted); font-size: var(--text-ui); line-height: 1.5; }
+.pricing-card-wide { grid-column: 1 / -1; }
+.pricing-card-wide .pricing-note { max-width: 720px; }
+.pricing-card-wide .price-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  column-gap: var(--space-8);
+}
+.pricing-card-wide .price-list li:last-child { padding-bottom: var(--space-3); }
+.pricing-card-wide .price-list li:only-child { max-width: 720px; }
 .pricing-closing { max-width: 720px; margin-top: var(--space-8); color: var(--muted); }
 .pricing-closing p { margin: 0; }
 .pricing-actions {

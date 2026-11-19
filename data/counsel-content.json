@@ -485,6 +485,97 @@
       ]
     },
     {
+      "path": "/care-transitions-investment-guide",
+      "title": "Care Transitions Investment & Care Options",
+      "description": "Rates for Counsel Concierge Nursing's care transitions services in Nashville, including discharge escort, transition programs, overnight care, and continuous care.",
+      "noindex": true,
+      "blocks": [
+        {
+          "type": "html",
+          "html": "<h2>Care Transitions Investment &amp; Care Options</h2><p>Every client engagement begins with a consultation to confirm scope, scheduling, and pricing before care begins. The listed rates reflect our care transitions services for the return home from a hospital or care facility.</p>"
+        },
+        {
+          "type": "pricing",
+          "title": "Discharge Escort",
+          "wide": true,
+          "html": "",
+          "items": [
+            {
+              "title": "Up to 6 hours",
+              "price": "$650",
+              "html": "<p>With a registered nurse, starting at the facility or at home: discharge instructions with the care team, prescription pickup, transport home and settling in. Additional time billed hourly.</p>"
+            }
+          ]
+        },
+        {
+          "type": "pricing",
+          "title": "Transition Programs",
+          "wide": true,
+          "html": "<p>Every program includes an intake consultation, review of discharge paperwork, care coordination with pharmacy, equipment suppliers, home health and physician offices, and nurse phone access 6am–8pm. All programs begin on discharge day.</p>",
+          "items": [
+            {
+              "title": "2-Week Transition, 14 days",
+              "price": "$1,500",
+              "html": "<p>Pre-discharge facility meeting, Discharge Escort (up to 6 hours), and 2 weekly check-ins (up to 3 hours each).</p>"
+            },
+            {
+              "title": "Essentials, 30 days",
+              "price": "$2,750",
+              "html": "<p>Pre-discharge facility meeting, Discharge Escort, 4 weekly check-ins, 1 appointment accompaniment (up to 4 hours), and a written care plan at day 30.</p>"
+            },
+            {
+              "title": "Plus, 30 days",
+              "price": "$5,000",
+              "html": "<p>Pre-discharge facility meeting, Discharge Escort, 12-hour first-night overnight, 6 check-ins (twice weekly for the first 2 weeks), 2 appointment accompaniments, and a written summary at day 30.</p>"
+            }
+          ]
+        },
+        {
+          "type": "pricing",
+          "title": "Overnight Care",
+          "html": "<p>Program clients receive 15% off overnights booked at least 24 hours in advance.</p>",
+          "items": [
+            {
+              "title": "Overnight, 8 hours",
+              "price": "$1,000",
+              "html": "<p>10pm–6am</p>"
+            },
+            {
+              "title": "Overnight, 12 hours",
+              "price": "$1,500",
+              "html": "<p>8pm–8am</p>"
+            }
+          ]
+        },
+        {
+          "type": "pricing",
+          "title": "Continuous Care Packages",
+          "html": "",
+          "items": [
+            {
+              "title": "24-Hour Care",
+              "price": "$2,500",
+              "html": ""
+            },
+            {
+              "title": "48-Hour Care",
+              "price": "$4,800",
+              "html": ""
+            },
+            {
+              "title": "72-Hour Care",
+              "price": "$7,000",
+              "html": ""
+            }
+          ]
+        },
+        {
+          "type": "html",
+          "html": "<p>Care transitions services are available for discharges home from a hospital, ER, inpatient rehab or skilled nursing facility, within 30 days of discharge. Travel within 20 miles of downtown Nashville is included. Counsel operates on a private-pay basis and does not replace emergency services.</p>"
+        }
+      ]
+    },
+    {
       "path": "/post-operative-care-nashville",
       "title": "Post-Operative Recovery Care in Nashville, TN",
       "description": "In-home post-operative nursing care in Nashville, TN: pre-op preparation, day-of-surgery RN accompaniment from $750, and in-home recovery monitoring and coordination.",
