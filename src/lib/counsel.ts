@@ -1,10 +1,10 @@
 import source from "../../data/counsel-content.json";
 export type Block = {
   type: string;
+  url?: string;
   html?: string;
   text?: string;
   title?: string;
-  url?: string;
   items?: { title: string; html: string; price?: string; url?: string }[];
 };
 export type Page = {
