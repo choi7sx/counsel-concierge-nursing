@@ -75,6 +75,9 @@ _inputs:
   noindex:
     type: checkbox
     comment: Hide this page from search engines and the sitemap. Used for pages people reach by QR code.
+  wide:
+    type: checkbox
+    comment: Show this pricing group across the full width, with its prices side by side.
   price:
     type: text
     comment: Shown exactly as written, for example $750.

@@ -1,6 +1,6 @@
 # Google Analytics 4
 
-The shared `Counsel` layout includes GA4 on every page, including the noindex QR-code pages (`/reviews`, `/post-op-investment-guide`), the form receipt pages, and the 404 page. It follows the same setup as the Excel Sports Performance site. Delegated listeners cover links, buttons, FAQ accordions, the navigation menus, and the consultation dialog. Ordinary text and form fields don't produce events.
+The shared `Counsel` layout includes GA4 on every page, including the noindex QR-code pages (`/reviews`, `/post-op-investment-guide`, `/care-transitions-investment-guide`), the form receipt pages, and the 404 page. It follows the same setup as the Excel Sports Performance site. Delegated listeners cover links, buttons, FAQ accordions, the navigation menus, and the consultation dialog. Ordinary text and form fields don't produce events.
 
 ## The property
 

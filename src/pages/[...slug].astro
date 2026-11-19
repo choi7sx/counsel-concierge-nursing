@@ -39,7 +39,7 @@ const path = page.path;
     title={(page.metaTitle || page.title).trim()}
     description={page.description || undefined}
     noindex={page.noindex}
-    editorial={["/insights", "/reviews", "/post-op-investment-guide"].includes(path)}
+    editorial={["/insights", "/reviews", "/post-op-investment-guide", "/care-transitions-investment-guide"].includes(path)}
   >
     {path === links.services ? (
       <Services />
@@ -57,7 +57,7 @@ const path = page.path;
       </EditorialPage>
     ) : path === "/reviews" ? (
       <Reviews page={page} />
-    ) : path === "/post-op-investment-guide" ? (
+    ) : path === "/post-op-investment-guide" || path === "/care-transitions-investment-guide" ? (
       <InvestmentGuide page={page} />
     ) : path.startsWith("/insights/") ? (
       <Article page={page} />

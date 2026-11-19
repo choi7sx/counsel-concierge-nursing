@@ -4,6 +4,8 @@ export type Block = {
   html?: string;
   text?: string;
   title?: string;
+  /** Pricing card spans the full row; its prices sit side by side. */
+  wide?: boolean;
   items?: { title: string; html: string; price?: string; url?: string }[];
 };
 export type Page = {
