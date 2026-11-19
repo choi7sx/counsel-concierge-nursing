@@ -1220,36 +1220,41 @@ html.menu-open, html.menu-open body { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .footer-group summary::after { transition: none; }
 }
-/* Client review excerpts on the homepage, above "The clinical layer". */
-.client-reviews { padding-bottom: 0; }
+/* Client review excerpts on the homepage, above "The clinical layer". Navy,
+   like the approach section, so it stands apart from the cream section below. */
+.client-reviews {
+  color: var(--cream);
+  background: var(--primary);
+}
+.client-reviews :focus-visible { outline-color: var(--accent); }
 .review-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-8);
+  gap: var(--space-6);
 }
 .review-card {
   display: flex;
   flex-direction: column;
   margin: 0;
-  padding: var(--space-10);
-  border: 1px solid var(--line);
+  padding: var(--space-8);
+  border: 1px solid rgb(255 255 255 / 20%);
   border-radius: var(--radius-card);
-  background: var(--paper);
+  background: rgb(255 255 255 / 4%);
 }
 .review-card blockquote {
   flex: 1;
   margin: 0;
   font-family: var(--serif);
-  font-size: 24px;
-  line-height: 1.45;
+  font-size: 20px;
+  line-height: 1.5;
 }
 .review-card blockquote::before {
   content: "“";
   display: block;
-  height: 40px;
-  font-size: 72px;
+  height: 28px;
+  font-size: 52px;
   line-height: 1;
-  color: var(--accent-strong);
+  color: var(--accent);
 }
 .review-card blockquote p { margin: 0; }
 .review-card figcaption {
@@ -1258,10 +1263,12 @@ html.menu-open, html.menu-open body { overflow: hidden; }
   align-items: center;
   justify-content: space-between;
   gap: var(--space-2) var(--space-6);
-  margin-top: var(--space-8);
-  padding-top: var(--space-4);
-  border-top: 1px solid var(--line);
+  margin-top: var(--space-6);
+  padding-top: var(--space-3);
+  border-top: 1px solid rgb(255 255 255 / 20%);
 }
+.review-card .text-link { border-color: var(--line-strong); }
+.review-card .text-link:hover { color: var(--accent); border-color: var(--accent); }
 .review-name {
   display: flex;
   align-items: center;
@@ -1270,9 +1277,10 @@ html.menu-open, html.menu-open body { overflow: hidden; }
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  color: var(--on-dark);
 }
 @media (max-width: 760px) {
   .review-grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
   .review-card { padding: var(--space-6); }
-  .review-card blockquote { font-size: 21px; }
+  .review-card blockquote { font-size: 18px; }
 }
