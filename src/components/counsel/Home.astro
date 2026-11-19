@@ -45,9 +45,9 @@ const reviews = home.blocks.find((block) => block.type === "testimonials");
     </div>
   </div>
   {reviews?.items?.length ? (
-    <section class="section client-reviews" aria-labelledby="client-reviews-heading">
-      <div class="wrap">
-        <div class="section-heading">
+    <section class="client-reviews" aria-labelledby="client-reviews-heading">
+      <div class="wrap client-reviews-grid">
+        <div class="client-reviews-heading">
           <h2 id="client-reviews-heading">
             In our clients’
             <br />
@@ -59,12 +59,12 @@ const reviews = home.blocks.find((block) => block.type === "testimonials");
             </a>
           )}
         </div>
-        <div class="review-grid">
+        <div class="review-list">
           {reviews.items.map((review) => (
-            <figure class="review-card">
+            <figure class="review">
               <blockquote set:html={review.html} />
               <figcaption>
-                <span class="review-name">{review.title}</span>
+                {review.title}
                 {review.url && (
                   <a class="text-link" href={review.url}>
                     Read the full account <Arrow />
