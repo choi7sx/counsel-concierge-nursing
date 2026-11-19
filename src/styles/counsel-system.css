@@ -1267,8 +1267,8 @@ html.menu-open, html.menu-open body { overflow: hidden; }
   padding-top: var(--space-3);
   border-top: 1px solid rgb(255 255 255 / 20%);
 }
-.review-card .text-link { border-color: var(--line-strong); }
-.review-card .text-link:hover { color: var(--accent); border-color: var(--accent); }
+.client-reviews .text-link { border-color: var(--line-strong); }
+.client-reviews .text-link:hover { color: var(--accent); border-color: var(--accent); }
 .review-name {
   display: flex;
   align-items: center;

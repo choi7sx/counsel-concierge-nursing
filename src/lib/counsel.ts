@@ -4,6 +4,7 @@ export type Block = {
   html?: string;
   text?: string;
   title?: string;
+  url?: string;
   items?: { title: string; html: string; price?: string; url?: string }[];
 };
 export type Page = {
