@@ -433,7 +433,7 @@
           "items": [
             {
               "title": "Up to 2 hours",
-              "price": "$250",
+              "price": "$275",
               "html": "<p>Discounted to $225 when booked alongside an extended recovery package.</p>"
             }
           ]
@@ -444,8 +444,8 @@
           "html": "",
           "items": [
             {
-              "title": "Up to 9 hours",
-              "price": "$750",
+              "title": "Up to 8 hours",
+              "price": "$800",
               "html": "<p>RN accompaniment from pickup to return home.</p>"
             }
           ]
@@ -457,17 +457,17 @@
           "items": [
             {
               "title": "24-Hour Post-Op Care",
-              "price": "$2,000",
+              "price": "$2,500",
               "html": ""
             },
             {
               "title": "48-Hour Post-Op Care",
-              "price": "$4,000",
+              "price": "$4,800",
               "html": ""
             },
             {
               "title": "72-Hour Post-Op Care",
-              "price": "$6,000",
+              "price": "$7,000",
               "html": ""
             }
           ]
@@ -489,7 +489,7 @@
             },
             {
               "title": "Day, 4 hours",
-              "price": "$400",
+              "price": "$450",
               "html": "<p>Must be scheduled 24 hours in advance, with a 4-hour minimum.</p>"
             }
           ]
@@ -594,7 +594,7 @@
     {
       "path": "/post-operative-care-nashville",
       "title": "Post-Operative Recovery Care in Nashville, TN",
-      "description": "In-home post-operative nursing care in Nashville, TN: pre-op preparation, day-of-surgery RN accompaniment from $750, and in-home recovery monitoring and coordination.",
+      "description": "In-home post-operative nursing care in Nashville, TN: pre-op preparation, day-of-surgery RN accompaniment from $800, and in-home recovery monitoring and coordination.",
       "blocks": [
         {
           "type": "html",
@@ -634,7 +634,7 @@
         },
         {
           "type": "html",
-          "html": "<p>Day-of-surgery RN accompaniment, from pickup to recovery at home, starts at $750. For clients who need continued support beyond the day of surgery, we offer extended recovery packages, including overnight and multi-day continuous care, structured around the procedure, surgeon’s discharge instructions, and the client's specific recovery needs.</p><p>Every engagement begins with a consultation to confirm scope and pricing before care begins.</p>"
+          "html": "<p>Day-of-surgery RN accompaniment, from pickup to recovery at home, starts at $800. For clients who need continued support beyond the day of surgery, we offer extended recovery packages, including overnight and multi-day continuous care, structured around the procedure, surgeon’s discharge instructions, and the client's specific recovery needs.</p><p>Every engagement begins with a consultation to confirm scope and pricing before care begins.</p>"
         },
         {
           "type": "html",
@@ -649,7 +649,7 @@
             },
             {
               "title": "Is this covered by insurance?",
-              "html": "<p>No. Counsel operates on a private-pay basis, which allows care to be structured around the client's actual needs rather than insurance criteria. Post-operative support starts at $750 for day-of-surgery accompaniment, with extended and overnight care also available. Some clients use HSA/FSA funds; we recommend confirming eligibility with your plan administrator.</p>"
+              "html": "<p>No. Counsel operates on a private-pay basis, which allows care to be structured around the client's actual needs rather than insurance criteria. Post-operative support starts at $800 for day-of-surgery accompaniment, with extended and overnight care also available. Some clients use HSA/FSA funds; we recommend confirming eligibility with your plan administrator.</p>"
             },
             {
               "title": "How is this different from home health after surgery?",

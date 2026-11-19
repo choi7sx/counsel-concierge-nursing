@@ -183,7 +183,7 @@ const service = (path: string, url: string) => {
       offers: {
         "@type": "Offer",
         description: "Day-of-surgery RN accompaniment, from pickup to recovery at home",
-        priceSpecification: { "@type": "PriceSpecification", minPrice: 750, priceCurrency: "USD" },
+        priceSpecification: { "@type": "PriceSpecification", minPrice: 800, priceCurrency: "USD" },
       },
     }),
   };

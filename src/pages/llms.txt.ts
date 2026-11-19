@@ -28,7 +28,7 @@ export function GET() {
 - Counsel is: ${is.join("; ")}.
 - Counsel is not: ${isNot.join("; ")}.
 - Services are offered two ways: monthly retainer care plans for ongoing oversight, and situational services for a specific event or short-term need, typically a day or two.
-- Post-operative recovery care is the most requested service. Day-of-surgery RN accompaniment, from pickup to recovery at home, starts at $750.
+- Post-operative recovery care is the most requested service. Day-of-surgery RN accompaniment, from pickup to recovery at home, starts at $800.
 - Getting started: every engagement begins with a complimentary discovery call, followed by a private in-person consultation to evaluate needs and create a personalized care plan.
 - Contact: phone (615) 933-9208, email ${EMAIL}, or request a consultation at ${absolute(links.consultation)}
 - Counsel provides private nursing oversight and does not replace a primary care provider or emergency services.

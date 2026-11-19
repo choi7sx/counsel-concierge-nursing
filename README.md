@@ -60,7 +60,7 @@ After the switch, devices could keep showing the old Squarespace site for up to 
 
 References: [CloudCannon external DNS](https://cloudcannon.com/documentation/developer-articles/configure-external-dns/) and [Squarespace domain forwarding](https://support.squarespace.com/hc/en-us/articles/214767107-Forwarding-a-domain).
 
-The old $0 product checkout pages have been replaced with consultation-oriented service pages. The original post-operative starting price of $750 remains on the recovery care page.
+The old $0 product checkout pages have been replaced with consultation-oriented service pages. The post-operative starting price of $800 appears on the recovery care page.
 
 ## Assets and metadata
 
@@ -71,7 +71,7 @@ Client photography is stored locally as responsive WebP images in `public/images
 Search metadata lives in `src/layouts/Counsel.astro` and `src/lib/seo.ts`, and is built from the page content, so edits in CloudCannon update it automatically.
 
 - Every page has a title, description, canonical URL (no trailing slash, matching the original Squarespace URLs), Open Graph and Twitter cards with a 1200×630 JPEG, and favicons. In CloudCannon, `metaTitle` sets an optional search title; the practice name is appended unless the title already includes it. Keep descriptions around 150–160 characters.
-- Indexable pages include schema.org JSON-LD: the practice as a concierge nursing practice (`LocalBusiness`, since schema.org has no nursing-practice type; `MedicalBusiness` would class it with clinics) with phone, email, Nashville / Middle Tennessee service area, and social profiles; its founder as a `Person` with BSN and RN credentials, `BreadcrumbList`s, a `Service` for each service page (post-op care includes its $750 starting price), `FAQPage` for the FAQ accordions on the Services and Post-Op pages, and `BlogPosting` for Insights articles. A page's FAQ markup comes from the accordion that follows a "Frequently Asked Questions" heading.
+- Indexable pages include schema.org JSON-LD: the practice as a concierge nursing practice (`LocalBusiness`, since schema.org has no nursing-practice type; `MedicalBusiness` would class it with clinics) with phone, email, Nashville / Middle Tennessee service area, and social profiles; its founder as a `Person` with BSN and RN credentials, `BreadcrumbList`s, a `Service` for each service page (post-op care includes its $800 starting price), `FAQPage` for the FAQ accordions on the Services and Post-Op pages, and `BlogPosting` for Insights articles. A page's FAQ markup comes from the accordion that follows a "Frequently Asked Questions" heading.
 - `/llms.txt` summarizes the practice, services, articles, and FAQs in plain text for AI assistants ([llmstxt.org](https://llmstxt.org)). `/insights/rss.xml` lists the articles. `/sitemap.xml` lists indexable pages, with article dates as `lastmod`.
 - `robots.txt` allows all crawlers, including AI search and assistant crawlers. The old Squarespace site blocked them with Squarespace's AI-crawler setting. Pages marked `noindex` stay crawlable so search engines can see the tag.
 - The CloudCannon preview domain (`*.cloudvent.net`) sends `X-Robots-Tag: noindex` and a blocking `robots.txt`, as previews should. The production domain sends neither (confirmed November 11, 2026).
